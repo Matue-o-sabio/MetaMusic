@@ -1,767 +1,725 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎵 Melodle · adivinhe a música</title>
-  <!-- Fonte moderna e ousada -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Ícones (opcional, para estrelas) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Melodle · Adivinhe a Música</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Space Grotesk', sans-serif;
-      background: #0b081a;
-      background-image: radial-gradient(circle at 30% 10%, #1b1233 0%, #0a0717 80%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-      color: #f0edff;
-    }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0b081a;
+            background-image: radial-gradient(circle at 30% 10%, #1b1233 0%, #0a0717 80%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            color: #f0edff;
+        }
 
-    .game-container {
-      max-width: 800px;
-      width: 100%;
-      background: rgba(18, 14, 34, 0.55);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 3.5rem;
-      padding: 2rem 2rem 2.5rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 70, 200, 0.15), 0 0 30px rgba(180, 0, 255, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      transition: all 0.3s ease;
-    }
+        .game-container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(18, 14, 34, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 3.5rem;
+            padding: 2rem 2rem 2.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 70, 200, 0.15), 0 0 30px rgba(180, 0, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
 
-    /* cabeçalho extravagante */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
 
-    .header h1 {
-      font-weight: 700;
-      font-size: 2.2rem;
-      background: linear-gradient(135deg, #ff3b9e, #b44cff, #3bc9ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.5px;
-      text-shadow: 0 0 20px rgba(180, 60, 255, 0.4);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+        .header h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #ff3b9e, #b44cff, #3bc9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 20px rgba(180, 60, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    .header i {
-      font-size: 2rem;
-      color: #ff6bcb;
-      filter: drop-shadow(0 0 8px #ff3b9e);
-    }
+        .header i {
+            font-size: 2rem;
+            color: #ff6bcb;
+            filter: drop-shadow(0 0 8px #ff3b9e);
+        }
 
-    .day-badge {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(4px);
-      padding: 0.5rem 1.2rem;
-      border-radius: 60px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: #c6b8ff;
-      box-shadow: 0 0 12px rgba(120, 0, 255, 0.2);
-    }
+        .day-badge {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #c6b8ff;
+            box-shadow: 0 0 12px rgba(120, 0, 255, 0.2);
+        }
 
-    .day-badge i {
-      margin-right: 6px;
-      color: #ffd966;
-    }
+        .day-badge i {
+            margin-right: 6px;
+            color: #ffd966;
+        }
 
-    /* verso da música – destaque */
-    .lyric-card {
-      background: rgba(28, 20, 48, 0.6);
-      backdrop-filter: blur(8px);
-      border-radius: 2.5rem;
-      padding: 1.8rem 2rem;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(255, 180, 255, 0.08);
-      box-shadow: inset 0 0 30px rgba(180, 0, 255, 0.1), 0 10px 30px -10px #000000aa;
-      text-align: center;
-      transition: all 0.4s ease;
-    }
+        .lyric-card {
+            background: rgba(28, 20, 48, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 2.5rem;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 180, 255, 0.08);
+            box-shadow: inset 0 0 30px rgba(180, 0, 255, 0.1), 0 10px 30px -10px #000000aa;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
 
-    .lyric-card .verse {
-      font-size: 1.7rem;
-      font-weight: 500;
-      line-height: 1.4;
-      color: #f2eaff;
-      text-shadow: 0 0 20px rgba(180, 100, 255, 0.3);
-      letter-spacing: -0.2px;
-      padding: 0.2rem 0;
-    }
+        .lyric-card .verse {
+            font-size: 1.7rem;
+            font-weight: 500;
+            line-height: 1.4;
+            color: #f2eaff;
+            text-shadow: 0 0 20px rgba(180, 100, 255, 0.3);
+            letter-spacing: -0.2px;
+            padding: 0.2rem 0;
+        }
 
-    .lyric-card .verse i {
-      color: #b77aff;
-      margin: 0 0.4rem;
-      opacity: 0.7;
-    }
+        .lyric-card .verse i {
+            color: #b77aff;
+            margin: 0 0.4rem;
+            opacity: 0.7;
+        }
 
-    .verse-reveal-count {
-      margin-top: 0.8rem;
-      font-size: 0.8rem;
-      color: #a28ed0;
-      letter-spacing: 0.5px;
-    }
+        .verse-reveal-count {
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            color: #a28ed0;
+            letter-spacing: 0.5px;
+        }
 
-    /* campo de busca + autocomplete */
-    .search-section {
-      margin-bottom: 2rem;
-      position: relative;
-    }
+        .search-section {
+            margin-bottom: 2rem;
+            position: relative;
+        }
 
-    .search-wrapper {
-      display: flex;
-      gap: 0.8rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+        .search-wrapper {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
 
-    .search-input-wrapper {
-      flex: 1;
-      position: relative;
-    }
+        .search-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
 
-    #songInput {
-      width: 100%;
-      padding: 1rem 1.5rem;
-      border-radius: 60px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(10, 6, 24, 0.7);
-      backdrop-filter: blur(4px);
-      color: #f0edff;
-      font-size: 1rem;
-      font-weight: 500;
-      outline: none;
-      transition: all 0.25s ease;
-      box-shadow: 0 0 0 0px rgba(180, 0, 255, 0);
-    }
+        #songInput {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 6, 24, 0.7);
+            backdrop-filter: blur(4px);
+            color: #f0edff;
+            font-size: 1rem;
+            font-weight: 500;
+            outline: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 0 0 0px rgba(180, 0, 255, 0);
+        }
 
-    #songInput:focus {
-      border-color: #b44cff;
-      box-shadow: 0 0 25px rgba(180, 0, 255, 0.3), 0 0 0 2px rgba(180, 0, 255, 0.2);
-      background: rgba(14, 8, 34, 0.8);
-    }
+        #songInput:focus {
+            border-color: #b44cff;
+            box-shadow: 0 0 25px rgba(180, 0, 255, 0.3), 0 0 0 2px rgba(180, 0, 255, 0.2);
+            background: rgba(14, 8, 34, 0.8);
+        }
 
-    #songInput::placeholder {
-      color: #6b5d8a;
-      font-weight: 400;
-    }
+        #songInput::placeholder {
+            color: #6b5d8a;
+            font-weight: 400;
+        }
 
-    .btn-primary {
-      background: linear-gradient(145deg, #b44cff, #8b2fdb);
-      border: none;
-      padding: 1rem 2.2rem;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 1rem;
-      color: white;
-      box-shadow: 0 0 25px rgba(150, 0, 255, 0.4);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+        .btn-primary {
+            background: linear-gradient(145deg, #b44cff, #8b2fdb);
+            border: none;
+            padding: 1rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            box-shadow: 0 0 25px rgba(150, 0, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    .btn-primary:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 40px #b44cffaa;
-    }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px #b44cffaa;
+        }
 
-    .btn-primary:active {
-      transform: scale(0.97);
-    }
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
 
-    .btn-primary:disabled {
-      opacity: 0.3;
-      pointer-events: none;
-    }
+        .btn-primary:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
 
-    /* autocomplete dropdown */
-    .autocomplete-list {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 0;
-      right: 0;
-      background: rgba(18, 12, 38, 0.95);
-      backdrop-filter: blur(16px);
-      border-radius: 1.8rem;
-      padding: 0.5rem 0;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-      z-index: 30;
-      max-height: 200px;
-      overflow-y: auto;
-      display: none;
-    }
+        .autocomplete-list {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: rgba(18, 12, 38, 0.95);
+            backdrop-filter: blur(16px);
+            border-radius: 1.8rem;
+            padding: 0.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            z-index: 30;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
 
-    .autocomplete-list.active {
-      display: block;
-    }
+        .autocomplete-list.active {
+            display: block;
+        }
 
-    .autocomplete-item {
-      padding: 0.7rem 1.8rem;
-      cursor: pointer;
-      transition: 0.1s ease;
-      display: flex;
-      justify-content: space-between;
-      color: #d4caff;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-    }
+        .autocomplete-item {
+            padding: 0.7rem 1.8rem;
+            cursor: pointer;
+            transition: 0.1s ease;
+            display: flex;
+            justify-content: space-between;
+            color: #d4caff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
 
-    .autocomplete-item:hover {
-      background: rgba(150, 70, 255, 0.2);
-      color: white;
-    }
+        .autocomplete-item:hover {
+            background: rgba(150, 70, 255, 0.2);
+            color: white;
+        }
 
-    .autocomplete-item .artist-name {
-      color: #a28ed0;
-      font-size: 0.85rem;
-    }
+        .autocomplete-item .artist-name {
+            color: #a28ed0;
+            font-size: 0.85rem;
+        }
 
-    /* tabela comparativa (glassmorphism) */
-    .comparison-table {
-      background: rgba(16, 10, 34, 0.5);
-      backdrop-filter: blur(8px);
-      border-radius: 2rem;
-      padding: 1.5rem;
-      margin: 1.8rem 0 1.2rem;
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-      transition: all 0.4s ease;
-    }
+        .comparison-table {
+            background: rgba(16, 10, 34, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            margin: 1.8rem 0 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
 
-    .comparison-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.8rem 0.2rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      font-size: 0.95rem;
-    }
+        .comparison-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.95rem;
+        }
 
-    .comparison-row:last-child {
-      border-bottom: none;
-    }
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
 
-    .cmp-label {
-      font-weight: 400;
-      color: #b7a8e0;
-      letter-spacing: 0.3px;
-    }
+        .cmp-label {
+            font-weight: 400;
+            color: #b7a8e0;
+            letter-spacing: 0.3px;
+        }
 
-    .cmp-value {
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+        .cmp-value {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .cmp-value .badge {
-      padding: 0.2rem 1rem;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid transparent;
-    }
+        .cmp-value .badge {
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
+        }
 
-    .badge.green {
-      background: #1f5f3f;
-      color: #9bffb0;
-      border-color: #34b86b;
-      box-shadow: 0 0 15px #1aff6e33;
-    }
-    .badge.yellow {
-      background: #5f4b1a;
-      color: #ffd966;
-      border-color: #d4a022;
-      box-shadow: 0 0 15px #ffbb3333;
-    }
-    .badge.red {
-      background: #4f1e2a;
-      color: #ff8a8a;
-      border-color: #d43f4f;
-      box-shadow: 0 0 15px #ff3b3b33;
-    }
+        .badge.green {
+            background: #1f5f3f;
+            color: #9bffb0;
+            border-color: #34b86b;
+            box-shadow: 0 0 15px #1aff6e33;
+        }
+        .badge.yellow {
+            background: #5f4b1a;
+            color: #ffd966;
+            border-color: #d4a022;
+            box-shadow: 0 0 15px #ffbb3333;
+        }
+        .badge.red {
+            background: #4f1e2a;
+            color: #ff8a8a;
+            border-color: #d43f4f;
+            box-shadow: 0 0 15px #ff3b3b33;
+        }
 
-    .arrow-up { color: #7affb0; margin-left: 4px; }
-    .arrow-down { color: #ff7b9e; margin-left: 4px; }
+        .arrow-up { color: #7affb0; margin-left: 4px; }
+        .arrow-down { color: #ff7b9e; margin-left: 4px; }
 
-    .cmp-value i {
-      margin-right: 6px;
-      font-size: 0.9rem;
-    }
+        .cmp-value i {
+            margin-right: 6px;
+            font-size: 0.9rem;
+        }
 
-    /* mensagem de erro / acerto */
-    .feedback-message {
-      text-align: center;
-      font-weight: 600;
-      padding: 0.8rem 0;
-      font-size: 1.1rem;
-      min-height: 3.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+        .feedback-message {
+            text-align: center;
+            font-weight: 600;
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            min-height: 3.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
 
-    .feedback-message.success {
-      color: #b4ffb4;
-      text-shadow: 0 0 20px #00ff88aa;
-    }
+        .feedback-message.success {
+            color: #b4ffb4;
+            text-shadow: 0 0 20px #00ff88aa;
+        }
 
-    .feedback-message.error {
-      color: #ffb0b0;
-    }
+        .feedback-message.error {
+            color: #ffb0b0;
+        }
 
-    /* confete neon (animação) */
-    .confetti-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 999;
-      overflow: hidden;
-    }
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
 
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
-      animation: confettiFall linear forwards;
-    }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            animation: confettiFall linear forwards;
+        }
 
-    @keyframes confettiFall {
-      0% { opacity: 1; transform: translateY(-20px) rotate(0deg) scale(1); }
-      100% { opacity: 0; transform: translateY(110vh) rotate(720deg) scale(0.2); }
-    }
+        @keyframes confettiFall {
+            0% { opacity: 1; transform: translateY(-20px) rotate(0deg) scale(1); }
+            100% { opacity: 0; transform: translateY(110vh) rotate(720deg) scale(0.2); }
+        }
 
-    /* pulsaçao de audio (acerto) */
-    .pulse-glow {
-      animation: audioPulse 0.8s ease 3;
-    }
+        .pulse-glow {
+            animation: audioPulse 0.8s ease 3;
+        }
 
-    @keyframes audioPulse {
-      0% { box-shadow: 0 0 0 0 #ff3b9e88, 0 0 0 0 #b44cff66; }
-      50% { box-shadow: 0 0 40px 10px #ff3b9eaa, 0 0 80px 30px #b44cff66; }
-      100% { box-shadow: 0 0 0 0 #ff3b9e88, 0 0 0 0 #b44cff66; }
-    }
+        @keyframes audioPulse {
+            0% { box-shadow: 0 0 0 0 #ff3b9e88, 0 0 0 0 #b44cff66; }
+            50% { box-shadow: 0 0 40px 10px #ff3b9eaa, 0 0 80px 30px #b44cff66; }
+            100% { box-shadow: 0 0 0 0 #ff3b9e88, 0 0 0 0 #b44cff66; }
+        }
 
-    /* responsivo */
-    @media (max-width: 600px) {
-      .game-container { padding: 1.5rem; }
-      .header h1 { font-size: 1.7rem; }
-      .lyric-card .verse { font-size: 1.3rem; }
-      .btn-primary { padding: 0.8rem 1.8rem; }
-    }
+        @media (max-width: 600px) {
+            .game-container { padding: 1.5rem; }
+            .header h1 { font-size: 1.7rem; }
+            .lyric-card .verse { font-size: 1.3rem; }
+            .btn-primary { padding: 0.8rem 1.8rem; }
+        }
 
-    /* scroll do autocomplete */
-    .autocomplete-list::-webkit-scrollbar {
-      width: 4px;
-      background: transparent;
-    }
-    .autocomplete-list::-webkit-scrollbar-thumb {
-      background: #b44cff;
-      border-radius: 20px;
-    }
-  </style>
+        .autocomplete-list::-webkit-scrollbar {
+            width: 4px;
+            background: transparent;
+        }
+        .autocomplete-list::-webkit-scrollbar-thumb {
+            background: #b44cff;
+            border-radius: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div class="game-container" id="gameContainer">
-    <div class="header">
-      <h1><i class="fas fa-headphones-alt"></i> Melodle</h1>
-      <span class="day-badge"><i class="fas fa-calendar-alt"></i> #16 · diário</span>
-    </div>
-
-    <!-- Letra -->
-    <div class="lyric-card" id="lyricCard">
-      <div class="verse" id="verseDisplay">“<i class="fas fa-music"></i>  A vida é uma onda que... <i class="fas fa-music"></i>”</div>
-      <div class="verse-reveal-count" id="verseCount">verso 1 de 3</div>
-    </div>
-
-    <!-- Busca -->
-    <div class="search-section">
-      <div class="search-wrapper">
-        <div class="search-input-wrapper">
-          <input type="text" id="songInput" placeholder="Digite música ou artista..." autocomplete="off">
-          <div class="autocomplete-list" id="autocompleteList"></div>
+    <div class="game-container" id="gameContainer">
+        <div class="header">
+            <h1><i class="fas fa-headphones-alt"></i> Melodle</h1>
+            <span class="day-badge"><i class="fas fa-calendar-alt"></i> #16 · diario</span>
         </div>
-        <button class="btn-primary" id="guessBtn"><i class="fas fa-guitar"></i> Palpitar</button>
-      </div>
+
+        <div class="lyric-card" id="lyricCard">
+            <div class="verse" id="verseDisplay">"<i class="fas fa-music"></i> A vida e uma onda que... <i class="fas fa-music"></i>"</div>
+            <div class="verse-reveal-count" id="verseCount">verso 1 de 3</div>
+        </div>
+
+        <div class="search-section">
+            <div class="search-wrapper">
+                <div class="search-input-wrapper">
+                    <input type="text" id="songInput" placeholder="Digite musica ou artista..." autocomplete="off">
+                    <div class="autocomplete-list" id="autocompleteList"></div>
+                </div>
+                <button class="btn-primary" id="guessBtn"><i class="fas fa-guitar"></i> Palpitar</button>
+            </div>
+        </div>
+
+        <div class="comparison-table" id="comparisonTable">
+            <div class="comparison-row"><span class="cmp-label"> Artista</span><span class="cmp-value" id="cmpArtist">---</span></div>
+            <div class="comparison-row"><span class="cmp-label"> Genero</span><span class="cmp-value" id="cmpGenre">---</span></div>
+            <div class="comparison-row"><span class="cmp-label"> Decada</span><span class="cmp-value" id="cmpDecade">---</span></div>
+            <div class="comparison-row"><span class="cmp-label"> Nacionalidade</span><span class="cmp-value" id="cmpNationality">---</span></div>
+            <div class="comparison-row"><span class="cmp-label"> Popularidade</span><span class="cmp-value" id="cmpPopularity">---</span></div>
+        </div>
+
+        <div class="feedback-message" id="feedbackMessage"> Adivinhe a musica do dia!</div>
     </div>
 
-    <!-- Tabela comparativa -->
-    <div class="comparison-table" id="comparisonTable">
-      <div class="comparison-row"><span class="cmp-label">🎤 Artista</span><span class="cmp-value" id="cmpArtist">—</span></div>
-      <div class="comparison-row"><span class="cmp-label">🎧 Gênero</span><span class="cmp-value" id="cmpGenre">—</span></div>
-      <div class="comparison-row"><span class="cmp-label">📅 Década</span><span class="cmp-value" id="cmpDecade">—</span></div>
-      <div class="comparison-row"><span class="cmp-label">🌍 Nacionalidade</span><span class="cmp-value" id="cmpNationality">—</span></div>
-      <div class="comparison-row"><span class="cmp-label">📈 Popularidade</span><span class="cmp-value" id="cmpPopularity">—</span></div>
-    </div>
+    <script>
+        (function() {
+            // BANCO DE DADOS FICTICIO
+            const MUSIC_DB = [{
+                id: 1,
+                title: "Bohemian Rhapsody",
+                artist: "Queen",
+                genre: "Rock",
+                year: 1975,
+                nationality: "Britanica",
+                popularity: 980,
+                lyrics: [
+                    "Is this the real life? Is this just fantasy?",
+                    "Caught in a landslide, no escape from reality",
+                    "Mama, just killed a man, put a gun against his head"
+                ]
+            }, {
+                id: 2,
+                title: "Billie Jean",
+                artist: "Michael Jackson",
+                genre: "Pop",
+                year: 1982,
+                nationality: "Americana",
+                popularity: 920,
+                lyrics: [
+                    "She was more like a beauty queen from a movie scene",
+                    "Billie Jean is not my lover",
+                    "The kid is not my son"
+                ]
+            }, {
+                id: 3,
+                title: "Tempo Perdido",
+                artist: "Legiao Urbana",
+                genre: "MPB / Rock",
+                year: 1986,
+                nationality: "Brasileira",
+                popularity: 750,
+                lyrics: [
+                    "Todos os dias quando acordo, nao tenho mais o tempo que passou",
+                    "Mas tenho muito tempo, temos todo o tempo do mundo",
+                    "Somos tao jovens"
+                ]
+            }, {
+                id: 4,
+                title: "Blinding Lights",
+                artist: "The Weeknd",
+                genre: "Pop / Synthwave",
+                year: 2020,
+                nationality: "Canadense",
+                popularity: 990,
+                lyrics: [
+                    "I'm blinded by the lights",
+                    "No, I can't sleep until I feel your touch",
+                    "I said, ooh, I'm drowning in the night"
+                ]
+            }, {
+                id: 5,
+                title: "Garota de Ipanema",
+                artist: "Tom Jobim",
+                genre: "Bossa Nova",
+                year: 1962,
+                nationality: "Brasileira",
+                popularity: 700,
+                lyrics: [
+                    "Olha que coisa mais linda, mais cheia de graca",
+                    "E ela a menina que vem e que passa",
+                    "Num doce balanco, caminho do mar"
+                ]
+            }];
 
-    <!-- Feedback -->
-    <div class="feedback-message" id="feedbackMessage">🎯 Adivinhe a música do dia!</div>
-  </div>
+            const DAILY_ID = 3;
+            const dailySong = MUSIC_DB.find(s => s.id === DAILY_ID);
+            if (!dailySong) throw new Error("Musica diaria nao encontrada");
 
-  <script>
-    (function(){
-      // ----------------------- BANCO DE DADOS FICTÍCIO -----------------------
-      const MUSIC_DB = [
-        {
-          id: 1,
-          title: "Bohemian Rhapsody",
-          artist: "Queen",
-          genre: "Rock",
-          year: 1975,
-          nationality: "Britânica",
-          popularity: 980,
-          lyrics: [
-            "Is this the real life? Is this just fantasy?",
-            "Caught in a landslide, no escape from reality",
-            "Mama, just killed a man, put a gun against his head"
-          ]
-        },
-        {
-          id: 2,
-          title: "Billie Jean",
-          artist: "Michael Jackson",
-          genre: "Pop",
-          year: 1982,
-          nationality: "Americana",
-          popularity: 920,
-          lyrics: [
-            "She was more like a beauty queen from a movie scene",
-            "Billie Jean is not my lover",
-            "The kid is not my son"
-          ]
-        },
-        {
-          id: 3,
-          title: "Tempo Perdido",
-          artist: "Legião Urbana",
-          genre: "MPB / Rock",
-          year: 1986,
-          nationality: "Brasileira",
-          popularity: 750,
-          lyrics: [
-            "Todos os dias quando acordo, não tenho mais o tempo que passou",
-            "Mas tenho muito tempo, temos todo o tempo do mundo",
-            "Somos tão jovens"
-          ]
-        },
-        {
-          id: 4,
-          title: "Blinding Lights",
-          artist: "The Weeknd",
-          genre: "Pop / Synthwave",
-          year: 2020,
-          nationality: "Canadense",
-          popularity: 990,
-          lyrics: [
-            "I'm blinded by the lights",
-            "No, I can't sleep until I feel your touch",
-            "I said, ooh, I'm drowning in the night"
-          ]
-        },
-        {
-          id: 5,
-          title: "Garota de Ipanema",
-          artist: "Tom Jobim",
-          genre: "Bossa Nova",
-          year: 1962,
-          nationality: "Brasileira",
-          popularity: 700,
-          lyrics: [
-            "Olha que coisa mais linda, mais cheia de graça",
-            "É ela a menina que vem e que passa",
-            "Num doce balanço, caminho do mar"
-          ]
-        }
-      ];
+            let currentVerseIndex = 0;
+            let attempts = 0;
+            let gameOver = false;
+            let guessedSongs = [];
+            let allSongTitles = MUSIC_DB.map(s => ({ title: s.title, artist: s.artist, id: s.id }));
 
-      // ----------------------- ESTADO DO JOGO -----------------------
-      // Música do dia (sorteada fixa: índice 2 para demonstração, mas pode ser random)
-      const DAILY_ID = 2; // "Tempo Perdido" (Legião Urbana)
-      const dailySong = MUSIC_DB.find(s => s.id === DAILY_ID);
-      if (!dailySong) throw new Error("Música diária não encontrada");
+            const verseDisplay = document.getElementById('verseDisplay');
+            const verseCount = document.getElementById('verseCount');
+            const songInput = document.getElementById('songInput');
+            const guessBtn = document.getElementById('guessBtn');
+            const autocompleteList = document.getElementById('autocompleteList');
+            const feedback = document.getElementById('feedbackMessage');
+            const cmpArtist = document.getElementById('cmpArtist');
+            const cmpGenre = document.getElementById('cmpGenre');
+            const cmpDecade = document.getElementById('cmpDecade');
+            const cmpNationality = document.getElementById('cmpNationality');
+            const cmpPopularity = document.getElementById('cmpPopularity');
+            const gameContainer = document.getElementById('gameContainer');
 
-      let currentVerseIndex = 0;                // quantos versos já foram revelados (0-based)
-      let attempts = 0;
-      let gameOver = false;
-      let guessedSongs = [];                   // lista de objetos { song, match }
-      let allSongTitles = MUSIC_DB.map(s => ({ title: s.title, artist: s.artist, id: s.id }));
+            function revealVerse(index) {
+                if (!dailySong.lyrics || index >= dailySong.lyrics.length) {
+                    return dailySong.lyrics[dailySong.lyrics.length - 1] || "...";
+                }
+                return dailySong.lyrics[index];
+            }
 
-      // elementos DOM
-      const verseDisplay = document.getElementById('verseDisplay');
-      const verseCount = document.getElementById('verseCount');
-      const songInput = document.getElementById('songInput');
-      const guessBtn = document.getElementById('guessBtn');
-      const autocompleteList = document.getElementById('autocompleteList');
-      const feedback = document.getElementById('feedbackMessage');
-      const cmpArtist = document.getElementById('cmpArtist');
-      const cmpGenre = document.getElementById('cmpGenre');
-      const cmpDecade = document.getElementById('cmpDecade');
-      const cmpNationality = document.getElementById('cmpNationality');
-      const cmpPopularity = document.getElementById('cmpPopularity');
-      const gameContainer = document.getElementById('gameContainer');
+            function updateVerseDisplay() {
+                const verseText = revealVerse(currentVerseIndex);
+                verseDisplay.innerHTML = '"<i class="fas fa-music"></i> ' + verseText + ' <i class="fas fa-music"></i>"';
+                const total = dailySong.lyrics.length;
+                verseCount.textContent = 'verso ' + (currentVerseIndex + 1) + ' de ' + total;
+            }
 
-      // ----------------------- FUNÇÕES AUXILIARES -----------------------
-      function revealVerse(index) {
-        if (!dailySong.lyrics || index >= dailySong.lyrics.length) {
-          return dailySong.lyrics[dailySong.lyrics.length - 1] || "♪ ... ♪";
-        }
-        return dailySong.lyrics[index];
-      }
+            function updateComparisonTable(guessSong) {
+                if (!guessSong) {
+                    cmpArtist.innerHTML = '---';
+                    cmpGenre.innerHTML = '---';
+                    cmpDecade.innerHTML = '---';
+                    cmpNationality.innerHTML = '---';
+                    cmpPopularity.innerHTML = '---';
+                    return;
+                }
 
-      function updateVerseDisplay() {
-        const verseText = revealVerse(currentVerseIndex);
-        verseDisplay.innerHTML = `“<i class="fas fa-music"></i>  ${verseText}  <i class="fas fa-music"></i>”`;
-        const total = dailySong.lyrics.length;
-        verseCount.textContent = `verso ${currentVerseIndex+1} de ${total}`;
-      }
+                const artistMatch = guessSong.artist === dailySong.artist ? 'green' :
+                    (dailySong.artist.includes(guessSong.artist) || guessSong.artist.includes(dailySong.artist) ? 'yellow' :
+                        'red');
+                cmpArtist.innerHTML = '<span class="badge ' + artistMatch + '">' + guessSong.artist + '</span>';
 
-      // Atualiza a tabela com a última tentativa
-      function updateComparisonTable(guessSong) {
-        if (!guessSong) {
-          // limpa
-          cmpArtist.innerHTML = '—';
-          cmpGenre.innerHTML = '—';
-          cmpDecade.innerHTML = '—';
-          cmpNationality.innerHTML = '—';
-          cmpPopularity.innerHTML = '—';
-          return;
-        }
+                const genreMatch = guessSong.genre === dailySong.genre ? 'green' : 'red';
+                cmpGenre.innerHTML = '<span class="badge ' + genreMatch + '">' + guessSong.genre + '</span>';
 
-        // Artista
-        const artistMatch = guessSong.artist === dailySong.artist ? 'green' :
-                            (dailySong.artist.includes(guessSong.artist) || guessSong.artist.includes(dailySong.artist) ? 'yellow' : 'red');
-        cmpArtist.innerHTML = `<span class="badge ${artistMatch}">${guessSong.artist}</span>`;
+                const guessYear = guessSong.year;
+                const targetYear = dailySong.year;
+                let decadeArrow = '';
+                if (guessYear < targetYear) decadeArrow = '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais antiga</span>';
+                else if (guessYear > targetYear) decadeArrow =
+                    '<span class="arrow-down"><i class="fas fa-arrow-down"></i> mais recente</span>';
+                else decadeArrow = '<span style="color:#7affb0;"> mesma decada</span>';
+                cmpDecade.innerHTML = guessYear + ' ' + decadeArrow;
 
-        // Gênero
-        const genreMatch = guessSong.genre === dailySong.genre ? 'green' : 'red';
-        cmpGenre.innerHTML = `<span class="badge ${genreMatch}">${guessSong.genre}</span>`;
+                const natMatch = guessSong.nationality === dailySong.nationality ? 'green' : 'red';
+                cmpNationality.innerHTML = '<span class="badge ' + natMatch + '">' + guessSong.nationality + '</span>';
 
-        // Década (ano)
-        const guessYear = guessSong.year;
-        const targetYear = dailySong.year;
-        let decadeArrow = '';
-        if (guessYear < targetYear) decadeArrow = `<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais antiga</span>`;
-        else if (guessYear > targetYear) decadeArrow = `<span class="arrow-down"><i class="fas fa-arrow-down"></i> mais recente</span>`;
-        else decadeArrow = `<span style="color:#7affb0;">✅ mesma década</span>`;
-        cmpDecade.innerHTML = `${guessYear} ${decadeArrow}`;
+                const popDiff = guessSong.popularity - dailySong.popularity;
+                let popArrow = '';
+                if (popDiff > 0) popArrow = '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais popular</span>';
+                else if (popDiff < 0) popArrow = '<span class="arrow-down"><i class="fas fa-arrow-down"></i> menos popular</span>';
+                else popArrow = '<span style="color:#7affb0;"> igual</span>';
+                cmpPopularity.innerHTML = guessSong.popularity + ' ' + popArrow;
+            }
 
-        // Nacionalidade
-        const natMatch = guessSong.nationality === dailySong.nationality ? 'green' : 'red';
-        cmpNationality.innerHTML = `<span class="badge ${natMatch}">${guessSong.nationality}</span>`;
+            function checkGuess(guessedSong) {
+                if (guessedSong.id === dailySong.id) {
+                    gameOver = true;
+                    feedback.innerHTML = ' VOCE ACERTOU! Musica do dia descoberta! ';
+                    feedback.className = 'feedback-message success';
+                    spawnConfetti();
+                    document.querySelector('.lyric-card').classList.add('pulse-glow');
+                    currentVerseIndex = dailySong.lyrics.length - 1;
+                    updateVerseDisplay();
+                    guessBtn.disabled = true;
+                    songInput.disabled = true;
+                    return true;
+                }
+                return false;
+            }
 
-        // Popularidade
-        const popDiff = guessSong.popularity - dailySong.popularity;
-        let popArrow = '';
-        if (popDiff > 0) popArrow = `<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais popular</span>`;
-        else if (popDiff < 0) popArrow = `<span class="arrow-down"><i class="fas fa-arrow-down"></i> menos popular</span>`;
-        else popArrow = `<span style="color:#7affb0;">⚡ igual</span>`;
-        cmpPopularity.innerHTML = `${guessSong.popularity} ${popArrow}`;
-      }
+            function spawnConfetti() {
+                const container = document.createElement('div');
+                container.className = 'confetti-container';
+                document.body.appendChild(container);
+                const colors = ['#ff3b9e', '#b44cff', '#3bc9ff', '#ffd966', '#7affb0', '#ff6b6b'];
+                for (let i = 0; i < 120; i++) {
+                    const el = document.createElement('div');
+                    el.className = 'confetti';
+                    el.style.left = Math.random() * 100 + '%';
+                    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    el.style.width = (Math.random() * 8 + 4) + 'px';
+                    el.style.height = (Math.random() * 8 + 4) + 'px';
+                    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                    el.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                    el.style.animationDelay = (Math.random() * 0.8) + 's';
+                    container.appendChild(el);
+                }
+                setTimeout(function() { container.remove(); }, 4000);
+            }
 
-      // Verifica se o jogador acertou
-      function checkGuess(guessedSong) {
-        if (guessedSong.id === dailySong.id) {
-          // ACERTOU!
-          gameOver = true;
-          feedback.innerHTML = '🎉🎶 VOCÊ ACERTOU! Música do dia descoberta! 🎶🎉';
-          feedback.className = 'feedback-message success';
-          // animação de confete neon
-          spawnConfetti();
-          // efeito pulsação no card principal
-          document.querySelector('.lyric-card').classList.add('pulse-glow');
-          // revela todos os versos
-          currentVerseIndex = dailySong.lyrics.length - 1;
-          updateVerseDisplay();
-          guessBtn.disabled = true;
-          songInput.disabled = true;
-          return true;
-        }
-        return false;
-      }
+            function renderAutocomplete(filter) {
+                filter = filter || '';
+                var lower = filter.toLowerCase();
+                var filtered = allSongTitles.filter(function(item) {
+                    return item.title.toLowerCase().indexOf(lower) !== -1 ||
+                        item.artist.toLowerCase().indexOf(lower) !== -1;
+                });
+                autocompleteList.innerHTML = '';
+                if (filtered.length === 0 || filter === '') {
+                    autocompleteList.classList.remove('active');
+                    return;
+                }
+                autocompleteList.classList.add('active');
+                filtered.forEach(function(item) {
+                    var div = document.createElement('div');
+                    div.className = 'autocomplete-item';
+                    div.innerHTML = '<span>' + item.title + '</span><span class="artist-name">' + item.artist +
+                        '</span>';
+                    div.addEventListener('click', function() {
+                        songInput.value = item.title;
+                        autocompleteList.classList.remove('active');
+                    });
+                    autocompleteList.appendChild(div);
+                });
+            }
 
-      // Confete neon
-      function spawnConfetti() {
-        const container = document.createElement('div');
-        container.className = 'confetti-container';
-        document.body.appendChild(container);
-        const colors = ['#ff3b9e', '#b44cff', '#3bc9ff', '#ffd966', '#7affb0', '#ff6b6b'];
-        for (let i = 0; i < 120; i++) {
-          const el = document.createElement('div');
-          el.className = 'confetti';
-          el.style.left = Math.random() * 100 + '%';
-          el.style.background = colors[Math.floor(Math.random() * colors.length)];
-          el.style.width = (Math.random() * 8 + 4) + 'px';
-          el.style.height = (Math.random() * 8 + 4) + 'px';
-          el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-          el.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
-          el.style.animationDelay = (Math.random() * 0.8) + 's';
-          container.appendChild(el);
-        }
-        setTimeout(() => container.remove(), 4000);
-      }
+            function handleGuess() {
+                if (gameOver) return;
+                var query = songInput.value.trim();
+                if (query === '') {
+                    feedback.innerHTML = ' Digite o nome de uma musica ou artista.';
+                    feedback.className = 'feedback-message error';
+                    return;
+                }
 
-      // Mostra autocomplete
-      function renderAutocomplete(filter = '') {
-        const lower = filter.toLowerCase();
-        const filtered = allSongTitles.filter(item => 
-          item.title.toLowerCase().includes(lower) || 
-          item.artist.toLowerCase().includes(lower)
-        );
-        autocompleteList.innerHTML = '';
-        if (filtered.length === 0 || filter === '') {
-          autocompleteList.classList.remove('active');
-          return;
-        }
-        autocompleteList.classList.add('active');
-        filtered.forEach(item => {
-          const div = document.createElement('div');
-          div.className = 'autocomplete-item';
-          div.innerHTML = `<span>${item.title}</span><span class="artist-name">${item.artist}</span>`;
-          div.addEventListener('click', () => {
-            songInput.value = item.title;
-            autocompleteList.classList.remove('active');
-            // dispara tentativa automaticamente? opcional, mas o usuário clica no botão
-          });
-          autocompleteList.appendChild(div);
-        });
-      }
+                var foundSong = null;
+                for (var i = 0; i < MUSIC_DB.length; i++) {
+                    if (MUSIC_DB[i].title.toLowerCase() === query.toLowerCase()) {
+                        foundSong = MUSIC_DB[i];
+                        break;
+                    }
+                }
 
-      // Lógica principal de palpite
-      function handleGuess() {
-        if (gameOver) return;
-        const query = songInput.value.trim();
-        if (query === '') {
-          feedback.innerHTML = '⚠️ Digite o nome de uma música ou artista.';
-          feedback.className = 'feedback-message error';
-          return;
-        }
+                if (!foundSong) {
+                    feedback.innerHTML = ' Musica nao encontrada no nosso repositorio. Tente outra.';
+                    feedback.className = 'feedback-message error';
+                    return;
+                }
 
-        // buscar no DB pelo título (case insensitive)
-        const foundSong = MUSIC_DB.find(s => s.title.toLowerCase() === query.toLowerCase());
-        if (!foundSong) {
-          feedback.innerHTML = '❌ Música não encontrada no nosso repositório. Tente outra.';
-          feedback.className = 'feedback-message error';
-          return;
-        }
+                var alreadyGuessed = false;
+                for (var j = 0; j < guessedSongs.length; j++) {
+                    if (guessedSongs[j].id === foundSong.id) {
+                        alreadyGuessed = true;
+                        break;
+                    }
+                }
 
-        // Se já foi adivinhada
-        if (guessedSongs.some(s => s.id === foundSong.id)) {
-          feedback.innerHTML = '⏳ Você já tentou essa música. Escolha outra.';
-          feedback.className = 'feedback-message error';
-          return;
-        }
+                if (alreadyGuessed) {
+                    feedback.innerHTML = ' Voce ja tentou essa musica. Escolha outra.';
+                    feedback.className = 'feedback-message error';
+                    return;
+                }
 
-        // Registrar tentativa
-        attempts++;
-        guessedSongs.push(foundSong);
+                attempts++;
+                guessedSongs.push(foundSong);
+                updateComparisonTable(foundSong);
 
-        // Atualizar tabela
-        updateComparisonTable(foundSong);
+                var isCorrect = checkGuess(foundSong);
+                if (isCorrect) {
+                    return;
+                }
 
-        // Verificar acerto
-        const isCorrect = checkGuess(foundSong);
-        if (isCorrect) {
-          // já tratado
-          return;
-        }
+                if (currentVerseIndex < dailySong.lyrics.length - 1) {
+                    currentVerseIndex++;
+                    updateVerseDisplay();
+                }
 
-        // Se errou: revela próximo verso (se houver)
-        if (currentVerseIndex < dailySong.lyrics.length - 1) {
-          currentVerseIndex++;
-          updateVerseDisplay();
-        } else {
-          // já no último verso
-        }
+                feedback.innerHTML = ' Errou! Tente novamente (tentativa ' + attempts + ')';
+                feedback.className = 'feedback-message error';
+                songInput.value = '';
+                songInput.focus();
+                autocompleteList.classList.remove('active');
+            }
 
-        feedback.innerHTML = `❌ Errou! Tente novamente (tentativa ${attempts})`;
-        feedback.className = 'feedback-message error';
+            songInput.addEventListener('input', function(e) {
+                var val = e.target.value;
+                renderAutocomplete(val);
+            });
 
-        // Se tentativas > 5, dá dica extra? mas não necessário.
-        // Se esgotar os versos, ainda pode tentar.
-        songInput.value = '';
-        songInput.focus();
-        autocompleteList.classList.remove('active');
-      }
+            songInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleGuess();
+                }
+                if (e.key === 'Escape') {
+                    autocompleteList.classList.remove('active');
+                }
+            });
 
-      // ----------------------- EVENTOS -----------------------
-      songInput.addEventListener('input', (e) => {
-        const val = e.target.value;
-        renderAutocomplete(val);
-      });
+            guessBtn.addEventListener('click', handleGuess);
 
-      songInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          handleGuess();
-        }
-        if (e.key === 'Escape') {
-          autocompleteList.classList.remove('active');
-        }
-      });
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-input-wrapper')) {
+                    autocompleteList.classList.remove('active');
+                }
+            });
 
-      guessBtn.addEventListener('click', handleGuess);
+            function initGame() {
+                currentVerseIndex = 0;
+                updateVerseDisplay();
+                feedback.innerHTML = ' Adivinhe a musica do dia!';
+                feedback.className = 'feedback-message';
+                updateComparisonTable(null);
+                songInput.value = '';
+                songInput.disabled = false;
+                guessBtn.disabled = false;
+                gameOver = false;
+                guessedSongs = [];
+                attempts = 0;
+                document.querySelector('.lyric-card').classList.remove('pulse-glow');
+            }
 
-      // Fechar autocomplete ao clicar fora
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.search-input-wrapper')) {
-          autocompleteList.classList.remove('active');
-        }
-      });
-
-      // ----------------------- INICIALIZAÇÃO -----------------------
-      function initGame() {
-        // revela primeiro verso
-        currentVerseIndex = 0;
-        updateVerseDisplay();
-        feedback.innerHTML = '🎯 Adivinhe a música do dia!';
-        feedback.className = 'feedback-message';
-        updateComparisonTable(null);
-        songInput.value = '';
-        songInput.disabled = false;
-        guessBtn.disabled = false;
-        gameOver = false;
-        guessedSongs = [];
-        attempts = 0;
-        document.querySelector('.lyric-card').classList.remove('pulse-glow');
-      }
-
-      initGame();
-
-      // Para debug (opcional): mostrar a música certa no console
-      console.log(`🎵 Música do dia: ${dailySong.title} - ${dailySong.artist}`);
-    })();
-  </script>
+            initGame();
+            console.log(' Musica do dia: ' + dailySong.title + ' - ' + dailySong.artist);
+        })();
+    </script>
 </body>
 </html>
