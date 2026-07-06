@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Melodle · Modo Infinito</title>
+    <title> Melodle · Adivinhe a Música</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -63,10 +63,18 @@
             gap: 0.5rem;
         }
 
-        .header i {
+        .header h1 i {
             font-size: 2rem;
             color: #ff6bcb;
             filter: drop-shadow(0 0 8px #ff3b9e);
+        }
+
+        .header-subtitle {
+            font-size: 0.8rem;
+            color: #a28ed0;
+            letter-spacing: 1px;
+            margin-top: -0.3rem;
+            padding-left: 0.5rem;
         }
 
         .stats {
@@ -478,7 +486,10 @@
 <body>
     <div class="game-container" id="gameContainer">
         <div class="header">
-            <h1><i class="fas fa-headphones-alt"></i> Melodle</h1>
+            <div>
+                <h1><i class="fas fa-headphones-alt"></i> Liricle</h1>
+                <div class="header-subtitle">Adivinhe a música pela letra</div>
+            </div>
             <div class="stats">
                 <div class="stat-item">
                     <i class="fas fa-trophy"></i>
@@ -506,7 +517,7 @@
 
         <div class="lyric-card" id="lyricCard">
             <div class="verse" id="verseDisplay">
-                <i class="fas fa-music"></i> Carregando musica... <i class="fas fa-music"></i>
+                <i class="fas fa-quote-left"></i> Carregando letra... <i class="fas fa-quote-right"></i>
             </div>
             <div class="verse-reveal-count" id="verseCount">verso 1 de ?</div>
         </div>
@@ -514,7 +525,7 @@
         <div class="search-section">
             <div class="search-wrapper">
                 <div class="search-input-wrapper">
-                    <input type="text" id="songInput" placeholder="Digite musica ou artista..." autocomplete="off">
+                    <input type="text" id="songInput" placeholder="Digite o nome da música ou artista..." autocomplete="off">
                     <div class="autocomplete-list" id="autocompleteList"></div>
                 </div>
                 <button class="btn-primary" id="guessBtn"><i class="fas fa-guitar"></i> Palpitar</button>
@@ -530,7 +541,7 @@
         </div>
 
         <div class="feedback-message" id="feedbackMessage">
-            <i class="fas fa-info-circle"></i> Adivinhe a musica!
+            <i class="fas fa-info-circle"></i> Adivinhe a música pela letra!
         </div>
 
         <div style="text-align: center; display: none;" id="nextRoundContainer">
@@ -542,7 +553,7 @@
 
     <script>
         // ============================================================
-        // BANCO DE DADOS COM 40 MUSICAS
+        // BANCO DE DADOS COM 40 MUSICAS E SUAS LETRAS
         // ============================================================
         var MUSIC_DB = [
             // Rock Clássico
@@ -968,589 +979,4 @@
                 popularity: 850,
                 lyrics: [
                     "Birds flying high, you know how I feel",
-                    "Sun in the sky, you know how I feel",
-                    "Breeze driftin' on by, you know how I feel",
-                    "It's a new dawn, it's a new day, it's a new life for me"
-                ]
-            },
-            {
-                id: 29,
-                title: "Take Five",
-                artist: "Dave Brubeck",
-                genre: "Jazz",
-                year: 1959,
-                nationality: "Americana",
-                popularity: 780,
-                lyrics: [
-                    "(Instrumental)",
-                    "Smooth jazz, the perfect groove",
-                    "Five four time signature, it's unique",
-                    "A masterpiece of jazz music"
-                ]
-            },
-            // Clássica / Instrumental
-            {
-                id: 30,
-                title: "Clair de Lune",
-                artist: "Debussy",
-                genre: "Classica",
-                year: 1905,
-                nationality: "Francesa",
-                popularity: 720,
-                lyrics: [
-                    "(Instrumental)",
-                    "Beautiful piano melody",
-                    "Moonlight sonata feeling",
-                    "A timeless classical piece"
-                ]
-            },
-            // Mais Pop
-            {
-                id: 31,
-                title: "Dancing Queen",
-                artist: "ABBA",
-                genre: "Pop",
-                year: 1976,
-                nationality: "Sueca",
-                popularity: 940,
-                lyrics: [
-                    "You can dance, you can jive, having the time of your life",
-                    "See that girl, watch that scene, digging the dancing queen",
-                    "Friday night and the lights are low",
-                    "Looking out for the place to go"
-                ]
-            },
-            {
-                id: 32,
-                title: "I Will Survive",
-                artist: "Gloria Gaynor",
-                genre: "Pop",
-                year: 1978,
-                nationality: "Americana",
-                popularity: 930,
-                lyrics: [
-                    "At first I was afraid, I was petrified",
-                    "Kept thinking I could never live without you by my side",
-                    "But then I spent so many nights thinking how you did me wrong",
-                    "And I grew strong, and I learned how to get along"
-                ]
-            },
-            // Mais Rock
-            {
-                id: 33,
-                title: "Back in Black",
-                artist: "AC/DC",
-                genre: "Rock",
-                year: 1980,
-                nationality: "Australiana",
-                popularity: 960,
-                lyrics: [
-                    "Back in black, I hit the sack",
-                    "I've been too long, I'm glad to be back",
-                    "Yes, I'm let loose from the noose",
-                    "That's kept me hanging about"
-                ]
-            },
-            {
-                id: 34,
-                title: "Seven Nation Army",
-                artist: "The White Stripes",
-                genre: "Rock",
-                year: 2003,
-                nationality: "Americana",
-                popularity: 950,
-                lyrics: [
-                    "I'm gonna fight 'em off",
-                    "A seven nation army couldn't hold me back",
-                    "They're gonna rip it off",
-                    "Taking their time right behind my back"
-                ]
-            },
-            // Mais MPB
-            {
-                id: 35,
-                title: "Construcao",
-                artist: "Chico Buarque",
-                genre: "MPB",
-                year: 1971,
-                nationality: "Brasileira",
-                popularity: 740,
-                lyrics: [
-                    "Amou daquela vez como se fosse a ultima",
-                    "Beijou sua mulher como se fosse a ultima",
-                    "E cada filho seu como se fosse o unico",
-                    "E atravessou a rua com seu passo timido"
-                ]
-            },
-            {
-                id: 36,
-                title: "O Bêbado e a Equilibrista",
-                artist: "Joao Bosco",
-                genre: "MPB",
-                year: 1979,
-                nationality: "Brasileira",
-                popularity: 720,
-                lyrics: [
-                    "O bêbado e a equilibrista",
-                    "Se abraçam no ar",
-                    "A vida e uma festa",
-                    "A vida e um carnaval"
-                ]
-            },
-            // Mais Eletronica
-            {
-                id: 37,
-                title: "Levels",
-                artist: "Avicii",
-                genre: "Eletronica",
-                year: 2011,
-                nationality: "Sueca",
-                popularity: 970,
-                lyrics: [
-                    "Oh, sometimes I get a good feeling, yeah",
-                    "Get a feeling that I never, never, never, never had before, no no",
-                    "I get a good feeling, yeah",
-                    "Oh, sometimes I get a good feeling, yeah"
-                ]
-            },
-            {
-                id: 38,
-                title: "Wake Me Up",
-                artist: "Avicii",
-                genre: "Eletronica",
-                year: 2013,
-                nationality: "Sueca",
-                popularity: 980,
-                lyrics: [
-                    "Feeling my way through the darkness",
-                    "Guided by a beating heart",
-                    "I can't tell where the journey will end",
-                    "But I know where to start"
-                ]
-            },
-            // Mais Indie
-            {
-                id: 39,
-                title: "Fluorescent Adolescent",
-                artist: "Arctic Monkeys",
-                genre: "Indie Rock",
-                year: 2007,
-                nationality: "Britanica",
-                popularity: 900,
-                lyrics: [
-                    "You used to get it in your fishnets",
-                    "Now you only get it in your night dress",
-                    "Discarded all the naughty nights for niceness",
-                    "Landed in a very common crisis"
-                ]
-            },
-            {
-                id: 40,
-                title: "R U Mine?",
-                artist: "Arctic Monkeys",
-                genre: "Indie Rock",
-                year: 2012,
-                nationality: "Britanica",
-                popularity: 920,
-                lyrics: [
-                    "I'm a puppet on a string",
-                    "Tracy Island, time-traveling diamond",
-                    "Coulda been a contender, coulda been a somebody",
-                    "R U mine?"
-                ]
-            }
-        ];
-
-        // ============================================================
-        // ESTADO DO JOGO
-        // ============================================================
-        var gameState = {
-            mode: 'daily',
-            currentSong: null,
-            currentVerseIndex: 0,
-            attempts: 0,
-            gameOver: false,
-            guessedSongs: [],
-            score: 0,
-            round: 1,
-            isDailyMode: true,
-            usedSongIds: [],
-            availableSongs: []
-        };
-
-        // ============================================================
-        // DOM ELEMENTOS
-        // ============================================================
-        var verseDisplay = document.getElementById('verseDisplay');
-        var verseCount = document.getElementById('verseCount');
-        var songInput = document.getElementById('songInput');
-        var guessBtn = document.getElementById('guessBtn');
-        var autocompleteList = document.getElementById('autocompleteList');
-        var feedback = document.getElementById('feedbackMessage');
-        var cmpArtist = document.getElementById('cmpArtist');
-        var cmpGenre = document.getElementById('cmpGenre');
-        var cmpDecade = document.getElementById('cmpDecade');
-        var cmpNationality = document.getElementById('cmpNationality');
-        var cmpPopularity = document.getElementById('cmpPopularity');
-        var scoreDisplay = document.getElementById('scoreDisplay');
-        var roundDisplay = document.getElementById('roundDisplay');
-        var nextRoundContainer = document.getElementById('nextRoundContainer');
-        var nextRoundBtn = document.getElementById('nextRoundBtn');
-        var dailyModeBtn = document.getElementById('dailyModeBtn');
-        var infiniteModeBtn = document.getElementById('infiniteModeBtn');
-        var lyricCard = document.getElementById('lyricCard');
-
-        // ============================================================
-        // FUNCOES DO JOGO
-        // ============================================================
-        function getDailySong() {
-            var today = new Date();
-            var dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-            var index = dayOfYear % MUSIC_DB.length;
-            return MUSIC_DB[index];
-        }
-
-        function getRandomSong() {
-            // Se nao houver musicas disponiveis, resetar lista
-            if (gameState.availableSongs.length === 0) {
-                gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
-                gameState.usedSongIds = [];
-            }
-
-            // Filtrar musicas nao usadas
-            var available = gameState.availableSongs.filter(function(id) {
-                return gameState.usedSongIds.indexOf(id) === -1;
-            });
-
-            if (available.length === 0) {
-                // Todas as musicas foram usadas, resetar
-                gameState.usedSongIds = [];
-                available = gameState.availableSongs.slice();
-            }
-
-            var randomIndex = Math.floor(Math.random() * available.length);
-            var songId = available[randomIndex];
-            gameState.usedSongIds.push(songId);
-
-            var song = MUSIC_DB.find(function(s) { return s.id === songId; });
-            return song || MUSIC_DB[0];
-        }
-
-        function loadNewSong() {
-            feedback.innerHTML = '<span class="loading-spinner"></span> Carregando nova musica...';
-            feedback.className = 'feedback-message loading';
-
-            var song;
-            if (gameState.isDailyMode) {
-                song = getDailySong();
-            } else {
-                song = getRandomSong();
-                if (!song) {
-                    song = MUSIC_DB[0];
-                }
-            }
-
-            gameState.currentSong = song;
-            gameState.currentVerseIndex = 0;
-            gameState.attempts = 0;
-            gameState.gameOver = false;
-            gameState.guessedSongs = [];
-
-            updateVerseDisplay();
-            updateComparisonTable(null);
-
-            feedback.innerHTML = ' Adivinhe a musica!';
-            feedback.className = 'feedback-message';
-            guessBtn.disabled = false;
-            songInput.disabled = false;
-            songInput.value = '';
-            nextRoundContainer.style.display = 'none';
-            lyricCard.classList.remove('pulse-glow');
-
-            // Mostrar dica do modo
-            if (gameState.isDailyMode) {
-                feedback.innerHTML = ' Musica do dia! Adivinhe!';
-            } else {
-                feedback.innerHTML = ' Nova musica! Adivinhe! (Rodada ' + gameState.round + ')';
-            }
-        }
-
-        function updateVerseDisplay() {
-            var song = gameState.currentSong;
-            if (!song) return;
-
-            var verseText = song.lyrics[gameState.currentVerseIndex] || '...';
-            verseDisplay.innerHTML = '"<i class="fas fa-music"></i> ' + verseText + ' <i class="fas fa-music"></i>"';
-            var total = song.lyrics.length;
-            verseCount.textContent = 'verso ' + (gameState.currentVerseIndex + 1) + ' de ' + total;
-        }
-
-        function updateComparisonTable(guessSong) {
-            if (!guessSong || !gameState.currentSong) {
-                cmpArtist.innerHTML = '---';
-                cmpGenre.innerHTML = '---';
-                cmpDecade.innerHTML = '---';
-                cmpNationality.innerHTML = '---';
-                cmpPopularity.innerHTML = '---';
-                return;
-            }
-
-            var currentSong = gameState.currentSong;
-
-            var artistMatch = guessSong.artist === currentSong.artist ? 'green' :
-                (currentSong.artist.includes(guessSong.artist) || guessSong.artist.includes(currentSong.artist) ? 'yellow' :
-                    'red');
-            cmpArtist.innerHTML = '<span class="badge ' + artistMatch + '">' + guessSong.artist + '</span>';
-
-            var genreMatch = guessSong.genre === currentSong.genre ? 'green' : 'red';
-            cmpGenre.innerHTML = '<span class="badge ' + genreMatch + '">' + guessSong.genre + '</span>';
-
-            var guessYear = guessSong.year || 2000;
-            var targetYear = currentSong.year || 2000;
-            var decadeArrow = '';
-            if (guessYear < targetYear) decadeArrow =
-                '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais antiga</span>';
-            else if (guessYear > targetYear) decadeArrow =
-                '<span class="arrow-down"><i class="fas fa-arrow-down"></i> mais recente</span>';
-            else decadeArrow = '<span style="color:#7affb0;"> mesma decada</span>';
-            cmpDecade.innerHTML = guessYear + ' ' + decadeArrow;
-
-            var natMatch = guessSong.nationality === currentSong.nationality ? 'green' : 'red';
-            cmpNationality.innerHTML = '<span class="badge ' + natMatch + '">' + guessSong.nationality + '</span>';
-
-            var popDiff = (guessSong.popularity || 500) - (currentSong.popularity || 500);
-            var popArrow = '';
-            if (popDiff > 0) popArrow = '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais popular</span>';
-            else if (popDiff < 0) popArrow = '<span class="arrow-down"><i class="fas fa-arrow-down"></i> menos popular</span>';
-            else popArrow = '<span style="color:#7affb0;"> igual</span>';
-            cmpPopularity.innerHTML = (guessSong.popularity || 500) + ' ' + popArrow;
-        }
-
-        function checkGuess(guessedSong) {
-            var currentSong = gameState.currentSong;
-            if (!currentSong) return false;
-
-            var guessedTitle = guessedSong.title.toLowerCase().trim();
-            var currentTitle = currentSong.title.toLowerCase().trim();
-
-            if (guessedTitle === currentTitle ||
-                guessedTitle.includes(currentTitle) ||
-                currentTitle.includes(guessedTitle)) {
-
-                gameState.gameOver = true;
-                var points = Math.max(100 - (gameState.attempts * 10), 10);
-                gameState.score += points;
-                updateScoreAndRound();
-
-                feedback.innerHTML = ' VOCE ACERTOU! +' + points + ' pontos!';
-                feedback.className = 'feedback-message success';
-                spawnConfetti();
-                lyricCard.classList.add('pulse-glow');
-
-                gameState.currentVerseIndex = currentSong.lyrics.length - 1;
-                updateVerseDisplay();
-
-                guessBtn.disabled = true;
-                songInput.disabled = true;
-                nextRoundContainer.style.display = 'block';
-
-                return true;
-            }
-            return false;
-        }
-
-        function updateScoreAndRound() {
-            scoreDisplay.textContent = gameState.score;
-            roundDisplay.textContent = gameState.round;
-        }
-
-        function spawnConfetti() {
-            var container = document.createElement('div');
-            container.className = 'confetti-container';
-            document.body.appendChild(container);
-            var colors = ['#ff3b9e', '#b44cff', '#3bc9ff', '#ffd966', '#7affb0', '#ff6b6b'];
-            for (var i = 0; i < 120; i++) {
-                var el = document.createElement('div');
-                el.className = 'confetti';
-                el.style.left = Math.random() * 100 + '%';
-                el.style.background = colors[Math.floor(Math.random() * colors.length)];
-                el.style.width = (Math.random() * 8 + 4) + 'px';
-                el.style.height = (Math.random() * 8 + 4) + 'px';
-                el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-                el.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
-                el.style.animationDelay = (Math.random() * 0.8) + 's';
-                container.appendChild(el);
-            }
-            setTimeout(function() { container.remove(); }, 4000);
-        }
-
-        function renderAutocomplete(filter) {
-            filter = filter || '';
-            var lower = filter.toLowerCase();
-
-            var filtered = MUSIC_DB.filter(function(item) {
-                return item.title.toLowerCase().indexOf(lower) !== -1 ||
-                    item.artist.toLowerCase().indexOf(lower) !== -1;
-            });
-
-            autocompleteList.innerHTML = '';
-            if (filtered.length === 0 || filter === '') {
-                autocompleteList.classList.remove('active');
-                return;
-            }
-
-            autocompleteList.classList.add('active');
-            for (var j = 0; j < Math.min(10, filtered.length); j++) {
-                var item = filtered[j];
-                var div = document.createElement('div');
-                div.className = 'autocomplete-item';
-                div.innerHTML = '<span>' + item.title + '</span><span class="artist-name">' + item.artist +
-                '</span>';
-                div.addEventListener('click', (function(itemData) {
-                    return function() {
-                        songInput.value = itemData.title;
-                        autocompleteList.classList.remove('active');
-                    };
-                })(item));
-                autocompleteList.appendChild(div);
-            }
-        }
-
-        function handleGuess() {
-            if (gameState.gameOver) return;
-            var query = songInput.value.trim();
-            if (query === '') {
-                feedback.innerHTML = ' Digite o nome de uma musica ou artista.';
-                feedback.className = 'feedback-message error';
-                return;
-            }
-
-            var foundSong = null;
-            for (var i = 0; i < MUSIC_DB.length; i++) {
-                if (MUSIC_DB[i].title.toLowerCase() === query.toLowerCase()) {
-                    foundSong = MUSIC_DB[i];
-                    break;
-                }
-            }
-
-            if (!foundSong) {
-                feedback.innerHTML = ' Musica nao encontrada. Tente novamente.';
-                feedback.className = 'feedback-message error';
-                return;
-            }
-
-            var alreadyGuessed = false;
-            for (var j = 0; j < gameState.guessedSongs.length; j++) {
-                if (gameState.guessedSongs[j].id === foundSong.id) {
-                    alreadyGuessed = true;
-                    break;
-                }
-            }
-
-            if (alreadyGuessed) {
-                feedback.innerHTML = ' Voce ja tentou essa musica. Escolha outra.';
-                feedback.className = 'feedback-message error';
-                return;
-            }
-
-            gameState.attempts++;
-            gameState.guessedSongs.push(foundSong);
-            updateComparisonTable(foundSong);
-
-            var isCorrect = checkGuess(foundSong);
-            if (isCorrect) {
-                return;
-            }
-
-            if (gameState.currentSong &&
-                gameState.currentVerseIndex < gameState.currentSong.lyrics.length - 1) {
-                gameState.currentVerseIndex++;
-                updateVerseDisplay();
-            }
-
-            feedback.innerHTML = ' Errou! Tente novamente (tentativa ' + gameState.attempts + ')';
-            feedback.className = 'feedback-message error';
-            songInput.value = '';
-            songInput.focus();
-            autocompleteList.classList.remove('active');
-        }
-
-        function nextRound() {
-            gameState.round++;
-            updateScoreAndRound();
-            nextRoundContainer.style.display = 'none';
-            loadNewSong();
-        }
-
-        function switchMode(mode) {
-            gameState.isDailyMode = (mode === 'daily');
-            gameState.round = 1;
-            gameState.score = 0;
-            gameState.usedSongIds = [];
-            gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
-            updateScoreAndRound();
-
-            dailyModeBtn.classList.toggle('active', mode === 'daily');
-            infiniteModeBtn.classList.toggle('active', mode === 'infinite');
-
-            loadNewSong();
-        }
-
-        // ============================================================
-        // EVENT LISTENERS
-        // ============================================================
-        songInput.addEventListener('input', function(e) {
-            var val = e.target.value;
-            renderAutocomplete(val);
-        });
-
-        songInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleGuess();
-            }
-            if (e.key === 'Escape') {
-                autocompleteList.classList.remove('active');
-            }
-        });
-
-        guessBtn.addEventListener('click', handleGuess);
-        nextRoundBtn.addEventListener('click', nextRound);
-
-        dailyModeBtn.addEventListener('click', function() {
-            if (!gameState.isDailyMode) {
-                switchMode('daily');
-            }
-        });
-
-        infiniteModeBtn.addEventListener('click', function() {
-            if (gameState.isDailyMode) {
-                switchMode('infinite');
-            }
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.search-input-wrapper')) {
-                autocompleteList.classList.remove('active');
-            }
-        });
-
-        // ============================================================
-        // INICIALIZACAO
-        // ============================================================
-        function initGame() {
-            gameState.isDailyMode = true;
-            gameState.score = 0;
-            gameState.round = 1;
-            gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
-            gameState.usedSongIds = [];
-            updateScoreAndRound();
-            loadNewSong();
-            console.log(' Melodle iniciado com ' + MUSIC_DB.length + ' musicas!');
-            console.log(' Modo: ' + (gameState.isDailyMode ? 'Diario' : 'Infinito'));
-        }
-
-        initGame();
-    </script>
-</body>
-</html>
+                    "
