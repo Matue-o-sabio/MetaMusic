@@ -542,80 +542,630 @@
 
     <script>
         // ============================================================
-        // BANCO DE DADOS LOCAL (FALLBACK) + INTEGRACAO WIKIPEDIA
+        // BANCO DE DADOS COM 40 MUSICAS
         // ============================================================
-        var LOCAL_SONGS = [{
-            id: 1,
-            title: "Bohemian Rhapsody",
-            artist: "Queen",
-            genre: "Rock",
-            year: 1975,
-            nationality: "Britanica",
-            popularity: 980,
-            lyrics: [
-                "Is this the real life? Is this just fantasy?",
-                "Caught in a landslide, no escape from reality",
-                "Mama, just killed a man, put a gun against his head"
-            ]
-        }, {
-            id: 2,
-            title: "Billie Jean",
-            artist: "Michael Jackson",
-            genre: "Pop",
-            year: 1982,
-            nationality: "Americana",
-            popularity: 920,
-            lyrics: [
-                "She was more like a beauty queen from a movie scene",
-                "Billie Jean is not my lover",
-                "The kid is not my son"
-            ]
-        }, {
-            id: 3,
-            title: "Tempo Perdido",
-            artist: "Legiao Urbana",
-            genre: "MPB / Rock",
-            year: 1986,
-            nationality: "Brasileira",
-            popularity: 750,
-            lyrics: [
-                "Todos os dias quando acordo, nao tenho mais o tempo que passou",
-                "Mas tenho muito tempo, temos todo o tempo do mundo",
-                "Somos tao jovens"
-            ]
-        }, {
-            id: 4,
-            title: "Blinding Lights",
-            artist: "The Weeknd",
-            genre: "Pop / Synthwave",
-            year: 2020,
-            nationality: "Canadense",
-            popularity: 990,
-            lyrics: [
-                "I'm blinded by the lights",
-                "No, I can't sleep until I feel your touch",
-                "I said, ooh, I'm drowning in the night"
-            ]
-        }, {
-            id: 5,
-            title: "Garota de Ipanema",
-            artist: "Tom Jobim",
-            genre: "Bossa Nova",
-            year: 1962,
-            nationality: "Brasileira",
-            popularity: 700,
-            lyrics: [
-                "Olha que coisa mais linda, mais cheia de graca",
-                "E ela a menina que vem e que passa",
-                "Num doce balanco, caminho do mar"
-            ]
-        }];
+        var MUSIC_DB = [
+            // Rock Clássico
+            {
+                id: 1,
+                title: "Bohemian Rhapsody",
+                artist: "Queen",
+                genre: "Rock",
+                year: 1975,
+                nationality: "Britanica",
+                popularity: 980,
+                lyrics: [
+                    "Is this the real life? Is this just fantasy?",
+                    "Caught in a landslide, no escape from reality",
+                    "Mama, just killed a man, put a gun against his head",
+                    "Mama, life had just begun, but now I've gone and thrown it all away"
+                ]
+            },
+            {
+                id: 2,
+                title: "Stairway to Heaven",
+                artist: "Led Zeppelin",
+                genre: "Rock",
+                year: 1971,
+                nationality: "Britanica",
+                popularity: 950,
+                lyrics: [
+                    "There's a lady who's sure all that glitters is gold",
+                    "And she's buying a stairway to heaven",
+                    "When she gets there she knows, if the stores are all closed",
+                    "With a word she can get what she came for"
+                ]
+            },
+            {
+                id: 3,
+                title: "Hotel California",
+                artist: "Eagles",
+                genre: "Rock",
+                year: 1977,
+                nationality: "Americana",
+                popularity: 940,
+                lyrics: [
+                    "On a dark desert highway, cool wind in my hair",
+                    "Warm smell of colitas, rising up through the air",
+                    "Up ahead in the distance, I saw a shimmering light",
+                    "My head grew heavy and my sight grew dim"
+                ]
+            },
+            {
+                id: 4,
+                title: "Smells Like Teen Spirit",
+                artist: "Nirvana",
+                genre: "Rock",
+                year: 1991,
+                nationality: "Americana",
+                popularity: 960,
+                lyrics: [
+                    "Load up on guns, bring your friends",
+                    "It's fun to lose and to pretend",
+                    "She's over bored and self-assured",
+                    "Oh no, I know a dirty word"
+                ]
+            },
+            {
+                id: 5,
+                title: "Wonderwall",
+                artist: "Oasis",
+                genre: "Rock",
+                year: 1995,
+                nationality: "Britanica",
+                popularity: 930,
+                lyrics: [
+                    "Today is gonna be the day that they're gonna throw it back to you",
+                    "By now you should've somehow realized what you gotta do",
+                    "I don't believe that anybody feels the way I do about you now",
+                    "Backbeat, the word is on the street that the fire in your heart is out"
+                ]
+            },
+            // Pop
+            {
+                id: 6,
+                title: "Billie Jean",
+                artist: "Michael Jackson",
+                genre: "Pop",
+                year: 1982,
+                nationality: "Americana",
+                popularity: 920,
+                lyrics: [
+                    "She was more like a beauty queen from a movie scene",
+                    "I said don't mind, but what do you mean I am the one",
+                    "Who will dance on the floor in the round",
+                    "Billie Jean is not my lover"
+                ]
+            },
+            {
+                id: 7,
+                title: "Shape of You",
+                artist: "Ed Sheeran",
+                genre: "Pop",
+                year: 2017,
+                nationality: "Britanica",
+                popularity: 970,
+                lyrics: [
+                    "The club isn't the best place to find a lover",
+                    "So the bar is where I go",
+                    "Me and my friends at the table doing shots",
+                    "Drinking fast and then we talk slow"
+                ]
+            },
+            {
+                id: 8,
+                title: "Bad Guy",
+                artist: "Billie Eilish",
+                genre: "Pop",
+                year: 2019,
+                nationality: "Americana",
+                popularity: 960,
+                lyrics: [
+                    "White shirt now red, my bloody nose",
+                    "Sleeping, you're on your tippy toes",
+                    "Creeping around like no one knows",
+                    "Think you're so criminal"
+                ]
+            },
+            {
+                id: 9,
+                title: "Blinding Lights",
+                artist: "The Weeknd",
+                genre: "Pop",
+                year: 2020,
+                nationality: "Canadense",
+                popularity: 990,
+                lyrics: [
+                    "I've been tryna call",
+                    "I've been on my own for long enough",
+                    "Maybe you can show me how to love, maybe",
+                    "I'm blinded by the lights"
+                ]
+            },
+            {
+                id: 10,
+                title: "Shallow",
+                artist: "Lady Gaga",
+                genre: "Pop",
+                year: 2018,
+                nationality: "Americana",
+                popularity: 950,
+                lyrics: [
+                    "Tell me something, girl",
+                    "Are you happy in this modern world?",
+                    "Or do you need more? Is there something else you're searching for?",
+                    "I'm falling, in all the good times I find myself longing for change"
+                ]
+            },
+            // MPB / Brasileira
+            {
+                id: 11,
+                title: "Tempo Perdido",
+                artist: "Legiao Urbana",
+                genre: "MPB",
+                year: 1986,
+                nationality: "Brasileira",
+                popularity: 750,
+                lyrics: [
+                    "Todos os dias quando acordo, nao tenho mais o tempo que passou",
+                    "Mas tenho muito tempo, temos todo o tempo do mundo",
+                    "Somos tao jovens, somos tao jovens",
+                    "E o tempo passa, a vida passa"
+                ]
+            },
+            {
+                id: 12,
+                title: "Garota de Ipanema",
+                artist: "Tom Jobim",
+                genre: "Bossa Nova",
+                year: 1962,
+                nationality: "Brasileira",
+                popularity: 700,
+                lyrics: [
+                    "Olha que coisa mais linda, mais cheia de graca",
+                    "E ela a menina que vem e que passa",
+                    "Num doce balanco, caminho do mar",
+                    "Moça do corpo dourado, do sol de Ipanema"
+                ]
+            },
+            {
+                id: 13,
+                title: "O Tempo nao Para",
+                artist: "Cazuza",
+                genre: "MPB",
+                year: 1988,
+                nationality: "Brasileira",
+                popularity: 680,
+                lyrics: [
+                    "O tempo nao para, o tempo nao para",
+                    "Nao adianta tentar, nao adianta tentar",
+                    "Viver e nao ter a vergonha de ser feliz",
+                    "Cantar e cantar e cantar"
+                ]
+            },
+            {
+                id: 14,
+                title: "Alegria, Alegria",
+                artist: "Caetano Veloso",
+                genre: "MPB",
+                year: 1968,
+                nationality: "Brasileira",
+                popularity: 660,
+                lyrics: [
+                    "Caminhando contra o vento",
+                    "Sem lenco e sem documento",
+                    "No sol de quase dezembro",
+                    "Eu vou, eu vou"
+                ]
+            },
+            {
+                id: 15,
+                title: "Como Nossos Pais",
+                artist: "Elis Regina",
+                genre: "MPB",
+                year: 1976,
+                nationality: "Brasileira",
+                popularity: 690,
+                lyrics: [
+                    "E por falar em beleza, nao se pode esquecer",
+                    "A musica e a alegria do meu pais",
+                    "E por falar em amor, a beleza e o amor",
+                    "E por falar em paz, a paz e o amor"
+                ]
+            },
+            // Rock Nacional
+            {
+                id: 16,
+                title: "Ouro de Tolo",
+                artist: "Raul Seixas",
+                genre: "Rock",
+                year: 1973,
+                nationality: "Brasileira",
+                popularity: 720,
+                lyrics: [
+                    "Eu nao, eu nao, eu nao sou como voce",
+                    "Nao, nao, nao, nao, nao, nao",
+                    "Eu nao, eu nao, eu nao sou como voce",
+                    "Nao, nao, nao, nao, nao, nao"
+                ]
+            },
+            {
+                id: 17,
+                title: "Pro Dia Nascer Feliz",
+                artist: "Cidade Negra",
+                genre: "Reggae",
+                year: 1994,
+                nationality: "Brasileira",
+                popularity: 640,
+                lyrics: [
+                    "E o que eu quero e o que eu sempre quis",
+                    "E o que eu sempre quis, e o que eu sempre quis",
+                    "E o que eu quero e o que eu sempre quis",
+                    "E o que eu sempre quis, e o que eu sempre quis"
+                ]
+            },
+            {
+                id: 18,
+                title: "Farol das Estrelas",
+                artist: "Champignon",
+                genre: "Rock",
+                year: 2003,
+                nationality: "Brasileira",
+                popularity: 610,
+                lyrics: [
+                    "Quando o sol se for, a lua vai brilhar",
+                    "E a noite vai chegar, eu vou te esperar",
+                    "Quando o sol se for, a lua vai brilhar",
+                    "E a noite vai chegar, eu vou te esperar"
+                ]
+            },
+            // Hip Hop / Rap
+            {
+                id: 19,
+                title: "Lose Yourself",
+                artist: "Eminem",
+                genre: "Rap",
+                year: 2002,
+                nationality: "Americana",
+                popularity: 970,
+                lyrics: [
+                    "His palms are sweaty, knees weak, arms are heavy",
+                    "There's vomit on his sweater already, mom's spaghetti",
+                    "He's nervous, but on the surface he looks calm and ready",
+                    "To drop bombs, but he keeps on forgetting"
+                ]
+            },
+            {
+                id: 20,
+                title: "God's Plan",
+                artist: "Drake",
+                genre: "Rap",
+                year: 2018,
+                nationality: "Canadense",
+                popularity: 960,
+                lyrics: [
+                    "And they wishin' and wishin' and wishin' and wishin'",
+                    "They wishin' on me, yeah",
+                    "I been movin' calm, don't start no trouble with me",
+                    "Tryna keep it peaceful is a struggle for me"
+                ]
+            },
+            {
+                id: 21,
+                title: "Sicko Mode",
+                artist: "Travis Scott",
+                genre: "Rap",
+                year: 2018,
+                nationality: "Americana",
+                popularity: 980,
+                lyrics: [
+                    "Astro, yeah, sun is down, freezin' cold",
+                    "But the heat is on, yeah",
+                    "From the 6, yeah, we gon' get it on, yeah",
+                    "Sicko mode, sicko mode"
+                ]
+            },
+            // Eletronica / Dance
+            {
+                id: 22,
+                title: "Strobe",
+                artist: "Deadmau5",
+                genre: "Eletronica",
+                year: 2009,
+                nationality: "Canadense",
+                popularity: 820,
+                lyrics: [
+                    "(Instrumental)",
+                    "No lyrics, just pure electronic music",
+                    "Feeling the rhythm, the beat goes on",
+                    "Dancing through the night"
+                ]
+            },
+            {
+                id: 23,
+                title: "Titanium",
+                artist: "David Guetta",
+                genre: "Eletronica",
+                year: 2011,
+                nationality: "Francesa",
+                popularity: 910,
+                lyrics: [
+                    "You shout it out, but I can't hear a word you say",
+                    "I'm talking loud, not saying much",
+                    "I'm criticized, but all your bullets ricochet",
+                    "You shoot me down, but I get up"
+                ]
+            },
+            {
+                id: 24,
+                title: "Animals",
+                artist: "Martin Garrix",
+                genre: "Eletronica",
+                year: 2013,
+                nationality: "Holandesa",
+                popularity: 890,
+                lyrics: [
+                    "We're the animals, animals",
+                    "We're the animals, animals",
+                    "We're the animals, animals",
+                    "We're the animals"
+                ]
+            },
+            // Indie / Alternativo
+            {
+                id: 25,
+                title: "Do I Wanna Know?",
+                artist: "Arctic Monkeys",
+                genre: "Indie Rock",
+                year: 2013,
+                nationality: "Britanica",
+                popularity: 930,
+                lyrics: [
+                    "Have you got color in your cheeks?",
+                    "Do you ever get that fear that you can't shift the tide?",
+                    "That sticks around like something in your teeth?",
+                    "Are there some aces up your sleeve?"
+                ]
+            },
+            {
+                id: 26,
+                title: "Skinny Love",
+                artist: "Bon Iver",
+                genre: "Indie Folk",
+                year: 2007,
+                nationality: "Americana",
+                popularity: 890,
+                lyrics: [
+                    "Come on skinny love, just last the year",
+                    "Pour a little salt, we were never here",
+                    "My, my, my, my, my, my, my, my",
+                    "Staring at the sink of blood and crushed veneer"
+                ]
+            },
+            {
+                id: 27,
+                title: "Electric Feel",
+                artist: "MGMT",
+                genre: "Indie Rock",
+                year: 2007,
+                nationality: "Americana",
+                popularity: 880,
+                lyrics: [
+                    "I said ooh girl, shock me like an electric eel",
+                    "Baby girl, turn me on with your electric feel",
+                    "I said ooh girl, shock me like an electric eel",
+                    "Baby girl, turn me on with your electric feel"
+                ]
+            },
+            // Jazz / Blues
+            {
+                id: 28,
+                title: "Feeling Good",
+                artist: "Nina Simone",
+                genre: "Jazz",
+                year: 1965,
+                nationality: "Americana",
+                popularity: 850,
+                lyrics: [
+                    "Birds flying high, you know how I feel",
+                    "Sun in the sky, you know how I feel",
+                    "Breeze driftin' on by, you know how I feel",
+                    "It's a new dawn, it's a new day, it's a new life for me"
+                ]
+            },
+            {
+                id: 29,
+                title: "Take Five",
+                artist: "Dave Brubeck",
+                genre: "Jazz",
+                year: 1959,
+                nationality: "Americana",
+                popularity: 780,
+                lyrics: [
+                    "(Instrumental)",
+                    "Smooth jazz, the perfect groove",
+                    "Five four time signature, it's unique",
+                    "A masterpiece of jazz music"
+                ]
+            },
+            // Clássica / Instrumental
+            {
+                id: 30,
+                title: "Clair de Lune",
+                artist: "Debussy",
+                genre: "Classica",
+                year: 1905,
+                nationality: "Francesa",
+                popularity: 720,
+                lyrics: [
+                    "(Instrumental)",
+                    "Beautiful piano melody",
+                    "Moonlight sonata feeling",
+                    "A timeless classical piece"
+                ]
+            },
+            // Mais Pop
+            {
+                id: 31,
+                title: "Dancing Queen",
+                artist: "ABBA",
+                genre: "Pop",
+                year: 1976,
+                nationality: "Sueca",
+                popularity: 940,
+                lyrics: [
+                    "You can dance, you can jive, having the time of your life",
+                    "See that girl, watch that scene, digging the dancing queen",
+                    "Friday night and the lights are low",
+                    "Looking out for the place to go"
+                ]
+            },
+            {
+                id: 32,
+                title: "I Will Survive",
+                artist: "Gloria Gaynor",
+                genre: "Pop",
+                year: 1978,
+                nationality: "Americana",
+                popularity: 930,
+                lyrics: [
+                    "At first I was afraid, I was petrified",
+                    "Kept thinking I could never live without you by my side",
+                    "But then I spent so many nights thinking how you did me wrong",
+                    "And I grew strong, and I learned how to get along"
+                ]
+            },
+            // Mais Rock
+            {
+                id: 33,
+                title: "Back in Black",
+                artist: "AC/DC",
+                genre: "Rock",
+                year: 1980,
+                nationality: "Australiana",
+                popularity: 960,
+                lyrics: [
+                    "Back in black, I hit the sack",
+                    "I've been too long, I'm glad to be back",
+                    "Yes, I'm let loose from the noose",
+                    "That's kept me hanging about"
+                ]
+            },
+            {
+                id: 34,
+                title: "Seven Nation Army",
+                artist: "The White Stripes",
+                genre: "Rock",
+                year: 2003,
+                nationality: "Americana",
+                popularity: 950,
+                lyrics: [
+                    "I'm gonna fight 'em off",
+                    "A seven nation army couldn't hold me back",
+                    "They're gonna rip it off",
+                    "Taking their time right behind my back"
+                ]
+            },
+            // Mais MPB
+            {
+                id: 35,
+                title: "Construcao",
+                artist: "Chico Buarque",
+                genre: "MPB",
+                year: 1971,
+                nationality: "Brasileira",
+                popularity: 740,
+                lyrics: [
+                    "Amou daquela vez como se fosse a ultima",
+                    "Beijou sua mulher como se fosse a ultima",
+                    "E cada filho seu como se fosse o unico",
+                    "E atravessou a rua com seu passo timido"
+                ]
+            },
+            {
+                id: 36,
+                title: "O Bêbado e a Equilibrista",
+                artist: "Joao Bosco",
+                genre: "MPB",
+                year: 1979,
+                nationality: "Brasileira",
+                popularity: 720,
+                lyrics: [
+                    "O bêbado e a equilibrista",
+                    "Se abraçam no ar",
+                    "A vida e uma festa",
+                    "A vida e um carnaval"
+                ]
+            },
+            // Mais Eletronica
+            {
+                id: 37,
+                title: "Levels",
+                artist: "Avicii",
+                genre: "Eletronica",
+                year: 2011,
+                nationality: "Sueca",
+                popularity: 970,
+                lyrics: [
+                    "Oh, sometimes I get a good feeling, yeah",
+                    "Get a feeling that I never, never, never, never had before, no no",
+                    "I get a good feeling, yeah",
+                    "Oh, sometimes I get a good feeling, yeah"
+                ]
+            },
+            {
+                id: 38,
+                title: "Wake Me Up",
+                artist: "Avicii",
+                genre: "Eletronica",
+                year: 2013,
+                nationality: "Sueca",
+                popularity: 980,
+                lyrics: [
+                    "Feeling my way through the darkness",
+                    "Guided by a beating heart",
+                    "I can't tell where the journey will end",
+                    "But I know where to start"
+                ]
+            },
+            // Mais Indie
+            {
+                id: 39,
+                title: "Fluorescent Adolescent",
+                artist: "Arctic Monkeys",
+                genre: "Indie Rock",
+                year: 2007,
+                nationality: "Britanica",
+                popularity: 900,
+                lyrics: [
+                    "You used to get it in your fishnets",
+                    "Now you only get it in your night dress",
+                    "Discarded all the naughty nights for niceness",
+                    "Landed in a very common crisis"
+                ]
+            },
+            {
+                id: 40,
+                title: "R U Mine?",
+                artist: "Arctic Monkeys",
+                genre: "Indie Rock",
+                year: 2012,
+                nationality: "Britanica",
+                popularity: 920,
+                lyrics: [
+                    "I'm a puppet on a string",
+                    "Tracy Island, time-traveling diamond",
+                    "Coulda been a contender, coulda been a somebody",
+                    "R U mine?"
+                ]
+            }
+        ];
 
         // ============================================================
         // ESTADO DO JOGO
         // ============================================================
         var gameState = {
-            mode: 'daily', // 'daily' ou 'infinite'
+            mode: 'daily',
             currentSong: null,
             currentVerseIndex: 0,
             attempts: 0,
@@ -623,10 +1173,9 @@
             guessedSongs: [],
             score: 0,
             round: 1,
-            totalSongs: [],
             isDailyMode: true,
-            dailySongId: null,
-            usedSongIds: []
+            usedSongIds: [],
+            availableSongs: []
         };
 
         // ============================================================
@@ -652,281 +1201,78 @@
         var lyricCard = document.getElementById('lyricCard');
 
         // ============================================================
-        // FUNCOES DE BUSCA NA WIKIPEDIA
-        // ============================================================
-        function searchWikipediaSongs(query) {
-            return new Promise(function(resolve, reject) {
-                var url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' +
-                    encodeURIComponent(query + ' song') +
-                    '&format=json&origin=*';
-
-                fetch(url)
-                    .then(function(response) { return response.json(); })
-                    .then(function(data) {
-                        if (data.query && data.query.search) {
-                            var results = data.query.search.map(function(item) {
-                                return {
-                                    title: item.title,
-                                    snippet: item.snippet
-                                };
-                            });
-                            resolve(results);
-                        } else {
-                            resolve([]);
-                        }
-                    })
-                    .catch(function(error) {
-                        console.error('Erro na busca Wikipedia:', error);
-                        reject(error);
-                    });
-            });
-        }
-
-        function getSongFromWikipedia(title) {
-            return new Promise(function(resolve, reject) {
-                var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&titles=' +
-                    encodeURIComponent(title) +
-                    '&format=json&origin=*';
-
-                fetch(url)
-                    .then(function(response) { return response.json(); })
-                    .then(function(data) {
-                        var pages = data.query.pages;
-                        var pageId = Object.keys(pages)[0];
-                        var page = pages[pageId];
-
-                        if (page && page.extract) {
-                            // Tentar extrair informacoes basicas
-                            var extract = page.extract;
-                            var lines = extract.split('\n').filter(function(l) { return l.trim().length > 0; });
-
-                            // Tentar encontrar letras (geralmente em artigos de musicas)
-                            var lyricsLines = [];
-                            var foundLyrics = false;
-                            for (var i = 0; i < lines.length; i++) {
-                                var line = lines[i].trim();
-                                if (line.toLowerCase().includes('lyrics') ||
-                                    line.toLowerCase().includes('verse') ||
-                                    line.toLowerCase().includes('chorus')) {
-                                    foundLyrics = true;
-                                    continue;
-                                }
-                                if (foundLyrics && line.length > 10 && !line.includes('[') && !line.includes('(')) {
-                                    lyricsLines.push(line);
-                                    if (lyricsLines.length >= 5) break;
-                                }
-                            }
-
-                            // Se nao encontrou letras, pegar primeiras frases
-                            if (lyricsLines.length === 0) {
-                                var sentences = extract.split('.');
-                                for (var j = 0; j < Math.min(5, sentences.length); j++) {
-                                    if (sentences[j].trim().length > 15) {
-                                        lyricsLines.push(sentences[j].trim() + '.');
-                                    }
-                                }
-                            }
-
-                            resolve({
-                                title: page.title,
-                                extract: extract,
-                                lyrics: lyricsLines.length > 0 ? lyricsLines : ['Letras nao encontradas'],
-                                pageUrl: 'https://en.wikipedia.org/wiki/' + encodeURIComponent(page.title)
-                            });
-                        } else {
-                            resolve(null);
-                        }
-                    })
-                    .catch(function(error) {
-                        console.error('Erro ao buscar letras:', error);
-                        reject(error);
-                    });
-            });
-        }
-
-        // ============================================================
-        // GERAR MUSICA ALEATORIA (WIKIPEDIA OU LOCAL)
-        // ============================================================
-        function generateRandomSong() {
-            return new Promise(function(resolve, reject) {
-                // Lista de artistas populares para buscar
-                var artists = [
-                    'The Beatles', 'Queen', 'Michael Jackson', 'Madonna', 'Elvis Presley',
-                    'Bob Dylan', 'David Bowie', 'Prince', 'Whitney Houston', 'Freddie Mercury',
-                    'Miles Davis', 'John Lennon', 'Paul McCartney', 'Stevie Wonder', 'Aretha Franklin',
-                    'Tupac', 'Nirvana', 'Radiohead', 'Pink Floyd', 'Led Zeppelin',
-                    'Muse', 'Coldplay', 'U2', 'The Rolling Stones', 'The Who',
-                    'The Beach Boys', 'The Doors', 'Jimi Hendrix', 'Janis Joplin', 'Joni Mitchell'
-                ];
-
-                var randomArtist = artists[Math.floor(Math.random() * artists.length)];
-
-                // Buscar musicas do artista na Wikipedia
-                searchWikipediaSongs(randomArtist)
-                    .then(function(results) {
-                        if (results && results.length > 0) {
-                            // Filtrar resultados que parecem ser musicas (nao albums ou outras paginas)
-                            var songResults = results.filter(function(r) {
-                                var title = r.title.toLowerCase();
-                                return !title.includes('album') &&
-                                    !title.includes('discography') &&
-                                    !title.includes('(album)') &&
-                                    !title.includes('compilation');
-                            });
-
-                            if (songResults.length > 0) {
-                                var randomSong = songResults[Math.floor(Math.random() * songResults.length)];
-                                return getSongFromWikipedia(randomSong.title);
-                            }
-                        }
-                        // Fallback: usar musica local aleatoria
-                        var localSong = LOCAL_SONGS[Math.floor(Math.random() * LOCAL_SONGS.length)];
-                        resolve({
-                            title: localSong.title,
-                            artist: localSong.artist,
-                            genre: localSong.genre,
-                            year: localSong.year,
-                            nationality: localSong.nationality,
-                            popularity: localSong.popularity,
-                            lyrics: localSong.lyrics,
-                            isLocal: true
-                        });
-                    })
-                    .catch(function() {
-                        // Fallback para erro
-                        var localSong = LOCAL_SONGS[Math.floor(Math.random() * LOCAL_SONGS.length)];
-                        resolve({
-                            title: localSong.title,
-                            artist: localSong.artist,
-                            genre: localSong.genre,
-                            year: localSong.year,
-                            nationality: localSong.nationality,
-                            popularity: localSong.popularity,
-                            lyrics: localSong.lyrics,
-                            isLocal: true
-                        });
-                    });
-            });
-        }
-
-        // ============================================================
         // FUNCOES DO JOGO
         // ============================================================
-        function generateDailySong() {
-            // Usar musica fixa do dia (baseado na data)
+        function getDailySong() {
             var today = new Date();
             var dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-            var index = dayOfYear % LOCAL_SONGS.length;
-            var song = LOCAL_SONGS[index];
-            return {
-                title: song.title,
-                artist: song.artist,
-                genre: song.genre,
-                year: song.year,
-                nationality: song.nationality,
-                popularity: song.popularity,
-                lyrics: song.lyrics,
-                isLocal: true,
-                isDaily: true,
-                id: song.id
-            };
+            var index = dayOfYear % MUSIC_DB.length;
+            return MUSIC_DB[index];
         }
 
-        function getCurrentSong() {
-            if (gameState.isDailyMode) {
-                return generateDailySong();
-            } else {
-                // Modo infinito - usar musica aleatoria
-                return gameState.currentSong;
+        function getRandomSong() {
+            // Se nao houver musicas disponiveis, resetar lista
+            if (gameState.availableSongs.length === 0) {
+                gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
+                gameState.usedSongIds = [];
             }
+
+            // Filtrar musicas nao usadas
+            var available = gameState.availableSongs.filter(function(id) {
+                return gameState.usedSongIds.indexOf(id) === -1;
+            });
+
+            if (available.length === 0) {
+                // Todas as musicas foram usadas, resetar
+                gameState.usedSongIds = [];
+                available = gameState.availableSongs.slice();
+            }
+
+            var randomIndex = Math.floor(Math.random() * available.length);
+            var songId = available[randomIndex];
+            gameState.usedSongIds.push(songId);
+
+            var song = MUSIC_DB.find(function(s) { return s.id === songId; });
+            return song || MUSIC_DB[0];
         }
 
         function loadNewSong() {
-            var loadingFeedback = document.getElementById('feedbackMessage');
-            loadingFeedback.innerHTML = '<span class="loading-spinner"></span> Carregando nova musica...';
-            loadingFeedback.className = 'feedback-message loading';
+            feedback.innerHTML = '<span class="loading-spinner"></span> Carregando nova musica...';
+            feedback.className = 'feedback-message loading';
 
+            var song;
             if (gameState.isDailyMode) {
-                var dailySong = generateDailySong();
-                gameState.currentSong = dailySong;
-                gameState.currentVerseIndex = 0;
-                gameState.attempts = 0;
-                gameState.gameOver = false;
-                gameState.guessedSongs = [];
-                updateVerseDisplay();
-                updateComparisonTable(null);
-                feedback.innerHTML = ' Adivinhe a musica do dia!';
-                feedback.className = 'feedback-message';
-                guessBtn.disabled = false;
-                songInput.disabled = false;
-                songInput.value = '';
-                nextRoundContainer.style.display = 'none';
-                loadingFeedback.className = 'feedback-message';
-                loadingFeedback.innerHTML = ' Adivinhe a musica do dia!';
-                return;
+                song = getDailySong();
+            } else {
+                song = getRandomSong();
+                if (!song) {
+                    song = MUSIC_DB[0];
+                }
             }
 
-            // Modo infinito
-            generateRandomSong()
-                .then(function(songData) {
-                    gameState.currentSong = {
-                        title: songData.title || 'Musica Desconhecida',
-                        artist: songData.artist || 'Artista Desconhecido',
-                        genre: songData.genre || 'Genero Desconhecido',
-                        year: songData.year || 2000,
-                        nationality: songData.nationality || 'Nacionalidade Desconhecida',
-                        popularity: songData.popularity || 500,
-                        lyrics: songData.lyrics || ['Letra nao encontrada'],
-                        isLocal: songData.isLocal || false,
-                        wikipediaUrl: songData.pageUrl || null
-                    };
+            gameState.currentSong = song;
+            gameState.currentVerseIndex = 0;
+            gameState.attempts = 0;
+            gameState.gameOver = false;
+            gameState.guessedSongs = [];
 
-                    gameState.currentVerseIndex = 0;
-                    gameState.attempts = 0;
-                    gameState.gameOver = false;
-                    gameState.guessedSongs = [];
+            updateVerseDisplay();
+            updateComparisonTable(null);
 
-                    updateVerseDisplay();
-                    updateComparisonTable(null);
+            feedback.innerHTML = ' Adivinhe a musica!';
+            feedback.className = 'feedback-message';
+            guessBtn.disabled = false;
+            songInput.disabled = false;
+            songInput.value = '';
+            nextRoundContainer.style.display = 'none';
+            lyricCard.classList.remove('pulse-glow');
 
-                    feedback.innerHTML = ' Nova musica carregada! Adivinhe!';
-                    feedback.className = 'feedback-message';
-                    guessBtn.disabled = false;
-                    songInput.disabled = false;
-                    songInput.value = '';
-                    nextRoundContainer.style.display = 'none';
-                    loadingFeedback.className = 'feedback-message';
-                    loadingFeedback.innerHTML = ' Nova musica carregada!';
-                })
-                .catch(function(error) {
-                    console.error('Erro ao carregar musica:', error);
-                    // Fallback: usar musica local
-                    var localSong = LOCAL_SONGS[Math.floor(Math.random() * LOCAL_SONGS.length)];
-                    gameState.currentSong = {
-                        title: localSong.title,
-                        artist: localSong.artist,
-                        genre: localSong.genre,
-                        year: localSong.year,
-                        nationality: localSong.nationality,
-                        popularity: localSong.popularity,
-                        lyrics: localSong.lyrics,
-                        isLocal: true
-                    };
-                    gameState.currentVerseIndex = 0;
-                    gameState.attempts = 0;
-                    gameState.gameOver = false;
-                    gameState.guessedSongs = [];
-                    updateVerseDisplay();
-                    updateComparisonTable(null);
-                    feedback.innerHTML = ' Musica carregada (fallback local)';
-                    feedback.className = 'feedback-message';
-                    guessBtn.disabled = false;
-                    songInput.disabled = false;
-                    songInput.value = '';
-                    nextRoundContainer.style.display = 'none';
-                    loadingFeedback.className = 'feedback-message';
-                    loadingFeedback.innerHTML = ' Musica carregada!';
-                });
+            // Mostrar dica do modo
+            if (gameState.isDailyMode) {
+                feedback.innerHTML = ' Musica do dia! Adivinhe!';
+            } else {
+                feedback.innerHTML = ' Nova musica! Adivinhe! (Rodada ' + gameState.round + ')';
+            }
         }
 
         function updateVerseDisplay() {
@@ -949,18 +1295,18 @@
                 return;
             }
 
-            var dailySong = gameState.currentSong;
+            var currentSong = gameState.currentSong;
 
-            var artistMatch = guessSong.artist === dailySong.artist ? 'green' :
-                (dailySong.artist.includes(guessSong.artist) || guessSong.artist.includes(dailySong.artist) ? 'yellow' :
+            var artistMatch = guessSong.artist === currentSong.artist ? 'green' :
+                (currentSong.artist.includes(guessSong.artist) || guessSong.artist.includes(currentSong.artist) ? 'yellow' :
                     'red');
             cmpArtist.innerHTML = '<span class="badge ' + artistMatch + '">' + guessSong.artist + '</span>';
 
-            var genreMatch = guessSong.genre === dailySong.genre ? 'green' : 'red';
+            var genreMatch = guessSong.genre === currentSong.genre ? 'green' : 'red';
             cmpGenre.innerHTML = '<span class="badge ' + genreMatch + '">' + guessSong.genre + '</span>';
 
             var guessYear = guessSong.year || 2000;
-            var targetYear = dailySong.year || 2000;
+            var targetYear = currentSong.year || 2000;
             var decadeArrow = '';
             if (guessYear < targetYear) decadeArrow =
                 '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais antiga</span>';
@@ -969,10 +1315,10 @@
             else decadeArrow = '<span style="color:#7affb0;"> mesma decada</span>';
             cmpDecade.innerHTML = guessYear + ' ' + decadeArrow;
 
-            var natMatch = guessSong.nationality === dailySong.nationality ? 'green' : 'red';
+            var natMatch = guessSong.nationality === currentSong.nationality ? 'green' : 'red';
             cmpNationality.innerHTML = '<span class="badge ' + natMatch + '">' + guessSong.nationality + '</span>';
 
-            var popDiff = (guessSong.popularity || 500) - (dailySong.popularity || 500);
+            var popDiff = (guessSong.popularity || 500) - (currentSong.popularity || 500);
             var popArrow = '';
             if (popDiff > 0) popArrow = '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais popular</span>';
             else if (popDiff < 0) popArrow = '<span class="arrow-down"><i class="fas fa-arrow-down"></i> menos popular</span>';
@@ -984,21 +1330,16 @@
             var currentSong = gameState.currentSong;
             if (!currentSong) return false;
 
-            // Comparar titulos (case insensitive)
             var guessedTitle = guessedSong.title.toLowerCase().trim();
             var currentTitle = currentSong.title.toLowerCase().trim();
 
-            // Verificar se acertou (titulo igual ou similar)
             if (guessedTitle === currentTitle ||
                 guessedTitle.includes(currentTitle) ||
                 currentTitle.includes(guessedTitle)) {
-                // ACERTOU!
-                gameState.gameOver = true;
 
-                // Calcular pontos baseado em tentativas
+                gameState.gameOver = true;
                 var points = Math.max(100 - (gameState.attempts * 10), 10);
                 gameState.score += points;
-
                 updateScoreAndRound();
 
                 feedback.innerHTML = ' VOCE ACERTOU! +' + points + ' pontos!';
@@ -1006,14 +1347,11 @@
                 spawnConfetti();
                 lyricCard.classList.add('pulse-glow');
 
-                // Revelar todos os versos
                 gameState.currentVerseIndex = currentSong.lyrics.length - 1;
                 updateVerseDisplay();
 
                 guessBtn.disabled = true;
                 songInput.disabled = true;
-
-                // Mostrar botao proxima rodada
                 nextRoundContainer.style.display = 'block';
 
                 return true;
@@ -1050,54 +1388,30 @@
             filter = filter || '';
             var lower = filter.toLowerCase();
 
-            // Buscar no banco local e nas musicas ja carregadas
-            var allTitles = LOCAL_SONGS.map(function(s) {
-                return { title: s.title, artist: s.artist };
-            });
-
-            // Adicionar musica atual se nao estiver na lista
-            if (gameState.currentSong && !gameState.currentSong.isLocal) {
-                allTitles.push({
-                    title: gameState.currentSong.title,
-                    artist: gameState.currentSong.artist || 'Desconhecido'
-                });
-            }
-
-            var filtered = allTitles.filter(function(item) {
+            var filtered = MUSIC_DB.filter(function(item) {
                 return item.title.toLowerCase().indexOf(lower) !== -1 ||
                     item.artist.toLowerCase().indexOf(lower) !== -1;
             });
 
-            // Remover duplicatas
-            var unique = [];
-            var seen = {};
-            for (var i = 0; i < filtered.length; i++) {
-                var key = filtered[i].title + '|' + filtered[i].artist;
-                if (!seen[key]) {
-                    seen[key] = true;
-                    unique.push(filtered[i]);
-                }
-            }
-
             autocompleteList.innerHTML = '';
-            if (unique.length === 0 || filter === '') {
+            if (filtered.length === 0 || filter === '') {
                 autocompleteList.classList.remove('active');
                 return;
             }
 
             autocompleteList.classList.add('active');
-            for (var j = 0; j < Math.min(10, unique.length); j++) {
-                var item = unique[j];
+            for (var j = 0; j < Math.min(10, filtered.length); j++) {
+                var item = filtered[j];
                 var div = document.createElement('div');
                 div.className = 'autocomplete-item';
                 div.innerHTML = '<span>' + item.title + '</span><span class="artist-name">' + item.artist +
                 '</span>';
-                div.addEventListener('click', function(itemData) {
+                div.addEventListener('click', (function(itemData) {
                     return function() {
                         songInput.value = itemData.title;
                         autocompleteList.classList.remove('active');
                     };
-                }(item));
+                })(item));
                 autocompleteList.appendChild(div);
             }
         }
@@ -1111,39 +1425,23 @@
                 return;
             }
 
-            // Buscar no banco local
             var foundSong = null;
-            for (var i = 0; i < LOCAL_SONGS.length; i++) {
-                if (LOCAL_SONGS[i].title.toLowerCase() === query.toLowerCase()) {
-                    foundSong = LOCAL_SONGS[i];
+            for (var i = 0; i < MUSIC_DB.length; i++) {
+                if (MUSIC_DB[i].title.toLowerCase() === query.toLowerCase()) {
+                    foundSong = MUSIC_DB[i];
                     break;
                 }
             }
 
-            // Se nao encontrou localmente, tentar criar uma entrada baseada no input
             if (!foundSong) {
-                // Verificar se o usuario digitou o nome da musica atual
-                if (gameState.currentSong &&
-                    gameState.currentSong.title.toLowerCase() === query.toLowerCase()) {
-                    foundSong = {
-                        title: gameState.currentSong.title,
-                        artist: gameState.currentSong.artist,
-                        genre: gameState.currentSong.genre,
-                        year: gameState.currentSong.year,
-                        nationality: gameState.currentSong.nationality,
-                        popularity: gameState.currentSong.popularity
-                    };
-                } else {
-                    feedback.innerHTML = ' Musica nao encontrada. Tente novamente.';
-                    feedback.className = 'feedback-message error';
-                    return;
-                }
+                feedback.innerHTML = ' Musica nao encontrada. Tente novamente.';
+                feedback.className = 'feedback-message error';
+                return;
             }
 
-            // Verificar se ja foi adivinhada
             var alreadyGuessed = false;
             for (var j = 0; j < gameState.guessedSongs.length; j++) {
-                if (gameState.guessedSongs[j].title === foundSong.title) {
+                if (gameState.guessedSongs[j].id === foundSong.id) {
                     alreadyGuessed = true;
                     break;
                 }
@@ -1164,7 +1462,6 @@
                 return;
             }
 
-            // Se errou: revela proximo verso
             if (gameState.currentSong &&
                 gameState.currentVerseIndex < gameState.currentSong.lyrics.length - 1) {
                 gameState.currentVerseIndex++;
@@ -1182,7 +1479,6 @@
             gameState.round++;
             updateScoreAndRound();
             nextRoundContainer.style.display = 'none';
-            lyricCard.classList.remove('pulse-glow');
             loadNewSong();
         }
 
@@ -1190,13 +1486,13 @@
             gameState.isDailyMode = (mode === 'daily');
             gameState.round = 1;
             gameState.score = 0;
+            gameState.usedSongIds = [];
+            gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
             updateScoreAndRound();
 
-            // Atualizar botoes
             dailyModeBtn.classList.toggle('active', mode === 'daily');
             infiniteModeBtn.classList.toggle('active', mode === 'infinite');
 
-            // Resetar jogo
             loadNewSong();
         }
 
@@ -1246,12 +1542,12 @@
             gameState.isDailyMode = true;
             gameState.score = 0;
             gameState.round = 1;
+            gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
+            gameState.usedSongIds = [];
             updateScoreAndRound();
             loadNewSong();
-
-            // Adicionar algumas musicas de exemplo ao banco local para autocomplete
-            console.log(' Melodle iniciado! Modo: ' + (gameState.isDailyMode ? 'Diario' : 'Infinito'));
-            console.log(' Use "Diario" para musica do dia ou "Infinito" para desafios aleatorios');
+            console.log(' Melodle iniciado com ' + MUSIC_DB.length + ' musicas!');
+            console.log(' Modo: ' + (gameState.isDailyMode ? 'Diario' : 'Infinito'));
         }
 
         initGame();
