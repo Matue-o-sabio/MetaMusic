@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Melodle · Adivinhe a Música</title>
+    <title> Melodle · Modo Infinito</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
         }
 
         .game-container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             background: rgba(18, 14, 34, 0.55);
             backdrop-filter: blur(12px);
@@ -46,6 +46,7 @@
             align-items: center;
             margin-bottom: 1.5rem;
             flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .header h1 {
@@ -68,21 +69,65 @@
             filter: drop-shadow(0 0 8px #ff3b9e);
         }
 
-        .day-badge {
+        .stats {
+            display: flex;
+            gap: 1.5rem;
             background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(4px);
-            padding: 0.5rem 1.2rem;
+            padding: 0.5rem 1.5rem;
             border-radius: 60px;
             border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-weight: 500;
             font-size: 0.9rem;
             color: #c6b8ff;
-            box-shadow: 0 0 12px rgba(120, 0, 255, 0.2);
         }
 
-        .day-badge i {
-            margin-right: 6px;
+        .stat-item i {
             color: #ffd966;
+        }
+
+        .stat-item .value {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.3rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .mode-btn {
+            padding: 0.4rem 1.2rem;
+            border: none;
+            border-radius: 60px;
+            background: transparent;
+            color: #a28ed0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(145deg, #b44cff, #8b2fdb);
+            color: white;
+            box-shadow: 0 0 20px rgba(150, 0, 255, 0.3);
+        }
+
+        .mode-btn:hover:not(.active) {
+            color: white;
         }
 
         .lyric-card {
@@ -95,6 +140,10 @@
             box-shadow: inset 0 0 30px rgba(180, 0, 255, 0.1), 0 10px 30px -10px #000000aa;
             text-align: center;
             transition: all 0.4s ease;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .lyric-card .verse {
@@ -178,6 +227,7 @@
             align-items: center;
             gap: 0.6rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .btn-primary:hover {
@@ -330,6 +380,10 @@
             color: #ffb0b0;
         }
 
+        .feedback-message.loading {
+            color: #b77aff;
+        }
+
         .confetti-container {
             position: fixed;
             top: 0;
@@ -364,11 +418,51 @@
             100% { box-shadow: 0 0 0 0 #ff3b9e88, 0 0 0 0 #b44cff66; }
         }
 
+        .next-round-btn {
+            background: linear-gradient(145deg, #3bc9ff, #7b4cff);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            box-shadow: 0 0 25px rgba(59, 201, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Space Grotesk', sans-serif;
+            margin-top: 1rem;
+        }
+
+        .next-round-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px #3bc9ffaa;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: #b44cff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         @media (max-width: 600px) {
             .game-container { padding: 1.5rem; }
             .header h1 { font-size: 1.7rem; }
             .lyric-card .verse { font-size: 1.3rem; }
             .btn-primary { padding: 0.8rem 1.8rem; }
+            .stats { padding: 0.3rem 1rem; gap: 0.8rem; }
+            .stat-item { font-size: 0.8rem; }
         }
 
         .autocomplete-list::-webkit-scrollbar {
@@ -385,12 +479,36 @@
     <div class="game-container" id="gameContainer">
         <div class="header">
             <h1><i class="fas fa-headphones-alt"></i> Melodle</h1>
-            <span class="day-badge"><i class="fas fa-calendar-alt"></i> #16 · diario</span>
+            <div class="stats">
+                <div class="stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Score: </span>
+                    <span class="value" id="scoreDisplay">0</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Rodada: </span>
+                    <span class="value" id="roundDisplay">1</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="daily" id="dailyModeBtn">
+                    <i class="fas fa-calendar-day"></i> Diario
+                </button>
+                <button class="mode-btn" data-mode="infinite" id="infiniteModeBtn">
+                    <i class="fas fa-infinity"></i> Infinito
+                </button>
+            </div>
         </div>
 
         <div class="lyric-card" id="lyricCard">
-            <div class="verse" id="verseDisplay">"<i class="fas fa-music"></i> A vida e uma onda que... <i class="fas fa-music"></i>"</div>
-            <div class="verse-reveal-count" id="verseCount">verso 1 de 3</div>
+            <div class="verse" id="verseDisplay">
+                <i class="fas fa-music"></i> Carregando musica... <i class="fas fa-music"></i>
+            </div>
+            <div class="verse-reveal-count" id="verseCount">verso 1 de ?</div>
         </div>
 
         <div class="search-section">
@@ -411,315 +529,732 @@
             <div class="comparison-row"><span class="cmp-label"> Popularidade</span><span class="cmp-value" id="cmpPopularity">---</span></div>
         </div>
 
-        <div class="feedback-message" id="feedbackMessage"> Adivinhe a musica do dia!</div>
+        <div class="feedback-message" id="feedbackMessage">
+            <i class="fas fa-info-circle"></i> Adivinhe a musica!
+        </div>
+
+        <div style="text-align: center; display: none;" id="nextRoundContainer">
+            <button class="next-round-btn" id="nextRoundBtn">
+                <i class="fas fa-forward"></i> Proxima Rodada
+            </button>
+        </div>
     </div>
 
     <script>
-        (function() {
-            // BANCO DE DADOS FICTICIO
-            const MUSIC_DB = [{
-                id: 1,
-                title: "Bohemian Rhapsody",
-                artist: "Queen",
-                genre: "Rock",
-                year: 1975,
-                nationality: "Britanica",
-                popularity: 980,
-                lyrics: [
-                    "Is this the real life? Is this just fantasy?",
-                    "Caught in a landslide, no escape from reality",
-                    "Mama, just killed a man, put a gun against his head"
-                ]
-            }, {
-                id: 2,
-                title: "Billie Jean",
-                artist: "Michael Jackson",
-                genre: "Pop",
-                year: 1982,
-                nationality: "Americana",
-                popularity: 920,
-                lyrics: [
-                    "She was more like a beauty queen from a movie scene",
-                    "Billie Jean is not my lover",
-                    "The kid is not my son"
-                ]
-            }, {
-                id: 3,
-                title: "Tempo Perdido",
-                artist: "Legiao Urbana",
-                genre: "MPB / Rock",
-                year: 1986,
-                nationality: "Brasileira",
-                popularity: 750,
-                lyrics: [
-                    "Todos os dias quando acordo, nao tenho mais o tempo que passou",
-                    "Mas tenho muito tempo, temos todo o tempo do mundo",
-                    "Somos tao jovens"
-                ]
-            }, {
-                id: 4,
-                title: "Blinding Lights",
-                artist: "The Weeknd",
-                genre: "Pop / Synthwave",
-                year: 2020,
-                nationality: "Canadense",
-                popularity: 990,
-                lyrics: [
-                    "I'm blinded by the lights",
-                    "No, I can't sleep until I feel your touch",
-                    "I said, ooh, I'm drowning in the night"
-                ]
-            }, {
-                id: 5,
-                title: "Garota de Ipanema",
-                artist: "Tom Jobim",
-                genre: "Bossa Nova",
-                year: 1962,
-                nationality: "Brasileira",
-                popularity: 700,
-                lyrics: [
-                    "Olha que coisa mais linda, mais cheia de graca",
-                    "E ela a menina que vem e que passa",
-                    "Num doce balanco, caminho do mar"
-                ]
-            }];
+        // ============================================================
+        // BANCO DE DADOS LOCAL (FALLBACK) + INTEGRACAO WIKIPEDIA
+        // ============================================================
+        var LOCAL_SONGS = [{
+            id: 1,
+            title: "Bohemian Rhapsody",
+            artist: "Queen",
+            genre: "Rock",
+            year: 1975,
+            nationality: "Britanica",
+            popularity: 980,
+            lyrics: [
+                "Is this the real life? Is this just fantasy?",
+                "Caught in a landslide, no escape from reality",
+                "Mama, just killed a man, put a gun against his head"
+            ]
+        }, {
+            id: 2,
+            title: "Billie Jean",
+            artist: "Michael Jackson",
+            genre: "Pop",
+            year: 1982,
+            nationality: "Americana",
+            popularity: 920,
+            lyrics: [
+                "She was more like a beauty queen from a movie scene",
+                "Billie Jean is not my lover",
+                "The kid is not my son"
+            ]
+        }, {
+            id: 3,
+            title: "Tempo Perdido",
+            artist: "Legiao Urbana",
+            genre: "MPB / Rock",
+            year: 1986,
+            nationality: "Brasileira",
+            popularity: 750,
+            lyrics: [
+                "Todos os dias quando acordo, nao tenho mais o tempo que passou",
+                "Mas tenho muito tempo, temos todo o tempo do mundo",
+                "Somos tao jovens"
+            ]
+        }, {
+            id: 4,
+            title: "Blinding Lights",
+            artist: "The Weeknd",
+            genre: "Pop / Synthwave",
+            year: 2020,
+            nationality: "Canadense",
+            popularity: 990,
+            lyrics: [
+                "I'm blinded by the lights",
+                "No, I can't sleep until I feel your touch",
+                "I said, ooh, I'm drowning in the night"
+            ]
+        }, {
+            id: 5,
+            title: "Garota de Ipanema",
+            artist: "Tom Jobim",
+            genre: "Bossa Nova",
+            year: 1962,
+            nationality: "Brasileira",
+            popularity: 700,
+            lyrics: [
+                "Olha que coisa mais linda, mais cheia de graca",
+                "E ela a menina que vem e que passa",
+                "Num doce balanco, caminho do mar"
+            ]
+        }];
 
-            const DAILY_ID = 3;
-            const dailySong = MUSIC_DB.find(s => s.id === DAILY_ID);
-            if (!dailySong) throw new Error("Musica diaria nao encontrada");
+        // ============================================================
+        // ESTADO DO JOGO
+        // ============================================================
+        var gameState = {
+            mode: 'daily', // 'daily' ou 'infinite'
+            currentSong: null,
+            currentVerseIndex: 0,
+            attempts: 0,
+            gameOver: false,
+            guessedSongs: [],
+            score: 0,
+            round: 1,
+            totalSongs: [],
+            isDailyMode: true,
+            dailySongId: null,
+            usedSongIds: []
+        };
 
-            let currentVerseIndex = 0;
-            let attempts = 0;
-            let gameOver = false;
-            let guessedSongs = [];
-            let allSongTitles = MUSIC_DB.map(s => ({ title: s.title, artist: s.artist, id: s.id }));
+        // ============================================================
+        // DOM ELEMENTOS
+        // ============================================================
+        var verseDisplay = document.getElementById('verseDisplay');
+        var verseCount = document.getElementById('verseCount');
+        var songInput = document.getElementById('songInput');
+        var guessBtn = document.getElementById('guessBtn');
+        var autocompleteList = document.getElementById('autocompleteList');
+        var feedback = document.getElementById('feedbackMessage');
+        var cmpArtist = document.getElementById('cmpArtist');
+        var cmpGenre = document.getElementById('cmpGenre');
+        var cmpDecade = document.getElementById('cmpDecade');
+        var cmpNationality = document.getElementById('cmpNationality');
+        var cmpPopularity = document.getElementById('cmpPopularity');
+        var scoreDisplay = document.getElementById('scoreDisplay');
+        var roundDisplay = document.getElementById('roundDisplay');
+        var nextRoundContainer = document.getElementById('nextRoundContainer');
+        var nextRoundBtn = document.getElementById('nextRoundBtn');
+        var dailyModeBtn = document.getElementById('dailyModeBtn');
+        var infiniteModeBtn = document.getElementById('infiniteModeBtn');
+        var lyricCard = document.getElementById('lyricCard');
 
-            const verseDisplay = document.getElementById('verseDisplay');
-            const verseCount = document.getElementById('verseCount');
-            const songInput = document.getElementById('songInput');
-            const guessBtn = document.getElementById('guessBtn');
-            const autocompleteList = document.getElementById('autocompleteList');
-            const feedback = document.getElementById('feedbackMessage');
-            const cmpArtist = document.getElementById('cmpArtist');
-            const cmpGenre = document.getElementById('cmpGenre');
-            const cmpDecade = document.getElementById('cmpDecade');
-            const cmpNationality = document.getElementById('cmpNationality');
-            const cmpPopularity = document.getElementById('cmpPopularity');
-            const gameContainer = document.getElementById('gameContainer');
+        // ============================================================
+        // FUNCOES DE BUSCA NA WIKIPEDIA
+        // ============================================================
+        function searchWikipediaSongs(query) {
+            return new Promise(function(resolve, reject) {
+                var url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' +
+                    encodeURIComponent(query + ' song') +
+                    '&format=json&origin=*';
 
-            function revealVerse(index) {
-                if (!dailySong.lyrics || index >= dailySong.lyrics.length) {
-                    return dailySong.lyrics[dailySong.lyrics.length - 1] || "...";
-                }
-                return dailySong.lyrics[index];
-            }
-
-            function updateVerseDisplay() {
-                const verseText = revealVerse(currentVerseIndex);
-                verseDisplay.innerHTML = '"<i class="fas fa-music"></i> ' + verseText + ' <i class="fas fa-music"></i>"';
-                const total = dailySong.lyrics.length;
-                verseCount.textContent = 'verso ' + (currentVerseIndex + 1) + ' de ' + total;
-            }
-
-            function updateComparisonTable(guessSong) {
-                if (!guessSong) {
-                    cmpArtist.innerHTML = '---';
-                    cmpGenre.innerHTML = '---';
-                    cmpDecade.innerHTML = '---';
-                    cmpNationality.innerHTML = '---';
-                    cmpPopularity.innerHTML = '---';
-                    return;
-                }
-
-                const artistMatch = guessSong.artist === dailySong.artist ? 'green' :
-                    (dailySong.artist.includes(guessSong.artist) || guessSong.artist.includes(dailySong.artist) ? 'yellow' :
-                        'red');
-                cmpArtist.innerHTML = '<span class="badge ' + artistMatch + '">' + guessSong.artist + '</span>';
-
-                const genreMatch = guessSong.genre === dailySong.genre ? 'green' : 'red';
-                cmpGenre.innerHTML = '<span class="badge ' + genreMatch + '">' + guessSong.genre + '</span>';
-
-                const guessYear = guessSong.year;
-                const targetYear = dailySong.year;
-                let decadeArrow = '';
-                if (guessYear < targetYear) decadeArrow = '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais antiga</span>';
-                else if (guessYear > targetYear) decadeArrow =
-                    '<span class="arrow-down"><i class="fas fa-arrow-down"></i> mais recente</span>';
-                else decadeArrow = '<span style="color:#7affb0;"> mesma decada</span>';
-                cmpDecade.innerHTML = guessYear + ' ' + decadeArrow;
-
-                const natMatch = guessSong.nationality === dailySong.nationality ? 'green' : 'red';
-                cmpNationality.innerHTML = '<span class="badge ' + natMatch + '">' + guessSong.nationality + '</span>';
-
-                const popDiff = guessSong.popularity - dailySong.popularity;
-                let popArrow = '';
-                if (popDiff > 0) popArrow = '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais popular</span>';
-                else if (popDiff < 0) popArrow = '<span class="arrow-down"><i class="fas fa-arrow-down"></i> menos popular</span>';
-                else popArrow = '<span style="color:#7affb0;"> igual</span>';
-                cmpPopularity.innerHTML = guessSong.popularity + ' ' + popArrow;
-            }
-
-            function checkGuess(guessedSong) {
-                if (guessedSong.id === dailySong.id) {
-                    gameOver = true;
-                    feedback.innerHTML = ' VOCE ACERTOU! Musica do dia descoberta! ';
-                    feedback.className = 'feedback-message success';
-                    spawnConfetti();
-                    document.querySelector('.lyric-card').classList.add('pulse-glow');
-                    currentVerseIndex = dailySong.lyrics.length - 1;
-                    updateVerseDisplay();
-                    guessBtn.disabled = true;
-                    songInput.disabled = true;
-                    return true;
-                }
-                return false;
-            }
-
-            function spawnConfetti() {
-                const container = document.createElement('div');
-                container.className = 'confetti-container';
-                document.body.appendChild(container);
-                const colors = ['#ff3b9e', '#b44cff', '#3bc9ff', '#ffd966', '#7affb0', '#ff6b6b'];
-                for (let i = 0; i < 120; i++) {
-                    const el = document.createElement('div');
-                    el.className = 'confetti';
-                    el.style.left = Math.random() * 100 + '%';
-                    el.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    el.style.width = (Math.random() * 8 + 4) + 'px';
-                    el.style.height = (Math.random() * 8 + 4) + 'px';
-                    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-                    el.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
-                    el.style.animationDelay = (Math.random() * 0.8) + 's';
-                    container.appendChild(el);
-                }
-                setTimeout(function() { container.remove(); }, 4000);
-            }
-
-            function renderAutocomplete(filter) {
-                filter = filter || '';
-                var lower = filter.toLowerCase();
-                var filtered = allSongTitles.filter(function(item) {
-                    return item.title.toLowerCase().indexOf(lower) !== -1 ||
-                        item.artist.toLowerCase().indexOf(lower) !== -1;
-                });
-                autocompleteList.innerHTML = '';
-                if (filtered.length === 0 || filter === '') {
-                    autocompleteList.classList.remove('active');
-                    return;
-                }
-                autocompleteList.classList.add('active');
-                filtered.forEach(function(item) {
-                    var div = document.createElement('div');
-                    div.className = 'autocomplete-item';
-                    div.innerHTML = '<span>' + item.title + '</span><span class="artist-name">' + item.artist +
-                        '</span>';
-                    div.addEventListener('click', function() {
-                        songInput.value = item.title;
-                        autocompleteList.classList.remove('active');
+                fetch(url)
+                    .then(function(response) { return response.json(); })
+                    .then(function(data) {
+                        if (data.query && data.query.search) {
+                            var results = data.query.search.map(function(item) {
+                                return {
+                                    title: item.title,
+                                    snippet: item.snippet
+                                };
+                            });
+                            resolve(results);
+                        } else {
+                            resolve([]);
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error('Erro na busca Wikipedia:', error);
+                        reject(error);
                     });
-                    autocompleteList.appendChild(div);
-                });
+            });
+        }
+
+        function getSongFromWikipedia(title) {
+            return new Promise(function(resolve, reject) {
+                var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&titles=' +
+                    encodeURIComponent(title) +
+                    '&format=json&origin=*';
+
+                fetch(url)
+                    .then(function(response) { return response.json(); })
+                    .then(function(data) {
+                        var pages = data.query.pages;
+                        var pageId = Object.keys(pages)[0];
+                        var page = pages[pageId];
+
+                        if (page && page.extract) {
+                            // Tentar extrair informacoes basicas
+                            var extract = page.extract;
+                            var lines = extract.split('\n').filter(function(l) { return l.trim().length > 0; });
+
+                            // Tentar encontrar letras (geralmente em artigos de musicas)
+                            var lyricsLines = [];
+                            var foundLyrics = false;
+                            for (var i = 0; i < lines.length; i++) {
+                                var line = lines[i].trim();
+                                if (line.toLowerCase().includes('lyrics') ||
+                                    line.toLowerCase().includes('verse') ||
+                                    line.toLowerCase().includes('chorus')) {
+                                    foundLyrics = true;
+                                    continue;
+                                }
+                                if (foundLyrics && line.length > 10 && !line.includes('[') && !line.includes('(')) {
+                                    lyricsLines.push(line);
+                                    if (lyricsLines.length >= 5) break;
+                                }
+                            }
+
+                            // Se nao encontrou letras, pegar primeiras frases
+                            if (lyricsLines.length === 0) {
+                                var sentences = extract.split('.');
+                                for (var j = 0; j < Math.min(5, sentences.length); j++) {
+                                    if (sentences[j].trim().length > 15) {
+                                        lyricsLines.push(sentences[j].trim() + '.');
+                                    }
+                                }
+                            }
+
+                            resolve({
+                                title: page.title,
+                                extract: extract,
+                                lyrics: lyricsLines.length > 0 ? lyricsLines : ['Letras nao encontradas'],
+                                pageUrl: 'https://en.wikipedia.org/wiki/' + encodeURIComponent(page.title)
+                            });
+                        } else {
+                            resolve(null);
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error('Erro ao buscar letras:', error);
+                        reject(error);
+                    });
+            });
+        }
+
+        // ============================================================
+        // GERAR MUSICA ALEATORIA (WIKIPEDIA OU LOCAL)
+        // ============================================================
+        function generateRandomSong() {
+            return new Promise(function(resolve, reject) {
+                // Lista de artistas populares para buscar
+                var artists = [
+                    'The Beatles', 'Queen', 'Michael Jackson', 'Madonna', 'Elvis Presley',
+                    'Bob Dylan', 'David Bowie', 'Prince', 'Whitney Houston', 'Freddie Mercury',
+                    'Miles Davis', 'John Lennon', 'Paul McCartney', 'Stevie Wonder', 'Aretha Franklin',
+                    'Tupac', 'Nirvana', 'Radiohead', 'Pink Floyd', 'Led Zeppelin',
+                    'Muse', 'Coldplay', 'U2', 'The Rolling Stones', 'The Who',
+                    'The Beach Boys', 'The Doors', 'Jimi Hendrix', 'Janis Joplin', 'Joni Mitchell'
+                ];
+
+                var randomArtist = artists[Math.floor(Math.random() * artists.length)];
+
+                // Buscar musicas do artista na Wikipedia
+                searchWikipediaSongs(randomArtist)
+                    .then(function(results) {
+                        if (results && results.length > 0) {
+                            // Filtrar resultados que parecem ser musicas (nao albums ou outras paginas)
+                            var songResults = results.filter(function(r) {
+                                var title = r.title.toLowerCase();
+                                return !title.includes('album') &&
+                                    !title.includes('discography') &&
+                                    !title.includes('(album)') &&
+                                    !title.includes('compilation');
+                            });
+
+                            if (songResults.length > 0) {
+                                var randomSong = songResults[Math.floor(Math.random() * songResults.length)];
+                                return getSongFromWikipedia(randomSong.title);
+                            }
+                        }
+                        // Fallback: usar musica local aleatoria
+                        var localSong = LOCAL_SONGS[Math.floor(Math.random() * LOCAL_SONGS.length)];
+                        resolve({
+                            title: localSong.title,
+                            artist: localSong.artist,
+                            genre: localSong.genre,
+                            year: localSong.year,
+                            nationality: localSong.nationality,
+                            popularity: localSong.popularity,
+                            lyrics: localSong.lyrics,
+                            isLocal: true
+                        });
+                    })
+                    .catch(function() {
+                        // Fallback para erro
+                        var localSong = LOCAL_SONGS[Math.floor(Math.random() * LOCAL_SONGS.length)];
+                        resolve({
+                            title: localSong.title,
+                            artist: localSong.artist,
+                            genre: localSong.genre,
+                            year: localSong.year,
+                            nationality: localSong.nationality,
+                            popularity: localSong.popularity,
+                            lyrics: localSong.lyrics,
+                            isLocal: true
+                        });
+                    });
+            });
+        }
+
+        // ============================================================
+        // FUNCOES DO JOGO
+        // ============================================================
+        function generateDailySong() {
+            // Usar musica fixa do dia (baseado na data)
+            var today = new Date();
+            var dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            var index = dayOfYear % LOCAL_SONGS.length;
+            var song = LOCAL_SONGS[index];
+            return {
+                title: song.title,
+                artist: song.artist,
+                genre: song.genre,
+                year: song.year,
+                nationality: song.nationality,
+                popularity: song.popularity,
+                lyrics: song.lyrics,
+                isLocal: true,
+                isDaily: true,
+                id: song.id
+            };
+        }
+
+        function getCurrentSong() {
+            if (gameState.isDailyMode) {
+                return generateDailySong();
+            } else {
+                // Modo infinito - usar musica aleatoria
+                return gameState.currentSong;
             }
+        }
 
-            function handleGuess() {
-                if (gameOver) return;
-                var query = songInput.value.trim();
-                if (query === '') {
-                    feedback.innerHTML = ' Digite o nome de uma musica ou artista.';
-                    feedback.className = 'feedback-message error';
-                    return;
-                }
+        function loadNewSong() {
+            var loadingFeedback = document.getElementById('feedbackMessage');
+            loadingFeedback.innerHTML = '<span class="loading-spinner"></span> Carregando nova musica...';
+            loadingFeedback.className = 'feedback-message loading';
 
-                var foundSong = null;
-                for (var i = 0; i < MUSIC_DB.length; i++) {
-                    if (MUSIC_DB[i].title.toLowerCase() === query.toLowerCase()) {
-                        foundSong = MUSIC_DB[i];
-                        break;
-                    }
-                }
-
-                if (!foundSong) {
-                    feedback.innerHTML = ' Musica nao encontrada no nosso repositorio. Tente outra.';
-                    feedback.className = 'feedback-message error';
-                    return;
-                }
-
-                var alreadyGuessed = false;
-                for (var j = 0; j < guessedSongs.length; j++) {
-                    if (guessedSongs[j].id === foundSong.id) {
-                        alreadyGuessed = true;
-                        break;
-                    }
-                }
-
-                if (alreadyGuessed) {
-                    feedback.innerHTML = ' Voce ja tentou essa musica. Escolha outra.';
-                    feedback.className = 'feedback-message error';
-                    return;
-                }
-
-                attempts++;
-                guessedSongs.push(foundSong);
-                updateComparisonTable(foundSong);
-
-                var isCorrect = checkGuess(foundSong);
-                if (isCorrect) {
-                    return;
-                }
-
-                if (currentVerseIndex < dailySong.lyrics.length - 1) {
-                    currentVerseIndex++;
-                    updateVerseDisplay();
-                }
-
-                feedback.innerHTML = ' Errou! Tente novamente (tentativa ' + attempts + ')';
-                feedback.className = 'feedback-message error';
-                songInput.value = '';
-                songInput.focus();
-                autocompleteList.classList.remove('active');
-            }
-
-            songInput.addEventListener('input', function(e) {
-                var val = e.target.value;
-                renderAutocomplete(val);
-            });
-
-            songInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleGuess();
-                }
-                if (e.key === 'Escape') {
-                    autocompleteList.classList.remove('active');
-                }
-            });
-
-            guessBtn.addEventListener('click', handleGuess);
-
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.search-input-wrapper')) {
-                    autocompleteList.classList.remove('active');
-                }
-            });
-
-            function initGame() {
-                currentVerseIndex = 0;
+            if (gameState.isDailyMode) {
+                var dailySong = generateDailySong();
+                gameState.currentSong = dailySong;
+                gameState.currentVerseIndex = 0;
+                gameState.attempts = 0;
+                gameState.gameOver = false;
+                gameState.guessedSongs = [];
                 updateVerseDisplay();
+                updateComparisonTable(null);
                 feedback.innerHTML = ' Adivinhe a musica do dia!';
                 feedback.className = 'feedback-message';
-                updateComparisonTable(null);
-                songInput.value = '';
-                songInput.disabled = false;
                 guessBtn.disabled = false;
-                gameOver = false;
-                guessedSongs = [];
-                attempts = 0;
-                document.querySelector('.lyric-card').classList.remove('pulse-glow');
+                songInput.disabled = false;
+                songInput.value = '';
+                nextRoundContainer.style.display = 'none';
+                loadingFeedback.className = 'feedback-message';
+                loadingFeedback.innerHTML = ' Adivinhe a musica do dia!';
+                return;
             }
 
-            initGame();
-            console.log(' Musica do dia: ' + dailySong.title + ' - ' + dailySong.artist);
-        })();
+            // Modo infinito
+            generateRandomSong()
+                .then(function(songData) {
+                    gameState.currentSong = {
+                        title: songData.title || 'Musica Desconhecida',
+                        artist: songData.artist || 'Artista Desconhecido',
+                        genre: songData.genre || 'Genero Desconhecido',
+                        year: songData.year || 2000,
+                        nationality: songData.nationality || 'Nacionalidade Desconhecida',
+                        popularity: songData.popularity || 500,
+                        lyrics: songData.lyrics || ['Letra nao encontrada'],
+                        isLocal: songData.isLocal || false,
+                        wikipediaUrl: songData.pageUrl || null
+                    };
+
+                    gameState.currentVerseIndex = 0;
+                    gameState.attempts = 0;
+                    gameState.gameOver = false;
+                    gameState.guessedSongs = [];
+
+                    updateVerseDisplay();
+                    updateComparisonTable(null);
+
+                    feedback.innerHTML = ' Nova musica carregada! Adivinhe!';
+                    feedback.className = 'feedback-message';
+                    guessBtn.disabled = false;
+                    songInput.disabled = false;
+                    songInput.value = '';
+                    nextRoundContainer.style.display = 'none';
+                    loadingFeedback.className = 'feedback-message';
+                    loadingFeedback.innerHTML = ' Nova musica carregada!';
+                })
+                .catch(function(error) {
+                    console.error('Erro ao carregar musica:', error);
+                    // Fallback: usar musica local
+                    var localSong = LOCAL_SONGS[Math.floor(Math.random() * LOCAL_SONGS.length)];
+                    gameState.currentSong = {
+                        title: localSong.title,
+                        artist: localSong.artist,
+                        genre: localSong.genre,
+                        year: localSong.year,
+                        nationality: localSong.nationality,
+                        popularity: localSong.popularity,
+                        lyrics: localSong.lyrics,
+                        isLocal: true
+                    };
+                    gameState.currentVerseIndex = 0;
+                    gameState.attempts = 0;
+                    gameState.gameOver = false;
+                    gameState.guessedSongs = [];
+                    updateVerseDisplay();
+                    updateComparisonTable(null);
+                    feedback.innerHTML = ' Musica carregada (fallback local)';
+                    feedback.className = 'feedback-message';
+                    guessBtn.disabled = false;
+                    songInput.disabled = false;
+                    songInput.value = '';
+                    nextRoundContainer.style.display = 'none';
+                    loadingFeedback.className = 'feedback-message';
+                    loadingFeedback.innerHTML = ' Musica carregada!';
+                });
+        }
+
+        function updateVerseDisplay() {
+            var song = gameState.currentSong;
+            if (!song) return;
+
+            var verseText = song.lyrics[gameState.currentVerseIndex] || '...';
+            verseDisplay.innerHTML = '"<i class="fas fa-music"></i> ' + verseText + ' <i class="fas fa-music"></i>"';
+            var total = song.lyrics.length;
+            verseCount.textContent = 'verso ' + (gameState.currentVerseIndex + 1) + ' de ' + total;
+        }
+
+        function updateComparisonTable(guessSong) {
+            if (!guessSong || !gameState.currentSong) {
+                cmpArtist.innerHTML = '---';
+                cmpGenre.innerHTML = '---';
+                cmpDecade.innerHTML = '---';
+                cmpNationality.innerHTML = '---';
+                cmpPopularity.innerHTML = '---';
+                return;
+            }
+
+            var dailySong = gameState.currentSong;
+
+            var artistMatch = guessSong.artist === dailySong.artist ? 'green' :
+                (dailySong.artist.includes(guessSong.artist) || guessSong.artist.includes(dailySong.artist) ? 'yellow' :
+                    'red');
+            cmpArtist.innerHTML = '<span class="badge ' + artistMatch + '">' + guessSong.artist + '</span>';
+
+            var genreMatch = guessSong.genre === dailySong.genre ? 'green' : 'red';
+            cmpGenre.innerHTML = '<span class="badge ' + genreMatch + '">' + guessSong.genre + '</span>';
+
+            var guessYear = guessSong.year || 2000;
+            var targetYear = dailySong.year || 2000;
+            var decadeArrow = '';
+            if (guessYear < targetYear) decadeArrow =
+                '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais antiga</span>';
+            else if (guessYear > targetYear) decadeArrow =
+                '<span class="arrow-down"><i class="fas fa-arrow-down"></i> mais recente</span>';
+            else decadeArrow = '<span style="color:#7affb0;"> mesma decada</span>';
+            cmpDecade.innerHTML = guessYear + ' ' + decadeArrow;
+
+            var natMatch = guessSong.nationality === dailySong.nationality ? 'green' : 'red';
+            cmpNationality.innerHTML = '<span class="badge ' + natMatch + '">' + guessSong.nationality + '</span>';
+
+            var popDiff = (guessSong.popularity || 500) - (dailySong.popularity || 500);
+            var popArrow = '';
+            if (popDiff > 0) popArrow = '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais popular</span>';
+            else if (popDiff < 0) popArrow = '<span class="arrow-down"><i class="fas fa-arrow-down"></i> menos popular</span>';
+            else popArrow = '<span style="color:#7affb0;"> igual</span>';
+            cmpPopularity.innerHTML = (guessSong.popularity || 500) + ' ' + popArrow;
+        }
+
+        function checkGuess(guessedSong) {
+            var currentSong = gameState.currentSong;
+            if (!currentSong) return false;
+
+            // Comparar titulos (case insensitive)
+            var guessedTitle = guessedSong.title.toLowerCase().trim();
+            var currentTitle = currentSong.title.toLowerCase().trim();
+
+            // Verificar se acertou (titulo igual ou similar)
+            if (guessedTitle === currentTitle ||
+                guessedTitle.includes(currentTitle) ||
+                currentTitle.includes(guessedTitle)) {
+                // ACERTOU!
+                gameState.gameOver = true;
+
+                // Calcular pontos baseado em tentativas
+                var points = Math.max(100 - (gameState.attempts * 10), 10);
+                gameState.score += points;
+
+                updateScoreAndRound();
+
+                feedback.innerHTML = ' VOCE ACERTOU! +' + points + ' pontos!';
+                feedback.className = 'feedback-message success';
+                spawnConfetti();
+                lyricCard.classList.add('pulse-glow');
+
+                // Revelar todos os versos
+                gameState.currentVerseIndex = currentSong.lyrics.length - 1;
+                updateVerseDisplay();
+
+                guessBtn.disabled = true;
+                songInput.disabled = true;
+
+                // Mostrar botao proxima rodada
+                nextRoundContainer.style.display = 'block';
+
+                return true;
+            }
+            return false;
+        }
+
+        function updateScoreAndRound() {
+            scoreDisplay.textContent = gameState.score;
+            roundDisplay.textContent = gameState.round;
+        }
+
+        function spawnConfetti() {
+            var container = document.createElement('div');
+            container.className = 'confetti-container';
+            document.body.appendChild(container);
+            var colors = ['#ff3b9e', '#b44cff', '#3bc9ff', '#ffd966', '#7affb0', '#ff6b6b'];
+            for (var i = 0; i < 120; i++) {
+                var el = document.createElement('div');
+                el.className = 'confetti';
+                el.style.left = Math.random() * 100 + '%';
+                el.style.background = colors[Math.floor(Math.random() * colors.length)];
+                el.style.width = (Math.random() * 8 + 4) + 'px';
+                el.style.height = (Math.random() * 8 + 4) + 'px';
+                el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                el.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                el.style.animationDelay = (Math.random() * 0.8) + 's';
+                container.appendChild(el);
+            }
+            setTimeout(function() { container.remove(); }, 4000);
+        }
+
+        function renderAutocomplete(filter) {
+            filter = filter || '';
+            var lower = filter.toLowerCase();
+
+            // Buscar no banco local e nas musicas ja carregadas
+            var allTitles = LOCAL_SONGS.map(function(s) {
+                return { title: s.title, artist: s.artist };
+            });
+
+            // Adicionar musica atual se nao estiver na lista
+            if (gameState.currentSong && !gameState.currentSong.isLocal) {
+                allTitles.push({
+                    title: gameState.currentSong.title,
+                    artist: gameState.currentSong.artist || 'Desconhecido'
+                });
+            }
+
+            var filtered = allTitles.filter(function(item) {
+                return item.title.toLowerCase().indexOf(lower) !== -1 ||
+                    item.artist.toLowerCase().indexOf(lower) !== -1;
+            });
+
+            // Remover duplicatas
+            var unique = [];
+            var seen = {};
+            for (var i = 0; i < filtered.length; i++) {
+                var key = filtered[i].title + '|' + filtered[i].artist;
+                if (!seen[key]) {
+                    seen[key] = true;
+                    unique.push(filtered[i]);
+                }
+            }
+
+            autocompleteList.innerHTML = '';
+            if (unique.length === 0 || filter === '') {
+                autocompleteList.classList.remove('active');
+                return;
+            }
+
+            autocompleteList.classList.add('active');
+            for (var j = 0; j < Math.min(10, unique.length); j++) {
+                var item = unique[j];
+                var div = document.createElement('div');
+                div.className = 'autocomplete-item';
+                div.innerHTML = '<span>' + item.title + '</span><span class="artist-name">' + item.artist +
+                '</span>';
+                div.addEventListener('click', function(itemData) {
+                    return function() {
+                        songInput.value = itemData.title;
+                        autocompleteList.classList.remove('active');
+                    };
+                }(item));
+                autocompleteList.appendChild(div);
+            }
+        }
+
+        function handleGuess() {
+            if (gameState.gameOver) return;
+            var query = songInput.value.trim();
+            if (query === '') {
+                feedback.innerHTML = ' Digite o nome de uma musica ou artista.';
+                feedback.className = 'feedback-message error';
+                return;
+            }
+
+            // Buscar no banco local
+            var foundSong = null;
+            for (var i = 0; i < LOCAL_SONGS.length; i++) {
+                if (LOCAL_SONGS[i].title.toLowerCase() === query.toLowerCase()) {
+                    foundSong = LOCAL_SONGS[i];
+                    break;
+                }
+            }
+
+            // Se nao encontrou localmente, tentar criar uma entrada baseada no input
+            if (!foundSong) {
+                // Verificar se o usuario digitou o nome da musica atual
+                if (gameState.currentSong &&
+                    gameState.currentSong.title.toLowerCase() === query.toLowerCase()) {
+                    foundSong = {
+                        title: gameState.currentSong.title,
+                        artist: gameState.currentSong.artist,
+                        genre: gameState.currentSong.genre,
+                        year: gameState.currentSong.year,
+                        nationality: gameState.currentSong.nationality,
+                        popularity: gameState.currentSong.popularity
+                    };
+                } else {
+                    feedback.innerHTML = ' Musica nao encontrada. Tente novamente.';
+                    feedback.className = 'feedback-message error';
+                    return;
+                }
+            }
+
+            // Verificar se ja foi adivinhada
+            var alreadyGuessed = false;
+            for (var j = 0; j < gameState.guessedSongs.length; j++) {
+                if (gameState.guessedSongs[j].title === foundSong.title) {
+                    alreadyGuessed = true;
+                    break;
+                }
+            }
+
+            if (alreadyGuessed) {
+                feedback.innerHTML = ' Voce ja tentou essa musica. Escolha outra.';
+                feedback.className = 'feedback-message error';
+                return;
+            }
+
+            gameState.attempts++;
+            gameState.guessedSongs.push(foundSong);
+            updateComparisonTable(foundSong);
+
+            var isCorrect = checkGuess(foundSong);
+            if (isCorrect) {
+                return;
+            }
+
+            // Se errou: revela proximo verso
+            if (gameState.currentSong &&
+                gameState.currentVerseIndex < gameState.currentSong.lyrics.length - 1) {
+                gameState.currentVerseIndex++;
+                updateVerseDisplay();
+            }
+
+            feedback.innerHTML = ' Errou! Tente novamente (tentativa ' + gameState.attempts + ')';
+            feedback.className = 'feedback-message error';
+            songInput.value = '';
+            songInput.focus();
+            autocompleteList.classList.remove('active');
+        }
+
+        function nextRound() {
+            gameState.round++;
+            updateScoreAndRound();
+            nextRoundContainer.style.display = 'none';
+            lyricCard.classList.remove('pulse-glow');
+            loadNewSong();
+        }
+
+        function switchMode(mode) {
+            gameState.isDailyMode = (mode === 'daily');
+            gameState.round = 1;
+            gameState.score = 0;
+            updateScoreAndRound();
+
+            // Atualizar botoes
+            dailyModeBtn.classList.toggle('active', mode === 'daily');
+            infiniteModeBtn.classList.toggle('active', mode === 'infinite');
+
+            // Resetar jogo
+            loadNewSong();
+        }
+
+        // ============================================================
+        // EVENT LISTENERS
+        // ============================================================
+        songInput.addEventListener('input', function(e) {
+            var val = e.target.value;
+            renderAutocomplete(val);
+        });
+
+        songInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleGuess();
+            }
+            if (e.key === 'Escape') {
+                autocompleteList.classList.remove('active');
+            }
+        });
+
+        guessBtn.addEventListener('click', handleGuess);
+        nextRoundBtn.addEventListener('click', nextRound);
+
+        dailyModeBtn.addEventListener('click', function() {
+            if (!gameState.isDailyMode) {
+                switchMode('daily');
+            }
+        });
+
+        infiniteModeBtn.addEventListener('click', function() {
+            if (gameState.isDailyMode) {
+                switchMode('infinite');
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-input-wrapper')) {
+                autocompleteList.classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // INICIALIZACAO
+        // ============================================================
+        function initGame() {
+            gameState.isDailyMode = true;
+            gameState.score = 0;
+            gameState.round = 1;
+            updateScoreAndRound();
+            loadNewSong();
+
+            // Adicionar algumas musicas de exemplo ao banco local para autocomplete
+            console.log(' Melodle iniciado! Modo: ' + (gameState.isDailyMode ? 'Diario' : 'Infinito'));
+            console.log(' Use "Diario" para musica do dia ou "Infinito" para desafios aleatorios');
+        }
+
+        initGame();
     </script>
 </body>
 </html>
