@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Liricle · Sertanejo</title>
+    <title> Matue-Liricle</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -118,38 +118,6 @@
             color: white;
             font-weight: 700;
             font-size: 1.1rem;
-        }
-
-        .mode-selector {
-            display: flex;
-            gap: 0.5rem;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.3rem;
-            border-radius: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .mode-btn {
-            padding: 0.4rem 1.2rem;
-            border: none;
-            border-radius: 60px;
-            background: transparent;
-            color: #a28ed0;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .mode-btn.active {
-            background: linear-gradient(145deg, #b44cff, #8b2fdb);
-            color: white;
-            box-shadow: 0 0 20px rgba(150, 0, 255, 0.3);
-        }
-
-        .mode-btn:hover:not(.active) {
-            color: white;
         }
 
         .lyric-card {
@@ -523,9 +491,9 @@
     <div class="game-container" id="gameContainer">
         <div class="header">
             <div>
-                <h1><i class="fas fa-guitar"></i> Sertanejo</h1>
+                <h1><i class="fas fa-guitar"></i> Matue-Liricle</h1>
                 <div class="header-subtitle">Adivinhe a música pelo refrão</div>
-                <span class="badge-refrao"><i class="fas fa-music"></i> Refrão do dia</span>
+                <span class="badge-refrao"><i class="fas fa-infinity"></i> Modo Infinito</span>
             </div>
             <div class="stats">
                 <div class="stat-item">
@@ -538,17 +506,6 @@
                     <span>Rodada: </span>
                     <span class="value" id="roundDisplay">1</span>
                 </div>
-            </div>
-        </div>
-
-        <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
-            <div class="mode-selector">
-                <button class="mode-btn active" data-mode="daily" id="dailyModeBtn">
-                    <i class="fas fa-calendar-day"></i> Diario
-                </button>
-                <button class="mode-btn" data-mode="infinite" id="infiniteModeBtn">
-                    <i class="fas fa-infinity"></i> Infinito
-                </button>
             </div>
         </div>
 
@@ -940,7 +897,6 @@
         // ESTADO DO JOGO
         // ============================================================
         var gameState = {
-            mode: 'daily',
             currentSong: null,
             currentVerseIndex: 0,
             attempts: 0,
@@ -948,7 +904,6 @@
             guessedSongs: [],
             score: 0,
             round: 1,
-            isDailyMode: true,
             usedSongIds: [],
             availableSongs: []
         };
@@ -971,20 +926,11 @@
         var roundDisplay = document.getElementById('roundDisplay');
         var nextRoundContainer = document.getElementById('nextRoundContainer');
         var nextRoundBtn = document.getElementById('nextRoundBtn');
-        var dailyModeBtn = document.getElementById('dailyModeBtn');
-        var infiniteModeBtn = document.getElementById('infiniteModeBtn');
         var lyricCard = document.getElementById('lyricCard');
 
         // ============================================================
         // FUNCOES DO JOGO
         // ============================================================
-        function getDailySong() {
-            var today = new Date();
-            var dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-            var index = dayOfYear % MUSIC_DB.length;
-            return MUSIC_DB[index];
-        }
-
         function getRandomSong() {
             if (gameState.availableSongs.length === 0) {
                 gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
@@ -1012,14 +958,9 @@
             feedback.innerHTML = '<span class="loading-spinner"></span> Carregando novo refrão...';
             feedback.className = 'feedback-message loading';
 
-            var song;
-            if (gameState.isDailyMode) {
-                song = getDailySong();
-            } else {
-                song = getRandomSong();
-                if (!song) {
-                    song = MUSIC_DB[0];
-                }
+            var song = getRandomSong();
+            if (!song) {
+                song = MUSIC_DB[0];
             }
 
             gameState.currentSong = song;
@@ -1031,19 +972,13 @@
             updateVerseDisplay();
             updateComparisonTable(null);
 
-            feedback.innerHTML = ' Adivinhe a música pelo refrão!';
+            feedback.innerHTML = ' Novo refrão! Adivinhe a música! (Rodada ' + gameState.round + ')';
             feedback.className = 'feedback-message';
             guessBtn.disabled = false;
             songInput.disabled = false;
             songInput.value = '';
             nextRoundContainer.style.display = 'none';
             lyricCard.classList.remove('pulse-glow');
-
-            if (gameState.isDailyMode) {
-                feedback.innerHTML = ' Refrão do dia! Adivinhe a música!';
-            } else {
-                feedback.innerHTML = ' Novo refrão! Adivinhe a música! (Rodada ' + gameState.round + ')';
-            }
         }
 
         function updateVerseDisplay() {
@@ -1254,20 +1189,6 @@
             loadNewSong();
         }
 
-        function switchMode(mode) {
-            gameState.isDailyMode = (mode === 'daily');
-            gameState.round = 1;
-            gameState.score = 0;
-            gameState.usedSongIds = [];
-            gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
-            updateScoreAndRound();
-
-            dailyModeBtn.classList.toggle('active', mode === 'daily');
-            infiniteModeBtn.classList.toggle('active', mode === 'infinite');
-
-            loadNewSong();
-        }
-
         // ============================================================
         // EVENT LISTENERS
         // ============================================================
@@ -1289,18 +1210,6 @@
         guessBtn.addEventListener('click', handleGuess);
         nextRoundBtn.addEventListener('click', nextRound);
 
-        dailyModeBtn.addEventListener('click', function() {
-            if (!gameState.isDailyMode) {
-                switchMode('daily');
-            }
-        });
-
-        infiniteModeBtn.addEventListener('click', function() {
-            if (gameState.isDailyMode) {
-                switchMode('infinite');
-            }
-        });
-
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.search-input-wrapper')) {
                 autocompleteList.classList.remove('active');
@@ -1311,15 +1220,14 @@
         // INICIALIZACAO
         // ============================================================
         function initGame() {
-            gameState.isDailyMode = true;
             gameState.score = 0;
             gameState.round = 1;
             gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
             gameState.usedSongIds = [];
             updateScoreAndRound();
             loadNewSong();
-            console.log(' Sertanejo iniciado com ' + MUSIC_DB.length + ' musicas!');
-            console.log(' Modo: ' + (gameState.isDailyMode ? 'Diario' : 'Infinito'));
+            console.log(' Matue-Liricle iniciado com ' + MUSIC_DB.length + ' musicas!');
+            console.log(' Modo: Infinito');
         }
 
         initGame();
