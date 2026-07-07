@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Liricle · Adivinhe pelo Refrão</title>
+    <title> Liricle · Sertanejo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -523,7 +523,7 @@
     <div class="game-container" id="gameContainer">
         <div class="header">
             <div>
-                <h1><i class="fas fa-headphones-alt"></i> Liricle</h1>
+                <h1><i class="fas fa-guitar"></i> Sertanejo</h1>
                 <div class="header-subtitle">Adivinhe a música pelo refrão</div>
                 <span class="badge-refrao"><i class="fas fa-music"></i> Refrão do dia</span>
             </div>
@@ -592,1026 +592,384 @@
 
     <script>
         // ============================================================
-        // BANCO DE DADOS COM 40 MUSICAS - SOMENTE REFRÕES
+        // BANCO DE DADOS - MUSICAS (1990-2011)
         // ============================================================
         var MUSIC_DB = [
-            // Rock Clássico
+            // Anos 90 - Duplas Clássicas
             {
                 id: 1,
-                title: "Bohemian Rhapsody",
-                artist: "Queen",
-                genre: "Rock",
-                year: 1975,
-                nationality: "Britanica",
-                popularity: 980,
+                title: "Evidencias",
+                artist: "Chitaozinho & Xororo",
+                genre: "Sertanejo",
+                year: 1990,
+                nationality: "Brasileira",
+                popularity: 950,
                 chorus: [
-                    "Mama, just killed a man",
-                    "Put a gun against his head",
-                    "Pulled my trigger, now he's dead",
-                    "Mama, life had just begun",
-                    "But now I've gone and thrown it all away"
+                    "E nessa loucura de dizer que não te quero",
+                    "vou negando as aparências",
+                    "Descartando as evidencias",
+                    "mas pra que viver mentindo"
                 ]
             },
             {
                 id: 2,
-                title: "Stairway to Heaven",
-                artist: "Led Zeppelin",
-                genre: "Rock",
-                year: 1971,
-                nationality: "Britanica",
-                popularity: 950,
+                title: "Boate Azul",
+                artist: "Leandro & Leonardo",
+                genre: "Sertanejo",
+                year: 1985,
+                nationality: "Brasileira",
+                popularity: 920,
                 chorus: [
-                    "And she's buying a stairway to heaven",
-                    "When she gets there she knows",
-                    "If the stores are all closed",
-                    "With a word she can get what she came for"
+                    "Doente de amor",
+                    "Procurei remédio na vida noturna",
+                    "com a flor da noite",
+                    "em uma boate aqui na zona sul"
                 ]
             },
             {
                 id: 3,
-                title: "Hotel California",
-                artist: "Eagles",
-                genre: "Rock",
-                year: 1977,
-                nationality: "Americana",
+                title: "Fio de Cabelo",
+                artist: "Chitaozinho & Xororo",
+                genre: "Sertanejo",
+                year: 1993,
+                nationality: "Brasileira",
                 popularity: 940,
                 chorus: [
-                    "Welcome to the Hotel California",
-                    "Such a lovely place, such a lovely face",
-                    "Plenty of room at the Hotel California",
-                    "Any time of year, you can find it here"
+                    "quando a gente ama",
+                    "qualquer coisa serve para relembrar",
+                    "o vestido velho da mulher amada",
+                    "tem muito valor"
                 ]
             },
             {
                 id: 4,
-                title: "Smells Like Teen Spirit",
-                artist: "Nirvana",
-                genre: "Rock",
-                year: 1991,
-                nationality: "Americana",
-                popularity: 960,
+                title: "Dormi na Praça",
+                artist: "Bruno & Marrone",
+                genre: "Sertanejo",
+                year: 1994,
+                nationality: "Brasileira",
+                popularity: 890,
                 chorus: [
-                    "Hello, hello, hello, how low",
-                    "Hello, hello, hello, how low",
-                    "Hello, hello, hello, how low",
-                    "With the lights out, it's less dangerous",
-                    "Here we are now, entertain us"
+                    "Seu guarda eu não sou vagabundo",
+                    "Eu não sou delinquente, sou um cara carente",
+                    "Eu dormi na praça pensando nela",
+                    "Seu guarda seja meu amigo"
                 ]
             },
             {
                 id: 5,
-                title: "Wonderwall",
-                artist: "Oasis",
-                genre: "Rock",
+                title: "No dia em que eu sai de casa",
+                artist: "Zeze Di Camargo & Luciano",
+                genre: "Sertanejo",
                 year: 1995,
-                nationality: "Britanica",
+                nationality: "Brasileira",
                 popularity: 930,
                 chorus: [
-                    "And all the roads we have to walk are winding",
-                    "And all the lights that lead us there are blinding",
-                    "There are many things that I would like to say to you",
-                    "But I don't know how",
-                    "Because maybe, you're gonna be the one that saves me",
-                    "And after all, you're my wonderwall"
+                    "No dia em que eu saí de casa",
+                    "Minha mãe me disse filho vem cá",
+                    "Passou a mão em meus cabelos",
+                    "Olhou em meus olhos, começou falar"
                 ]
             },
-            // Pop
             {
                 id: 6,
-                title: "Billie Jean",
-                artist: "Michael Jackson",
-                genre: "Pop",
-                year: 1982,
-                nationality: "Americana",
-                popularity: 920,
+                title: "Blusa Vermelha",
+                artist: "Trio parada Dura",
+                genre: "Sertanejo",
+                year: 1980,
+                nationality: "Brasileira",
+                popularity: 880,
                 chorus: [
-                    "Billie Jean is not my lover",
-                    "She's just a girl who claims that I am the one",
-                    "But the kid is not my son",
-                    "She says I am the one, but the kid is not my son"
+                    "Deus, ó, senhor poderoso, eu lhe faço um pedido",
+                    "Mande um alívio a esse coração que sofre",
+                    "Se ela um dia regressar, eu lhe agradeço",
+                    "Porém padecer, como eu padeço"
                 ]
             },
             {
                 id: 7,
-                title: "Shape of You",
-                artist: "Ed Sheeran",
-                genre: "Pop",
-                year: 2017,
-                nationality: "Britanica",
-                popularity: 970,
+                title: "Cumade e Cumpade",
+                artist: "Leandro & Leonardo",
+                genre: "Sertanejo",
+                year: 1998,
+                nationality: "Brasileira",
+                popularity: 910,
                 chorus: [
-                    "I'm in love with the shape of you",
-                    "We push and pull like a magnet do",
-                    "Although my heart is falling too",
-                    "I'm in love with your body",
-                    "And last night you were in my room",
-                    "And now my bedsheets smell like you"
+                    "Veste a calça Saint-Tropez",
+                    "Que deixa o umbiguinho de fora",
+                    "Entra na roda e rebola",
+                    "Rebolando sem parar"
                 ]
             },
             {
                 id: 8,
-                title: "Bad Guy",
-                artist: "Billie Eilish",
-                genre: "Pop",
-                year: 2019,
-                nationality: "Americana",
-                popularity: 960,
+                title: "Sonho de um caminhoneiro",
+                artist: "Milionario & Jose Rico",
+                genre: "Sertanejo",
+                year: 1997,
+                nationality: "Brasileira",
+                popularity: 940,
                 chorus: [
-                    "I'm the bad guy, duh",
-                    "I'm the bad guy, duh",
-                    "I like it when you take control",
-                    "Even if you know that you don't",
-                    "Own me, I'll let you play the role",
-                    "I'll be your animal"
+                    "Eram dois amigos inseparáveis",
+                    "Lutando pela vida e o pão",
+                    "Levando um sonho de cidade em cidade",
+                    "De serem donos de seu caminhão"
                 ]
             },
             {
                 id: 9,
-                title: "Blinding Lights",
-                artist: "The Weeknd",
-                genre: "Pop",
-                year: 2020,
-                nationality: "Canadense",
-                popularity: 990,
+                title: "Pense em Mim",
+                artist: "Leandro & Leonardo",
+                genre: "Sertanejo",
+                year: 1997,
+                nationality: "Brasileira",
+                popularity: 950,
                 chorus: [
-                    "I'm blinded by the lights",
-                    "No, I can't sleep until I feel your touch",
-                    "I said, ooh, I'm drowning in the night",
-                    "Oh, when I'm like this, you're the one I trust",
-                    "I'm blinded by the lights"
+                    "Em vez de você ficar pensando nele",
+                    "Em vez de você viver chorando por ele",
+                    "Pense em mim, chore por mim",
+                    "Liga pra mim, não, não liga pra ele"
                 ]
             },
             {
                 id: 10,
-                title: "Shallow",
-                artist: "Lady Gaga",
-                genre: "Pop",
-                year: 2018,
-                nationality: "Americana",
-                popularity: 950,
+                title: "Pinga ni mim",
+                artist: "Teodoro & Sampaio",
+                genre: "Sertanejo",
+                year: 1998,
+                nationality: "Brasileira",
+                popularity: 920,
                 chorus: [
-                    "I'm falling, in all the good times I find myself longing for change",
-                    "And in the bad times I fear myself",
-                    "Tell me something, girl",
-                    "Are you happy in this modern world?",
-                    "Or do you need more? Is there something else you're searching for?"
+                    "Nessa casa tem goteira",
+                    "Pinga ni mim",
+                    "Pinga ni mim",
+                    "pinga ni mim"
                 ]
             },
-            // MPB / Brasileira
+            // Anos 2000 - Sucessos
             {
                 id: 11,
-                title: "Tempo Perdido",
-                artist: "Legiao Urbana",
-                genre: "MPB",
-                year: 1986,
+                title: "É o Amor",
+                artist: "Zeze Di Camargo & Luciano",
+                genre: "Sertanejo",
+                year: 2000,
                 nationality: "Brasileira",
-                popularity: 750,
+                popularity: 960,
                 chorus: [
-                    "Somos tao jovens, somos tao jovens",
-                    "Somos tao jovens, somos tao jovens",
-                    "Temos todo o tempo do mundo",
-                    "Temos todo o tempo do mundo"
+                    "É o amor",
+                    "Que mexe com minha cabeça eme deixa assim",
+                    "Que faz eu pensar em você e esquecer de mim",
+                    "Que faz eu esquecer que a vida é feita pra viver"
                 ]
             },
             {
                 id: 12,
-                title: "Garota de Ipanema",
-                artist: "Tom Jobim",
-                genre: "Bossa Nova",
-                year: 1962,
+                title: "Cachimbo da paz",
+                artist: "Gabriel o Pensador",
+                genre: "Rap",
+                year: 2000,
                 nationality: "Brasileira",
-                popularity: 700,
+                popularity: 890,
                 chorus: [
-                    "Ah, se eu pudesse entender",
-                    "O que ela tem, que me faz sofrer",
-                    "Ela e a coisa mais linda",
-                    "A mais pura graca, a menina do mar"
+                    "apaga a fumaça do revolver, da pistola",
+                    "manda fumaça do cachimbo pra cachola",
+                    "Acende, puxa, prende passa",
+                    "indio quer cachimbo indio quer fazer fumaça"
                 ]
             },
             {
                 id: 13,
-                title: "O Tempo nao Para",
-                artist: "Cazuza",
-                genre: "MPB",
-                year: 1988,
+                title: "Robocop Gay",
+                artist: "Mamonas Assasinas",
+                genre: "rap",
+                year: 2001,
                 nationality: "Brasileira",
-                popularity: 680,
+                popularity: 870,
                 chorus: [
-                    "O tempo nao para, o tempo nao para",
-                    "Nao adianta tentar, nao adianta tentar",
-                    "Viver e nao ter a vergonha de ser feliz",
-                    "Cantar e cantar e cantar"
+                    "Um tanto quanto masculo",
+                    "ai, com M maiusculo",
+                    "vejam só os meus musculos",
+                    "Que com amor cultivei"
                 ]
             },
             {
                 id: 14,
-                title: "Alegria, Alegria",
-                artist: "Caetano Veloso",
-                genre: "MPB",
-                year: 1968,
+                title: "Sonho de Amor",
+                artist: "Zeze Di Camargo & Luciano",
+                genre: "Sertanejo",
+                year: 2015,
                 nationality: "Brasileira",
-                popularity: 660,
+                popularity: 850,
                 chorus: [
-                    "Caminhando contra o vento",
-                    "Sem lenco e sem documento",
-                    "No sol de quase dezembro",
-                    "Eu vou, eu vou, eu vou"
+                    "As noites sabem como eu te esperei",
+                    "Não conto pra ninguem",
+                    "A lua sabe que eu me apaixonei",
+                    "Mas, se você é real, porque você não vem?"
                 ]
             },
             {
                 id: 15,
-                title: "Como Nossos Pais",
-                artist: "Elis Regina",
-                genre: "MPB",
-                year: 1976,
+                title: "Chora, me liga",
+                artist: "João Bosco & Vinicius",
+                genre: "Sertanejo",
+                year: 2008,
                 nationality: "Brasileira",
-                popularity: 690,
+                popularity: 910,
                 chorus: [
-                    "E por falar em beleza, nao se pode esquecer",
-                    "A musica e a alegria do meu pais",
-                    "E por falar em amor, a beleza e o amor",
-                    "E por falar em paz, a paz e o amor"
+                    "Chora, me liga, implora",
+                    "Meu beijo de novo",
+                    "Me pede socorro",
+                    "Quem sabe eu vou te salvar"
                 ]
             },
-            // Rock Nacional
             {
                 id: 16,
-                title: "Ouro de Tolo",
-                artist: "Raul Seixas",
-                genre: "Rock",
-                year: 1973,
+                title: "João e o pé de maconha",
+                artist: "Galo Frito",
+                genre: "Reggae",
+                year: 2023,
                 nationality: "Brasileira",
-                popularity: 720,
+                popularity: 930,
                 chorus: [
-                    "Eu nao, eu nao, eu nao sou como voce",
-                    "Nao, nao, nao, nao, nao, nao",
-                    "Eu nao, eu nao, eu nao sou como voce",
-                    "Nao, nao, nao, nao, nao, nao"
+                    "A rumo da cidade grande",
+                    "Pra vender a vaca",
+                    "Foi parado por um mendigo",
+                    "Que gostosa, caraca"
                 ]
             },
             {
                 id: 17,
-                title: "Pro Dia Nascer Feliz",
-                artist: "Cidade Negra",
+                title: "Brotheragem",
+                artist: "Paulinho & Omar",
                 genre: "Reggae",
-                year: 1994,
+                year: 2023,
                 nationality: "Brasileira",
-                popularity: 640,
+                popularity: 880,
                 chorus: [
-                    "E o que eu quero e o que eu sempre quis",
-                    "E o que eu sempre quis, e o que eu sempre quis",
-                    "E o que eu quero e o que eu sempre quis",
-                    "E o que eu sempre quis, e o que eu sempre quis"
+                    "Não era viadagem",
+                    "Era diversão, era brotheragem",
+                    "Eu não via sacanagem",
+                    "Você me encochava"
                 ]
             },
             {
                 id: 18,
-                title: "Farol das Estrelas",
-                artist: "Champignon",
-                genre: "Rock",
-                year: 2003,
+                title: "Vai Embrazando",
+                artist: "KondZilla",
+                genre: "Funk",
+                year: 2017,
                 nationality: "Brasileira",
-                popularity: 610,
+                popularity: 860,
                 chorus: [
-                    "Quando o sol se for, a lua vai brilhar",
-                    "E a noite vai chegar, eu vou te esperar",
-                    "Quando o sol se for, a lua vai brilhar",
-                    "E a noite vai chegar, eu vou te esperar"
+                    "Se juntou com a amiga",
+                    "E foi lá pra casa",
+                    "Abre a geladeira",
+                    "Pega a Catuaba"
                 ]
             },
-            // Hip Hop / Rap
             {
                 id: 19,
-                title: "Lose Yourself",
-                artist: "Eminem",
-                genre: "Rap",
-                year: 2002,
-                nationality: "Americana",
-                popularity: 970,
+                title: "Zoio de lula",
+                artist: "Charlie Brown Jr",
+                genre: "Reggae",
+                year: 1999,
+                nationality: "Brasileira",
+                popularity: 920,
                 chorus: [
-                    "You better lose yourself in the music",
-                    "The moment, you own it, you better never let it go",
-                    "You only get one shot, do not miss your chance to blow",
-                    "This opportunity comes once in a lifetime"
+                    "Tirou a roupa, entrou no mar",
+                    "Pensei: meu Deus, que bom que fosse",
+                    "Tu me apresenta essa mulher",
+                    "Meu irmão, te dava até um doce"
                 ]
             },
             {
                 id: 20,
-                title: "God's Plan",
-                artist: "Drake",
-                genre: "Rap",
-                year: 2018,
-                nationality: "Canadense",
-                popularity: 960,
+                title: "Pitoco",
+                artist: "Teodoro & Sampaio",
+                genre: "Sertanejo",
+                year: 2009,
+                nationality: "Brasileira",
+                popularity: 840,
                 chorus: [
-                    "God's plan, God's plan",
-                    "I hold back, sometimes I won't, yeah",
-                    "I feel good, sometimes I don't, ay, don't",
-                    "I can't do this on my own"
+                    "O meu vizinho um dia sismou da mão",
+                    "Que quando ele saia, chegava o Ricardão",
+                    "Me procurou pra acabar com a traição",
+                    "Emprestei o meu cachorro pra ter a confirmação"
                 ]
             },
             {
                 id: 21,
-                title: "Sicko Mode",
-                artist: "Travis Scott",
-                genre: "Rap",
-                year: 2018,
-                nationality: "Americana",
-                popularity: 980,
+                title: "saquarema",
+                artist: "MC Roge",
+                genre: "Funk",
+                year: 2020,
+                nationality: "Brasileira",
+                popularity: 890,
                 chorus: [
-                    "Sicko mode, sicko mode",
-                    "Astro, yeah, sun is down, freezin' cold",
-                    "But the heat is on, yeah",
-                    "From the 6, yeah, we gon' get it on, yeah"
+                    "Passei da ponte",
+                    "Piei em Saqua vim de Hollywood",
+                    "Trouxe buchanan's e lança perfume",
+                    "Mulher nós manda vir pique do ifood"
                 ]
             },
-            // Eletronica / Dance
             {
                 id: 22,
-                title: "Strobe",
-                artist: "Deadmau5",
-                genre: "Eletronica",
-                year: 2009,
-                nationality: "Canadense",
-                popularity: 820,
+                title: "Acenda o Farol",
+                artist: "Tim Maia",
+                genre: "MPB",
+                year: 1978,
+                nationality: "Brasileira",
+                popularity: 900,
                 chorus: [
-                    "(Instrumental)",
-                    "Pure electronic music",
-                    "Feeling the rhythm",
-                    "Dancing through the night"
+                    "Você pode se encontrar",
+                    "Você deve se ajudar",
+                    "E viver tranquilamente",
+                    "Sentindo disposto"
                 ]
             },
             {
                 id: 23,
-                title: "Titanium",
-                artist: "David Guetta",
-                genre: "Eletronica",
-                year: 2011,
-                nationality: "Francesa",
+                title: "O descobridor dos sete mares",
+                artist: "Tim Maia",
+                genre: "MPB",
+                year: 2006,
+                nationality: "Brasileira",
                 popularity: 910,
                 chorus: [
-                    "You shoot me down, but I get up",
-                    "You shoot me down, but I get up",
-                    "I'm bulletproof, nothing to lose",
-                    "Fire away, fire away",
-                    "Ricochet, you take your aim",
-                    "Fire away, fire away"
+                    "Uma luz azul me guia",
+                    "Com a firmeza e os lampejos do farol",
+                    "E os recifes lá de cima",
+                    "Me avisam dos perigos de chegar"
                 ]
             },
             {
                 id: 24,
-                title: "Animals",
-                artist: "Martin Garrix",
-                genre: "Eletronica",
-                year: 2013,
-                nationality: "Holandesa",
-                popularity: 890,
+                title: "Amiga da minha mulher",
+                artist: "seu Jorge",
+                genre: "MPB",
+                year: 2011,
+                nationality: "Brasileira",
+                popularity: 870,
                 chorus: [
-                    "We're the animals, animals",
-                    "We're the animals, animals",
-                    "We're the animals, animals",
-                    "We're the animals"
+                    "Ela é amiga da minha mulher",
+                    "Pois é, pois é",
+                    "Mas vive dando em cima de mim",
+                    "Enfim, enfim"
                 ]
             },
-            // Indie / Alternativo
             {
                 id: 25,
-                title: "Do I Wanna Know?",
-                artist: "Arctic Monkeys",
-                genre: "Indie Rock",
-                year: 2013,
-                nationality: "Britanica",
+                title: "Lugar Distante",
+                artist: "Matuê",
+                genre: "Raggae",
+                year: 2021,
+                nationality: "Brasileira",
                 popularity: 930,
                 chorus: [
-                    "Do I wanna know?",
-                    "If this feeling flows both ways?",
-                    "Sad to see you go",
-                    "Was sort of hoping that you'd stay"
+                    "Yeah, yeah, yeah",
+                    "Maquinário insano, eu tô bongando",
+                    "Dentro do Camaro branco, eu vou passar voando fui",
+                    "Tô de mala pronta"
                 ]
             },
-            {
-                id: 26,
-                title: "Skinny Love",
-                artist: "Bon Iver",
-                genre: "Indie Folk",
-                year: 2007,
-                nationality: "Americana",
-                popularity: 890,
-                chorus: [
-                    "Come on skinny love, just last the year",
-                    "Pour a little salt, we were never here",
-                    "My, my, my, my, my, my, my, my",
-                    "Staring at the sink of blood and crushed veneer"
-                ]
-            },
-            {
-                id: 27,
-                title: "Electric Feel",
-                artist: "MGMT",
-                genre: "Indie Rock",
-                year: 2007,
-                nationality: "Americana",
-                popularity: 880,
-                chorus: [
-                    "I said ooh girl, shock me like an electric eel",
-                    "Baby girl, turn me on with your electric feel",
-                    "I said ooh girl, shock me like an electric eel",
-                    "Baby girl, turn me on with your electric feel"
-                ]
-            },
-            // Jazz / Blues
-            {
-                id: 28,
-                title: "Feeling Good",
-                artist: "Nina Simone",
-                genre: "Jazz",
-                year: 1965,
-                nationality: "Americana",
-                popularity: 850,
-                chorus: [
-                    "It's a new dawn, it's a new day, it's a new life for me",
-                    "It's a new dawn, it's a new day, it's a new life for me",
-                    "And I'm feeling good",
-                    "I'm feeling good"
-                ]
-            },
-            {
-                id: 29,
-                title: "Take Five",
-                artist: "Dave Brubeck",
-                genre: "Jazz",
-                year: 1959,
-                nationality: "Americana",
-                popularity: 780,
-                chorus: [
-                    "(Instrumental)",
-                    "Smooth jazz, the perfect groove",
-                    "Five four time signature, it's unique",
-                    "A masterpiece of jazz music"
-                ]
-            },
-            // Clássica / Instrumental
-            {
-                id: 30,
-                title: "Clair de Lune",
-                artist: "Debussy",
-                genre: "Classica",
-                year: 1905,
-                nationality: "Francesa",
-                popularity: 720,
-                chorus: [
-                    "(Instrumental)",
-                    "Beautiful piano melody",
-                    "Moonlight sonata feeling",
-                    "A timeless classical piece"
-                ]
-            },
-            // Mais Pop
-            {
-                id: 31,
-                title: "Dancing Queen",
-                artist: "ABBA",
-                genre: "Pop",
-                year: 1976,
-                nationality: "Sueca",
-                popularity: 940,
-                chorus: [
-                    "You can dance, you can jive, having the time of your life",
-                    "See that girl, watch that scene, digging the dancing queen",
-                    "Friday night and the lights are low",
-                    "Looking out for the place to go"
-                ]
-            },
-            {
-                id: 32,
-                title: "I Will Survive",
-                artist: "Gloria Gaynor",
-                genre: "Pop",
-                year: 1978,
-                nationality: "Americana",
-                popularity: 930,
-                chorus: [
-                    "I will survive, I will survive",
-                    "I will survive, I will survive",
-                    "Oh, as long as I know how to love, I know I'll stay alive",
-                    "I've got all my life to live, I've got all my love to give",
-                    "I will survive, I will survive, hey, hey"
-                ]
-            },
-            // Mais Rock
-            {
-                id: 33,
-                title: "Back in Black",
-                artist: "AC/DC",
-                genre: "Rock",
-                year: 1980,
-                nationality: "Australiana",
-                popularity: 960,
-                chorus: [
-                    "Back in black, I hit the sack",
-                    "I've been too long, I'm glad to be back",
-                    "Yes, I'm let loose from the noose",
-                    "That's kept me hanging about"
-                ]
-            },
-            {
-                id: 34,
-                title: "Seven Nation Army",
-                artist: "The White Stripes",
-                genre: "Rock",
-                year: 2003,
-                nationality: "Americana",
-                popularity: 950,
-                chorus: [
-                    "And the message coming from my eyes says leave it alone",
-                    "Don't you hear the whispers?",
-                    "A seven nation army couldn't hold me back",
-                    "They're gonna rip it off, taking their time right behind my back"
-                ]
-            },
-            // Mais MPB
-            {
-                id: 35,
-                title: "Construcao",
-                artist: "Chico Buarque",
-                genre: "MPB",
-                year: 1971,
-                nationality: "Brasileira",
-                popularity: 740,
-                chorus: [
-                    "Construcao, construcao",
-                    "Construcao, construcao",
-                    "E a vida vai",
-                    "E a vida vai"
-                ]
-            },
-            {
-                id: 36,
-                title: "O Bêbado e a Equilibrista",
-                artist: "Joao Bosco",
-                genre: "MPB",
-                year: 1979,
-                nationality: "Brasileira",
-                popularity: 720,
-                chorus: [
-                    "O bêbado e a equilibrista",
-                    "Se abraçam no ar",
-                    "A vida e uma festa",
-                    "A vida e um carnaval"
-                ]
-            },
-            // Mais Eletronica
-            {
-                id: 37,
-                title: "Levels",
-                artist: "Avicii",
-                genre: "Eletronica",
-                year: 2011,
-                nationality: "Sueca",
-                popularity: 970,
-                chorus: [
-                    "Oh, sometimes I get a good feeling, yeah",
-                    "Get a feeling that I never, never, never, never had before, no no",
-                    "I get a good feeling, yeah",
-                    "Oh, sometimes I get a good feeling, yeah"
-                ]
-            },
-            {
-                id: 38,
-                title: "Wake Me Up",
-                artist: "Avicii",
-                genre: "Eletronica",
-                year: 2013,
-                nationality: "Sueca",
-                popularity: 980,
-                chorus: [
-                    "Wake me up when it's all over",
-                    "When I'm wiser and I'm older",
-                    "All this time I was finding myself",
-                    "And I didn't know I was lost"
-                ]
-            },
-            // Mais Indie
-            {
-                id: 39,
-                title: "Fluorescent Adolescent",
-                artist: "Arctic Monkeys",
-                genre: "Indie Rock",
-                year: 2007,
-                nationality: "Britanica",
-                popularity: 900,
-                chorus: [
-                    "You used to get it in your fishnets",
-                    "Now you only get it in your night dress",
-                    "Discarded all the naughty nights for niceness",
-                    "Landed in a very common crisis"
-                ]
-            },
-            {
-                id: 40,
-                title: "R U Mine?",
-                artist: "Arctic Monkeys",
-                genre: "Indie Rock",
-                year: 2012,
-                nationality: "Britanica",
-                popularity: 920,
-                chorus: [
-                    "R U mine?",
-                    "I'm a puppet on a string",
-                    "Tracy Island, time-traveling diamond",
-                    "Coulda been a contender, coulda been a somebody"
-                ]
-            }
-        ];
-
-        // ============================================================
-        // ESTADO DO JOGO
-        // ============================================================
-        var gameState = {
-            mode: 'daily',
-            currentSong: null,
-            currentVerseIndex: 0,
-            attempts: 0,
-            gameOver: false,
-            guessedSongs: [],
-            score: 0,
-            round: 1,
-            isDailyMode: true,
-            usedSongIds: [],
-            availableSongs: []
-        };
-
-        // ============================================================
-        // DOM ELEMENTOS
-        // ============================================================
-        var verseDisplay = document.getElementById('verseDisplay');
-        var verseCount = document.getElementById('verseCount');
-        var songInput = document.getElementById('songInput');
-        var guessBtn = document.getElementById('guessBtn');
-        var autocompleteList = document.getElementById('autocompleteList');
-        var feedback = document.getElementById('feedbackMessage');
-        var cmpArtist = document.getElementById('cmpArtist');
-        var cmpGenre = document.getElementById('cmpGenre');
-        var cmpDecade = document.getElementById('cmpDecade');
-        var cmpNationality = document.getElementById('cmpNationality');
-        var cmpPopularity = document.getElementById('cmpPopularity');
-        var scoreDisplay = document.getElementById('scoreDisplay');
-        var roundDisplay = document.getElementById('roundDisplay');
-        var nextRoundContainer = document.getElementById('nextRoundContainer');
-        var nextRoundBtn = document.getElementById('nextRoundBtn');
-        var dailyModeBtn = document.getElementById('dailyModeBtn');
-        var infiniteModeBtn = document.getElementById('infiniteModeBtn');
-        var lyricCard = document.getElementById('lyricCard');
-
-        // ============================================================
-        // FUNCOES DO JOGO
-        // ============================================================
-        function getDailySong() {
-            var today = new Date();
-            var dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-            var index = dayOfYear % MUSIC_DB.length;
-            return MUSIC_DB[index];
-        }
-
-        function getRandomSong() {
-            if (gameState.availableSongs.length === 0) {
-                gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
-                gameState.usedSongIds = [];
-            }
-
-            var available = gameState.availableSongs.filter(function(id) {
-                return gameState.usedSongIds.indexOf(id) === -1;
-            });
-
-            if (available.length === 0) {
-                gameState.usedSongIds = [];
-                available = gameState.availableSongs.slice();
-            }
-
-            var randomIndex = Math.floor(Math.random() * available.length);
-            var songId = available[randomIndex];
-            gameState.usedSongIds.push(songId);
-
-            var song = MUSIC_DB.find(function(s) { return s.id === songId; });
-            return song || MUSIC_DB[0];
-        }
-
-        function loadNewSong() {
-            feedback.innerHTML = '<span class="loading-spinner"></span> Carregando novo refrão...';
-            feedback.className = 'feedback-message loading';
-
-            var song;
-            if (gameState.isDailyMode) {
-                song = getDailySong();
-            } else {
-                song = getRandomSong();
-                if (!song) {
-                    song = MUSIC_DB[0];
-                }
-            }
-
-            gameState.currentSong = song;
-            gameState.currentVerseIndex = 0;
-            gameState.attempts = 0;
-            gameState.gameOver = false;
-            gameState.guessedSongs = [];
-
-            updateVerseDisplay();
-            updateComparisonTable(null);
-
-            feedback.innerHTML = ' Adivinhe a música pelo refrão!';
-            feedback.className = 'feedback-message';
-            guessBtn.disabled = false;
-            songInput.disabled = false;
-            songInput.value = '';
-            nextRoundContainer.style.display = 'none';
-            lyricCard.classList.remove('pulse-glow');
-
-            if (gameState.isDailyMode) {
-                feedback.innerHTML = ' Refrão do dia! Adivinhe a música!';
-            } else {
-                feedback.innerHTML = ' Novo refrão! Adivinhe a música! (Rodada ' + gameState.round + ')';
-            }
-        }
-
-        function updateVerseDisplay() {
-            var song = gameState.currentSong;
-            if (!song) return;
-
-            var verseText = song.chorus[gameState.currentVerseIndex] || '...';
-            verseDisplay.innerHTML = '<i class="fas fa-quote-left"></i> ' + verseText + ' <i class="fas fa-quote-right"></i>';
-            var total = song.chorus.length;
-            verseCount.innerHTML = '<i class="fas fa-info-circle"></i> Refrão da música (' + (gameState.currentVerseIndex + 1) +
-                ' de ' + total + ' versos)';
-        }
-
-        function updateComparisonTable(guessSong) {
-            if (!guessSong || !gameState.currentSong) {
-                cmpArtist.innerHTML = '---';
-                cmpGenre.innerHTML = '---';
-                cmpDecade.innerHTML = '---';
-                cmpNationality.innerHTML = '---';
-                cmpPopularity.innerHTML = '---';
-                return;
-            }
-
-            var currentSong = gameState.currentSong;
-
-            var artistMatch = guessSong.artist === currentSong.artist ? 'green' :
-                (currentSong.artist.includes(guessSong.artist) || guessSong.artist.includes(currentSong.artist) ? 'yellow' :
-                    'red');
-            cmpArtist.innerHTML = '<span class="badge ' + artistMatch + '">' + guessSong.artist + '</span>';
-
-            var genreMatch = guessSong.genre === currentSong.genre ? 'green' : 'red';
-            cmpGenre.innerHTML = '<span class="badge ' + genreMatch + '">' + guessSong.genre + '</span>';
-
-            var guessYear = guessSong.year || 2000;
-            var targetYear = currentSong.year || 2000;
-            var decadeArrow = '';
-            if (guessYear < targetYear) decadeArrow =
-                '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais antiga</span>';
-            else if (guessYear > targetYear) decadeArrow =
-                '<span class="arrow-down"><i class="fas fa-arrow-down"></i> mais recente</span>';
-            else decadeArrow = '<span style="color:#7affb0;"> mesma decada</span>';
-            cmpDecade.innerHTML = guessYear + ' ' + decadeArrow;
-
-            var natMatch = guessSong.nationality === currentSong.nationality ? 'green' : 'red';
-            cmpNationality.innerHTML = '<span class="badge ' + natMatch + '">' + guessSong.nationality + '</span>';
-
-            var popDiff = (guessSong.popularity || 500) - (currentSong.popularity || 500);
-            var popArrow = '';
-            if (popDiff > 0) popArrow = '<span class="arrow-up"><i class="fas fa-arrow-up"></i> mais popular</span>';
-            else if (popDiff < 0) popArrow = '<span class="arrow-down"><i class="fas fa-arrow-down"></i> menos popular</span>';
-            else popArrow = '<span style="color:#7affb0;"> igual</span>';
-            cmpPopularity.innerHTML = (guessSong.popularity || 500) + ' ' + popArrow;
-        }
-
-        function checkGuess(guessedSong) {
-            var currentSong = gameState.currentSong;
-            if (!currentSong) return false;
-
-            var guessedTitle = guessedSong.title.toLowerCase().trim();
-            var currentTitle = currentSong.title.toLowerCase().trim();
-
-            if (guessedTitle === currentTitle ||
-                guessedTitle.includes(currentTitle) ||
-                currentTitle.includes(guessedTitle)) {
-
-                gameState.gameOver = true;
-                var points = Math.max(100 - (gameState.attempts * 10), 10);
-                gameState.score += points;
-                updateScoreAndRound();
-
-                feedback.innerHTML = ' VOCE ACERTOU! +' + points + ' pontos!';
-                feedback.className = 'feedback-message success';
-                spawnConfetti();
-                lyricCard.classList.add('pulse-glow');
-
-                gameState.currentVerseIndex = currentSong.chorus.length - 1;
-                updateVerseDisplay();
-
-                guessBtn.disabled = true;
-                songInput.disabled = true;
-                nextRoundContainer.style.display = 'block';
-
-                return true;
-            }
-            return false;
-        }
-
-        function updateScoreAndRound() {
-            scoreDisplay.textContent = gameState.score;
-            roundDisplay.textContent = gameState.round;
-        }
-
-        function spawnConfetti() {
-            var container = document.createElement('div');
-            container.className = 'confetti-container';
-            document.body.appendChild(container);
-            var colors = ['#ff3b9e', '#b44cff', '#3bc9ff', '#ffd966', '#7affb0', '#ff6b6b'];
-            for (var i = 0; i < 120; i++) {
-                var el = document.createElement('div');
-                el.className = 'confetti';
-                el.style.left = Math.random() * 100 + '%';
-                el.style.background = colors[Math.floor(Math.random() * colors.length)];
-                el.style.width = (Math.random() * 8 + 4) + 'px';
-                el.style.height = (Math.random() * 8 + 4) + 'px';
-                el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-                el.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
-                el.style.animationDelay = (Math.random() * 0.8) + 's';
-                container.appendChild(el);
-            }
-            setTimeout(function() { container.remove(); }, 4000);
-        }
-
-        function renderAutocomplete(filter) {
-            filter = filter || '';
-            var lower = filter.toLowerCase();
-
-            var filtered = MUSIC_DB.filter(function(item) {
-                return item.title.toLowerCase().indexOf(lower) !== -1 ||
-                    item.artist.toLowerCase().indexOf(lower) !== -1;
-            });
-
-            autocompleteList.innerHTML = '';
-            if (filtered.length === 0 || filter === '') {
-                autocompleteList.classList.remove('active');
-                return;
-            }
-
-            autocompleteList.classList.add('active');
-            for (var j = 0; j < Math.min(10, filtered.length); j++) {
-                var item = filtered[j];
-                var div = document.createElement('div');
-                div.className = 'autocomplete-item';
-                div.innerHTML = '<span>' + item.title + '</span><span class="artist-name">' + item.artist +
-                '</span>';
-                div.addEventListener('click', (function(itemData) {
-                    return function() {
-                        songInput.value = itemData.title;
-                        autocompleteList.classList.remove('active');
-                    };
-                })(item));
-                autocompleteList.appendChild(div);
-            }
-        }
-
-        function handleGuess() {
-            if (gameState.gameOver) return;
-            var query = songInput.value.trim();
-            if (query === '') {
-                feedback.innerHTML = ' Digite o nome da música ou artista.';
-                feedback.className = 'feedback-message error';
-                return;
-            }
-
-            var foundSong = null;
-            for (var i = 0; i < MUSIC_DB.length; i++) {
-                if (MUSIC_DB[i].title.toLowerCase() === query.toLowerCase()) {
-                    foundSong = MUSIC_DB[i];
-                    break;
-                }
-            }
-
-            if (!foundSong) {
-                feedback.innerHTML = ' Música não encontrada. Tente novamente.';
-                feedback.className = 'feedback-message error';
-                return;
-            }
-
-            var alreadyGuessed = false;
-            for (var j = 0; j < gameState.guessedSongs.length; j++) {
-                if (gameState.guessedSongs[j].id === foundSong.id) {
-                    alreadyGuessed = true;
-                    break;
-                }
-            }
-
-            if (alreadyGuessed) {
-                feedback.innerHTML = ' Você já tentou essa música. Escolha outra.';
-                feedback.className = 'feedback-message error';
-                return;
-            }
-
-            gameState.attempts++;
-            gameState.guessedSongs.push(foundSong);
-            updateComparisonTable(foundSong);
-
-            var isCorrect = checkGuess(foundSong);
-            if (isCorrect) {
-                return;
-            }
-
-            if (gameState.currentSong &&
-                gameState.currentVerseIndex < gameState.currentSong.chorus.length - 1) {
-                gameState.currentVerseIndex++;
-                updateVerseDisplay();
-            }
-
-            feedback.innerHTML = ' Errou! Tente novamente (tentativa ' + gameState.attempts + ')';
-            feedback.className = 'feedback-message error';
-            songInput.value = '';
-            songInput.focus();
-            autocompleteList.classList.remove('active');
-        }
-
-        function nextRound() {
-            gameState.round++;
-            updateScoreAndRound();
-            nextRoundContainer.style.display = 'none';
-            loadNewSong();
-        }
-
-        function switchMode(mode) {
-            gameState.isDailyMode = (mode === 'daily');
-            gameState.round = 1;
-            gameState.score = 0;
-            gameState.usedSongIds = [];
-            gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
-            updateScoreAndRound();
-
-            dailyModeBtn.classList.toggle('active', mode === 'daily');
-            infiniteModeBtn.classList.toggle('active', mode === 'infinite');
-
-            loadNewSong();
-        }
-
-        // ============================================================
-        // EVENT LISTENERS
-        // ============================================================
-        songInput.addEventListener('input', function(e) {
-            var val = e.target.value;
-            renderAutocomplete(val);
-        });
-
-        songInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleGuess();
-            }
-            if (e.key === 'Escape') {
-                autocompleteList.classList.remove('active');
-            }
-        });
-
-        guessBtn.addEventListener('click', handleGuess);
-        nextRoundBtn.addEventListener('click', nextRound);
-
-        dailyModeBtn.addEventListener('click', function() {
-            if (!gameState.isDailyMode) {
-                switchMode('daily');
-            }
-        });
-
-        infiniteModeBtn.addEventListener('click', function() {
-            if (gameState.isDailyMode) {
-                switchMode('infinite');
-            }
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.search-input-wrapper')) {
-                autocompleteList.classList.remove('active');
-            }
-        });
-
-        // ============================================================
-        // INICIALIZACAO
-        // ============================================================
-        function initGame() {
-            gameState.isDailyMode = true;
-            gameState.score = 0;
-            gameState.round = 1;
-            gameState.availableSongs = MUSIC_DB.map(function(s) { return s.id; });
-            gameState.usedSongIds = [];
-            updateScoreAndRound();
-            loadNewSong();
-            console.log(' Liricle iniciado com ' + MUSIC_DB.length + ' musicas!');
-            console.log(' Modo: ' + (gameState.isDailyMode ? 'Diario' : 'Infinito'));
-            console.log(' Adivinhe a música pelo REFRÃO!');
-        }
-
-        initGame();
-    </script>
-</body>
-</html>
+           
