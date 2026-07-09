@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Matue-Liricle</title>
+    <title>Matue-Liricle · Ranking</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
         }
 
         .game-container {
-            max-width: 900px;
+            max-width: 960px;
             width: 100%;
             background: rgba(18, 14, 34, 0.55);
             backdrop-filter: blur(12px);
@@ -468,6 +468,104 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Ranking */
+        .ranking-section {
+            margin-top: 2.2rem;
+            background: rgba(10, 6, 24, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.2rem 1.5rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .ranking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: #b7a8e0;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .ranking-header i {
+            color: #ffd966;
+            margin-right: 6px;
+        }
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .rank-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 60px;
+            border-left: 3px solid transparent;
+            transition: 0.2s;
+        }
+
+        .rank-item.top1 {
+            border-left-color: #ffd966;
+            background: rgba(255, 215, 0, 0.08);
+        }
+        .rank-item.top2 {
+            border-left-color: #c0c0c0;
+            background: rgba(192, 192, 192, 0.05);
+        }
+        .rank-item.top3 {
+            border-left-color: #cd7f32;
+            background: rgba(205, 127, 50, 0.05);
+        }
+
+        .rank-pos {
+            font-weight: 700;
+            color: #b7a8e0;
+            min-width: 28px;
+            font-size: 0.9rem;
+        }
+
+        .rank-name {
+            font-weight: 500;
+            flex: 1;
+            margin-left: 0.8rem;
+            color: #f0edff;
+        }
+
+        .rank-score {
+            font-weight: 600;
+            color: #c6b8ff;
+        }
+
+        .rank-score i {
+            color: #ffd966;
+            margin-right: 4px;
+            font-size: 0.8rem;
+        }
+
+        .reset-rank-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a28ed0;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .reset-rank-btn:hover {
+            background: rgba(255, 70, 70, 0.15);
+            color: #ff8a8a;
+            border-color: #ff3b3b66;
+        }
+
         @media (max-width: 600px) {
             .game-container { padding: 1.5rem; }
             .header h1 { font-size: 1.7rem; }
@@ -475,6 +573,7 @@
             .btn-primary { padding: 0.8rem 1.8rem; }
             .stats { padding: 0.3rem 1rem; gap: 0.8rem; }
             .stat-item { font-size: 0.8rem; }
+            .ranking-section { padding: 1rem; }
         }
 
         .autocomplete-list::-webkit-scrollbar {
@@ -545,14 +644,29 @@
                 <i class="fas fa-forward"></i> Proxima Rodada
             </button>
         </div>
+
+        <!-- RANKING -->
+        <div class="ranking-section" id="rankingSection">
+            <div class="ranking-header">
+                <span><i class="fas fa-crown"></i> RANKING · TOP 5</span>
+                <button class="reset-rank-btn" id="resetRankBtn"><i class="fas fa-undo-alt"></i> resetar</button>
+            </div>
+            <div class="ranking-list" id="rankingList">
+                <div class="rank-item"><span class="rank-pos">1.</span><span class="rank-name">—</span><span class="rank-score"><i class="fas fa-star"></i> 0</span></div>
+                <div class="rank-item"><span class="rank-pos">2.</span><span class="rank-name">—</span><span class="rank-score"><i class="fas fa-star"></i> 0</span></div>
+                <div class="rank-item"><span class="rank-pos">3.</span><span class="rank-name">—</span><span class="rank-score"><i class="fas fa-star"></i> 0</span></div>
+                <div class="rank-item"><span class="rank-pos">4.</span><span class="rank-name">—</span><span class="rank-score"><i class="fas fa-star"></i> 0</span></div>
+                <div class="rank-item"><span class="rank-pos">5.</span><span class="rank-name">—</span><span class="rank-score"><i class="fas fa-star"></i> 0</span></div>
+            </div>
+        </div>
     </div>
 
     <script>
         // ============================================================
-        // BANCO DE DADOS - MUSICAS (1990-2011)
+        // BANCO DE DADOS - 50 MÚSICAS (1990-2011 + novas)
         // ============================================================
         var MUSIC_DB = [
-            // Anos 90 - Duplas Clássicas
+            // --- 25 originais (mantidas) ---
             {
                 id: 1,
                 title: "Evidencias",
@@ -561,12 +675,7 @@
                 year: 1990,
                 nationality: "Brasileira",
                 popularity: 950,
-                chorus: [
-                    "E nessa loucura de dizer que não te quero",
-                    "Vou negando as aparências",
-                    "Descartando as evidencias",
-                    "Mas pra que viver mentindo"
-                ]
+                chorus: ["E nessa loucura de dizer que não te quero", "Vou negando as aparências", "Descartando as evidencias", "Mas pra que viver mentindo"]
             },
             {
                 id: 2,
@@ -576,10 +685,7 @@
                 year: 1985,
                 nationality: "Brasileira",
                 popularity: 920,
-                chorus: [
-                    "Doente de amor, procurei remédio na vida noturna",
-                    "Com a flor da noite, em uma boate aqui na zona sul"
-                ]
+                chorus: ["Doente de amor, procurei remédio na vida noturna", "Com a flor da noite, em uma boate aqui na zona sul"]
             },
             {
                 id: 3,
@@ -589,10 +695,7 @@
                 year: 1993,
                 nationality: "Brasileira",
                 popularity: 940,
-                chorus: [
-                    "Quando a gente ama, qualquer coisa serve pra relembrar",
-                    "O vestido velho da mulher amada, tem muito valor"
-                ]
+                chorus: ["Quando a gente ama, qualquer coisa serve pra relembrar", "O vestido velho da mulher amada, tem muito valor"]
             },
             {
                 id: 4,
@@ -602,11 +705,7 @@
                 year: 1994,
                 nationality: "Brasileira",
                 popularity: 890,
-                chorus: [
-                    "Seu guarda eu não sou vagabundo, eu não sou delinquente",
-                    "Sou um cara carente, eu dormi na praça pensando nela",
-                    "Seu guarda seja meu amigo"
-                ]
+                chorus: ["Seu guarda eu não sou vagabundo, eu não sou delinquente", "Sou um cara carente, eu dormi na praça pensando nela", "Seu guarda seja meu amigo"]
             },
             {
                 id: 5,
@@ -616,10 +715,7 @@
                 year: 1995,
                 nationality: "Brasileira",
                 popularity: 930,
-                chorus: [
-                    "No dia em que eu saí de casa, minha mãe me disse filho vem cá",
-                    "Passou a mão em meus cabelos, olhou em meus olhos, começou falar"
-                ]
+                chorus: ["No dia em que eu saí de casa, minha mãe me disse filho vem cá", "Passou a mão em meus cabelos, olhou em meus olhos, começou falar"]
             },
             {
                 id: 6,
@@ -629,11 +725,7 @@
                 year: 1980,
                 nationality: "Brasileira",
                 popularity: 880,
-                chorus: [
-                    "Deus, ó senhor poderoso, eu lhe faço um pedido",
-                    "Mande um alívio a esse coração que sofre",
-                    "Se ela um dia regressar, eu lhe agradeço"
-                ]
+                chorus: ["Deus, ó senhor poderoso, eu lhe faço um pedido", "Mande um alívio a esse coração que sofre", "Se ela um dia regressar, eu lhe agradeço"]
             },
             {
                 id: 7,
@@ -643,10 +735,7 @@
                 year: 1998,
                 nationality: "Brasileira",
                 popularity: 910,
-                chorus: [
-                    "Veste a calça Saint-Tropez que deixa o umbiguinho de fora",
-                    "Entra na roda e rebola, rebolando sem parar"
-                ]
+                chorus: ["Veste a calça Saint-Tropez que deixa o umbiguinho de fora", "Entra na roda e rebola, rebolando sem parar"]
             },
             {
                 id: 8,
@@ -656,10 +745,7 @@
                 year: 1997,
                 nationality: "Brasileira",
                 popularity: 940,
-                chorus: [
-                    "Eram dois amigos inseparáveis, lutando pela vida e o pão",
-                    "Levando um sonho de cidade em cidade, de serem donos de seu caminhão"
-                ]
+                chorus: ["Eram dois amigos inseparáveis, lutando pela vida e o pão", "Levando um sonho de cidade em cidade, de serem donos de seu caminhão"]
             },
             {
                 id: 9,
@@ -669,10 +755,7 @@
                 year: 1997,
                 nationality: "Brasileira",
                 popularity: 950,
-                chorus: [
-                    "Em vez de você ficar pensando nele, em vez de você viver chorando por ele",
-                    "Pense em mim, chore por mim, liga pra mim, não, não liga pra ele"
-                ]
+                chorus: ["Em vez de você ficar pensando nele, em vez de você viver chorando por ele", "Pense em mim, chore por mim, liga pra mim, não, não liga pra ele"]
             },
             {
                 id: 10,
@@ -682,12 +765,8 @@
                 year: 1998,
                 nationality: "Brasileira",
                 popularity: 920,
-                chorus: [
-                    "Nessa casa tem goteira, pinga ni mim",
-                    "Pinga ni mim, pinga ni mim"
-                ]
+                chorus: ["Nessa casa tem goteira, pinga ni mim", "Pinga ni mim, pinga ni mim"]
             },
-            // Anos 2000 - Sucessos
             {
                 id: 11,
                 title: "É o Amor",
@@ -696,11 +775,7 @@
                 year: 2000,
                 nationality: "Brasileira",
                 popularity: 960,
-                chorus: [
-                    "É o amor que mexe com minha cabeça e me deixa assim",
-                    "Que faz eu pensar em você e esquecer de mim",
-                    "Que faz eu esquecer que a vida é feita pra viver"
-                ]
+                chorus: ["É o amor que mexe com minha cabeça e me deixa assim", "Que faz eu pensar em você e esquecer de mim", "Que faz eu esquecer que a vida é feita pra viver"]
             },
             {
                 id: 12,
@@ -710,12 +785,7 @@
                 year: 2000,
                 nationality: "Brasileira",
                 popularity: 890,
-                chorus: [
-                    "Apaga a fumaça do revólver, da pistola",
-                    "Manda fumaça do cachimbo pra cachola",
-                    "Acende, puxa, prende passa",
-                    "Índio quer cachimbo, índio quer fazer fumaça"
-                ]
+                chorus: ["Apaga a fumaça do revólver, da pistola", "Manda fumaça do cachimbo pra cachola", "Acende, puxa, prende passa", "Índio quer cachimbo, índio quer fazer fumaça"]
             },
             {
                 id: 13,
@@ -725,10 +795,7 @@
                 year: 1995,
                 nationality: "Brasileira",
                 popularity: 870,
-                chorus: [
-                    "Um tanto quanto másculo, ai, com M maiúsculo",
-                    "Vejam só os meus músculos, que com amor cultivei"
-                ]
+                chorus: ["Um tanto quanto másculo, ai, com M maiúsculo", "Vejam só os meus músculos, que com amor cultivei"]
             },
             {
                 id: 14,
@@ -738,11 +805,7 @@
                 year: 2005,
                 nationality: "Brasileira",
                 popularity: 850,
-                chorus: [
-                    "As noites sabem como eu te esperei, não conto pra ninguém",
-                    "A lua sabe que eu me apaixonei",
-                    "Mas se você é real, porque você não vem?"
-                ]
+                chorus: ["As noites sabem como eu te esperei, não conto pra ninguém", "A lua sabe que eu me apaixonei", "Mas se você é real, porque você não vem?"]
             },
             {
                 id: 15,
@@ -752,10 +815,7 @@
                 year: 2008,
                 nationality: "Brasileira",
                 popularity: 910,
-                chorus: [
-                    "Chora, me liga, implora, meu beijo de novo",
-                    "Me pede socorro, quem sabe eu vou te salvar"
-                ]
+                chorus: ["Chora, me liga, implora, meu beijo de novo", "Me pede socorro, quem sabe eu vou te salvar"]
             },
             {
                 id: 16,
@@ -765,10 +825,7 @@
                 year: 2023,
                 nationality: "Brasileira",
                 popularity: 930,
-                chorus: [
-                    "A rumo da cidade grande, pra vender a vaca",
-                    "Foi parado por um mendigo, que gostosa, caraca"
-                ]
+                chorus: ["A rumo da cidade grande, pra vender a vaca", "Foi parado por um mendigo, que gostosa, caraca"]
             },
             {
                 id: 17,
@@ -778,10 +835,7 @@
                 year: 2023,
                 nationality: "Brasileira",
                 popularity: 880,
-                chorus: [
-                    "Não era viadagem, era diversão, era brotheragem",
-                    "Eu não via sacanagem, você me encochava"
-                ]
+                chorus: ["Não era viadagem, era diversão, era brotheragem", "Eu não via sacanagem, você me encochava"]
             },
             {
                 id: 18,
@@ -791,10 +845,7 @@
                 year: 2017,
                 nationality: "Brasileira",
                 popularity: 860,
-                chorus: [
-                    "Se juntou com a amiga e foi lá pra casa",
-                    "Abre a geladeira, pega a Catuaba"
-                ]
+                chorus: ["Se juntou com a amiga e foi lá pra casa", "Abre a geladeira, pega a Catuaba"]
             },
             {
                 id: 19,
@@ -804,10 +855,7 @@
                 year: 1999,
                 nationality: "Brasileira",
                 popularity: 920,
-                chorus: [
-                    "Tirou a roupa, entrou no mar, pensei: meu Deus, que bom que fosse",
-                    "Tu me apresenta essa mulher, meu irmão, te dava até um doce"
-                ]
+                chorus: ["Tirou a roupa, entrou no mar, pensei: meu Deus, que bom que fosse", "Tu me apresenta essa mulher, meu irmão, te dava até um doce"]
             },
             {
                 id: 20,
@@ -817,12 +865,7 @@
                 year: 2009,
                 nationality: "Brasileira",
                 popularity: 840,
-                chorus: [
-                    "O meu vizinho um dia sismou da mão",
-                    "Que quando ele saia, chegava o Ricardão",
-                    "Me procurou pra acabar com a traição",
-                    "Emprestei o meu cachorro pra ter a confirmação"
-                ]
+                chorus: ["O meu vizinho um dia sismou da mão", "Que quando ele saia, chegava o Ricardão", "Me procurou pra acabar com a traição", "Emprestei o meu cachorro pra ter a confirmação"]
             },
             {
                 id: 21,
@@ -832,11 +875,7 @@
                 year: 2020,
                 nationality: "Brasileira",
                 popularity: 890,
-                chorus: [
-                    "Passei da ponte, piei em Saqua, vim de Hollywood",
-                    "Trouxe buchanan's e lança perfume",
-                    "Mulher nós manda vir pique do ifood"
-                ]
+                chorus: ["Passei da ponte, piei em Saqua, vim de Hollywood", "Trouxe buchanan's e lança perfume", "Mulher nós manda vir pique do ifood"]
             },
             {
                 id: 22,
@@ -846,10 +885,7 @@
                 year: 1978,
                 nationality: "Brasileira",
                 popularity: 900,
-                chorus: [
-                    "Você pode se encontrar, você deve se ajudar",
-                    "E viver tranquilamente, sentindo disposto"
-                ]
+                chorus: ["Você pode se encontrar, você deve se ajudar", "E viver tranquilamente, sentindo disposto"]
             },
             {
                 id: 23,
@@ -859,10 +895,7 @@
                 year: 1983,
                 nationality: "Brasileira",
                 popularity: 910,
-                chorus: [
-                    "Uma luz azul me guia com a firmeza e os lampejos do farol",
-                    "E os recifes lá de cima me avisam dos perigos de chegar"
-                ]
+                chorus: ["Uma luz azul me guia com a firmeza e os lampejos do farol", "E os recifes lá de cima me avisam dos perigos de chegar"]
             },
             {
                 id: 24,
@@ -872,10 +905,7 @@
                 year: 2011,
                 nationality: "Brasileira",
                 popularity: 870,
-                chorus: [
-                    "Ela é amiga da minha mulher, pois é, pois é",
-                    "Mas vive dando em cima de mim, enfim, enfim"
-                ]
+                chorus: ["Ela é amiga da minha mulher, pois é, pois é", "Mas vive dando em cima de mim, enfim, enfim"]
             },
             {
                 id: 25,
@@ -885,13 +915,336 @@
                 year: 2021,
                 nationality: "Brasileira",
                 popularity: 930,
-                chorus: [
-                    "Maquinário insano, eu tô bongando",
-                    "Dentro do Camaro branco, eu vou passar voando, fui",
-                    "Tô de mala pronta"
-                ]
+                chorus: ["Maquinário insano, eu tô bongando", "Dentro do Camaro branco, eu vou passar voando, fui", "Tô de mala pronta"]
+            },
+            // ----- NOVAS 25 MÚSICAS (id 26-50) -----
+            {
+                id: 26,
+                title: "Tô nem aí",
+                artist: "L7nnon",
+                genre: "Funk",
+                year: 2020,
+                nationality: "Brasileira",
+                popularity: 920,
+                chorus: ["Tô nem aí, tô nem aí, ela quer sentar, sentar pra mim", "No baile do L7, ela desce até o chão"]
+            },
+            {
+                id: 27,
+                title: "Vida Loka",
+                artist: "Racionais MC's",
+                genre: "Rap",
+                year: 2002,
+                nationality: "Brasileira",
+                popularity: 980,
+                chorus: ["Vida Loka, vida Loka, a vida é louca, o mundo é dos espertos", "Deus é mais, mas a fé não é tudo"]
+            },
+            {
+                id: 28,
+                title: "Não é Sério",
+                artist: "Charlie Brown Jr",
+                genre: "Rock",
+                year: 2000,
+                nationality: "Brasileira",
+                popularity: 890,
+                chorus: ["Ela não é sério, ela não é sério, mas eu gosto dela"]
+            },
+            {
+                id: 29,
+                title: "Só os Loucos Sabem",
+                artist: "Charlie Brown Jr",
+                genre: "Rock",
+                year: 2005,
+                nationality: "Brasileira",
+                popularity: 930,
+                chorus: ["Só os loucos sabem, que a vida é uma viagem, não adianta fugir"]
+            },
+            {
+                id: 30,
+                title: "Zé do Caroço",
+                artist: "Seu Jorge",
+                genre: "MPB",
+                year: 2005,
+                nationality: "Brasileira",
+                popularity: 870,
+                chorus: ["Zé do caroço, ele é um homem de verdade, não pede esmola, não se humilha"]
+            },
+            {
+                id: 31,
+                title: "Mensagem de Amor",
+                artist: "Seu Jorge",
+                genre: "MPB",
+                year: 2008,
+                nationality: "Brasileira",
+                popularity: 840,
+                chorus: ["Eu quero ver você florescer, quero ver você vencer"]
+            },
+            {
+                id: 32,
+                title: "O Rappa - Me Deixa",
+                artist: "O Rappa",
+                genre: "Rock",
+                year: 2003,
+                nationality: "Brasileira",
+                popularity: 900,
+                chorus: ["Me deixa em paz, me deixa em paz, eu só quero viver"]
+            },
+            {
+                id: 33,
+                title: "Minha Alma",
+                artist: "O Rappa",
+                genre: "Rock",
+                year: 1999,
+                nationality: "Brasileira",
+                popularity: 940,
+                chorus: ["Minha alma, minha alma, ela voa livre, não tem hora pra voltar"]
+            },
+            {
+                id: 34,
+                title: "Boa Noite",
+                artist: "MC Kevinho",
+                genre: "Funk",
+                year: 2019,
+                nationality: "Brasileira",
+                popularity: 920,
+                chorus: ["Boa noite, boa noite, ela quer dançar, ela quer curtir"]
+            },
+            {
+                id: 35,
+                title: "Tipo Gin",
+                artist: "Kevin O Chris",
+                genre: "Funk",
+                year: 2020,
+                nationality: "Brasileira",
+                popularity: 930,
+                chorus: ["Ela é do tipo gin, eu sou do tipo whisky, ela quer curtir"]
+            },
+            {
+                id: 36,
+                title: "Deixa Eu Falar",
+                artist: "MC Don Juan",
+                genre: "Funk",
+                year: 2021,
+                nationality: "Brasileira",
+                popularity: 910,
+                chorus: ["Deixa eu falar, deixa eu falar, ela quer sentar, sentar pra mim"]
+            },
+            {
+                id: 37,
+                title: "Hoje Eu Vou Dar um Rolê",
+                artist: "MC Hariel",
+                genre: "Funk",
+                year: 2020,
+                nationality: "Brasileira",
+                popularity: 890,
+                chorus: ["Hoje eu vou dar um rolê, com os parceiro, fumar um, beber"]
+            },
+            {
+                id: 38,
+                title: "Olha a Onda",
+                artist: "MC Kekel",
+                genre: "Funk",
+                year: 2019,
+                nationality: "Brasileira",
+                popularity: 880,
+                chorus: ["Olha a onda, olha a onda, ela vem descendo, vem com tudo"]
+            },
+            {
+                id: 39,
+                title: "Cheia de Marra",
+                artist: "MC Livinho",
+                genre: "Funk",
+                year: 2018,
+                nationality: "Brasileira",
+                popularity: 870,
+                chorus: ["Ela é cheia de marra, mas na cama é uma gata"]
+            },
+            {
+                id: 40,
+                title: "Amor de Fim de Noite",
+                artist: "Munhoz & Mariano",
+                genre: "Sertanejo",
+                year: 2012,
+                nationality: "Brasileira",
+                popularity: 850,
+                chorus: ["Amor de fim de noite, é amor que não tem hora, é amor que não tem fim"]
+            },
+            {
+                id: 41,
+                title: "Fui Fiel",
+                artist: "Gusttavo Lima",
+                genre: "Sertanejo",
+                year: 2016,
+                nationality: "Brasileira",
+                popularity: 940,
+                chorus: ["Fui fiel, fui fiel, mas você não merece, vou seguir meu caminho"]
+            },
+            {
+                id: 42,
+                title: "Na Hora da Raiva",
+                artist: "Henrique & Juliano",
+                genre: "Sertanejo",
+                year: 2017,
+                nationality: "Brasileira",
+                popularity: 920,
+                chorus: ["Na hora da raiva, a gente fala o que não deve", "Depois se arrepende"]
+            },
+            {
+                id: 43,
+                title: "Coração de Isca",
+                artist: "Zé Neto & Cristiano",
+                genre: "Sertanejo",
+                year: 2019,
+                nationality: "Brasileira",
+                popularity: 930,
+                chorus: ["Coração de isca, não adianta pescar, ele foge de você"]
+            },
+            {
+                id: 44,
+                title: "Arruma a Mala",
+                artist: "Jorge & Mateus",
+                genre: "Sertanejo",
+                year: 2018,
+                nationality: "Brasileira",
+                popularity: 950,
+                chorus: ["Arruma a mala, vamos viajar, o mundo é grande, vamos aproveitar"]
+            },
+            {
+                id: 45,
+                title: "Paredes",
+                artist: "Marília Mendonça",
+                genre: "Sertanejo",
+                year: 2017,
+                nationality: "Brasileira",
+                popularity: 980,
+                chorus: ["As paredes da casa, testemunham minha dor", "Eu choro, eu grito, eu peço amor"]
+            },
+            {
+                id: 46,
+                title: "Batom de Cereja",
+                artist: "Israel & Rodolffo",
+                genre: "Sertanejo",
+                year: 2020,
+                nationality: "Brasileira",
+                popularity: 940,
+                chorus: ["Batom de cereja, ela é tão cheirosa, me deixa louco"]
+            },
+            {
+                id: 47,
+                title: "Largado às Traças",
+                artist: "Zé Neto & Cristiano",
+                genre: "Sertanejo",
+                year: 2021,
+                nationality: "Brasileira",
+                popularity: 930,
+                chorus: ["Largado às traças, sem você eu não sei viver", "Volta pra mim"]
+            },
+            {
+                id: 48,
+                title: "Graveto",
+                artist: "Marília Mendonça",
+                genre: "Sertanejo",
+                year: 2018,
+                nationality: "Brasileira",
+                popularity: 960,
+                chorus: ["Graveto, graveto, eu tô pegando fogo, tô queimando por você"]
+            },
+            {
+                id: 49,
+                title: "Troca de Calçada",
+                artist: "Jorge & Mateus",
+                genre: "Sertanejo",
+                year: 2019,
+                nationality: "Brasileira",
+                popularity: 910,
+                chorus: ["Troca de calçada, não passa por mim, eu não quero te ver"]
+            },
+            {
+                id: 50,
+                title: "Morena Tropicana",
+                artist: "Alceu Valença",
+                genre: "MPB",
+                year: 1985,
+                nationality: "Brasileira",
+                popularity: 870,
+                chorus: ["Morena tropicana, vem me dar o teu amor", "No balanço do mar"]
             }
         ];
+
+        // ============================================================
+        // RANKING (salvo no localStorage)
+        // ============================================================
+        var RANKING_KEY = 'matue_ranking';
+        var PLAYER_NAME = 'Matue';
+        var MAX_RANK = 5;
+
+        function getRanking() {
+            var data = localStorage.getItem(RANKING_KEY);
+            if (data) {
+                try { return JSON.parse(data); } catch (e) { return []; }
+            }
+            return [];
+        }
+
+        function saveRanking(ranking) {
+            localStorage.setItem(RANKING_KEY, JSON.stringify(ranking));
+        }
+
+        function updateRanking(score) {
+            var ranking = getRanking();
+            // procura se o player já existe
+            var found = false;
+            for (var i = 0; i < ranking.length; i++) {
+                if (ranking[i].name === PLAYER_NAME) {
+                    ranking[i].score = Math.max(ranking[i].score, score);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                ranking.push({ name: PLAYER_NAME, score: score });
+            }
+            // ordena por score decrescente
+            ranking.sort(function(a, b) { return b.score - a.score; });
+            if (ranking.length > MAX_RANK) ranking = ranking.slice(0, MAX_RANK);
+            saveRanking(ranking);
+            renderRanking();
+        }
+
+        function renderRanking() {
+            var ranking = getRanking();
+            var list = document.getElementById('rankingList');
+            list.innerHTML = '';
+            // garante que pelo menos 5 linhas
+            var display = [];
+            for (var i = 0; i < MAX_RANK; i++) {
+                display.push(ranking[i] || { name: '—', score: 0 });
+            }
+            for (var i = 0; i < display.length; i++) {
+                var item = display[i];
+                var div = document.createElement('div');
+                div.className = 'rank-item';
+                if (i === 0 && item.name !== '—') div.classList.add('top1');
+                else if (i === 1 && item.name !== '—') div.classList.add('top2');
+                else if (i === 2 && item.name !== '—') div.classList.add('top3');
+
+                var pos = document.createElement('span');
+                pos.className = 'rank-pos';
+                pos.textContent = (i + 1) + '.';
+
+                var name = document.createElement('span');
+                name.className = 'rank-name';
+                name.textContent = item.name;
+
+                var scoreSpan = document.createElement('span');
+                scoreSpan.className = 'rank-score';
+                scoreSpan.innerHTML = '<i class="fas fa-star"></i> ' + item.score;
+
+                div.appendChild(pos);
+                div.appendChild(name);
+                div.appendChild(scoreSpan);
+                list.appendChild(div);
+            }
+        }
 
         // ============================================================
         // ESTADO DO JOGO
@@ -927,6 +1280,7 @@
         var nextRoundContainer = document.getElementById('nextRoundContainer');
         var nextRoundBtn = document.getElementById('nextRoundBtn');
         var lyricCard = document.getElementById('lyricCard');
+        var resetRankBtn = document.getElementById('resetRankBtn');
 
         // ============================================================
         // FUNCOES DO JOGO
@@ -959,9 +1313,7 @@
             feedback.className = 'feedback-message loading';
 
             var song = getRandomSong();
-            if (!song) {
-                song = MUSIC_DB[0];
-            }
+            if (!song) song = MUSIC_DB[0];
 
             gameState.currentSong = song;
             gameState.currentVerseIndex = 0;
@@ -972,7 +1324,7 @@
             updateVerseDisplay();
             updateComparisonTable(null);
 
-            feedback.innerHTML = ' Novo refrão! Adivinhe a música! (Rodada ' + gameState.round + ')';
+            feedback.innerHTML = '🎵 Novo refrão! Adivinhe a música! (Rodada ' + gameState.round + ')';
             feedback.className = 'feedback-message';
             guessBtn.disabled = false;
             songInput.disabled = false;
@@ -984,7 +1336,6 @@
         function updateVerseDisplay() {
             var song = gameState.currentSong;
             if (!song) return;
-
             var verseText = song.chorus[gameState.currentVerseIndex] || '...';
             verseDisplay.innerHTML = '<i class="fas fa-quote-left"></i> ' + verseText + ' <i class="fas fa-quote-right"></i>';
             var total = song.chorus.length;
@@ -1049,10 +1400,13 @@
                 gameState.score += points;
                 updateScoreAndRound();
 
-                feedback.innerHTML = ' VOCE ACERTOU! +' + points + ' pontos!';
+                feedback.innerHTML = '🎉 VOCE ACERTOU! +' + points + ' pontos!';
                 feedback.className = 'feedback-message success';
                 spawnConfetti();
                 lyricCard.classList.add('pulse-glow');
+
+                // atualiza ranking com a pontuação atual
+                updateRanking(gameState.score);
 
                 gameState.currentVerseIndex = currentSong.chorus.length - 1;
                 updateVerseDisplay();
@@ -1165,9 +1519,7 @@
             updateComparisonTable(foundSong);
 
             var isCorrect = checkGuess(foundSong);
-            if (isCorrect) {
-                return;
-            }
+            if (isCorrect) return;
 
             if (gameState.currentSong &&
                 gameState.currentVerseIndex < gameState.currentSong.chorus.length - 1) {
@@ -1175,7 +1527,7 @@
                 updateVerseDisplay();
             }
 
-            feedback.innerHTML = ' Errou! Tente novamente (tentativa ' + gameState.attempts + ')';
+            feedback.innerHTML = '❌ Errou! Tente novamente (tentativa ' + gameState.attempts + ')';
             feedback.className = 'feedback-message error';
             songInput.value = '';
             songInput.focus();
@@ -1189,26 +1541,29 @@
             loadNewSong();
         }
 
+        function resetRanking() {
+            if (confirm('Resetar ranking? Todos os dados serão perdidos.')) {
+                localStorage.removeItem(RANKING_KEY);
+                renderRanking();
+            }
+        }
+
         // ============================================================
         // EVENT LISTENERS
         // ============================================================
         songInput.addEventListener('input', function(e) {
-            var val = e.target.value;
-            renderAutocomplete(val);
+            renderAutocomplete(e.target.value);
         });
 
         songInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleGuess();
-            }
-            if (e.key === 'Escape') {
-                autocompleteList.classList.remove('active');
-            }
+            if (e.key === 'Enter') { e.preventDefault();
+                handleGuess(); }
+            if (e.key === 'Escape') { autocompleteList.classList.remove('active'); }
         });
 
         guessBtn.addEventListener('click', handleGuess);
         nextRoundBtn.addEventListener('click', nextRound);
+        resetRankBtn.addEventListener('click', resetRanking);
 
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.search-input-wrapper')) {
@@ -1226,8 +1581,9 @@
             gameState.usedSongIds = [];
             updateScoreAndRound();
             loadNewSong();
-            console.log(' Matue-Liricle iniciado com ' + MUSIC_DB.length + ' musicas!');
-            console.log(' Modo: Infinito');
+            renderRanking();
+            console.log('🎵 Matue-Liricle iniciado com ' + MUSIC_DB.length + ' musicas!');
+            console.log('🏆 Ranking: ' + PLAYER_NAME + ' (salvo localmente)');
         }
 
         initGame();
